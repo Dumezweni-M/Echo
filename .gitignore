@@ -1,0 +1,2 @@
+#Prevents loading large node modules file
+node_modules/
