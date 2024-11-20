@@ -1,0 +1,12 @@
+View branches: git branch
+
+view current branch:  git status
+
+Switch to a Branch: git switch <branch-name>
+
+Create and Switch to a New Branch: git switch -c <branch-name>
+
+5. Merge a Branch into the Current Branch:
+Switch to the branch you want to merge into
+git checkout main
+git merge feature-xyz (branch you want merged)
