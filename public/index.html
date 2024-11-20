@@ -7,9 +7,42 @@
     <title>Echo.ME</title>
 </head>
 <body>
-    <h1 class="text-4xl font-bold underline">
-        Hello World!
-    </h1>
+
+    <div id="nav" class="grid grid-cols-3 border-b p-2">
+        <div class="text-center p-2 m-1"></div>
+        <div class="text-center p-2 m-1 font-bold text-2xl">Echo</div>
+        <div class="text-center p-2 m-1"></div>
+    </div>
+
+    <div class="wrapper p-2">
+        <div id="taskHeading" class="task border grid grid-cols-7 text-center mb-2">
+            <p class="col-span-3 font-bold">Task</p>
+            <p class="col-span-1 font-bold">Priority</p>  <!-- high, low Medium -->
+            <p class="col-span-1 font-bold">Due date</p>
+            <p class="col-span-1 font-bold">Category</p> <!-- Project, Chore, Routine -->
+            <p class="col-span-1 font-bold">Status</p> <!-- Todo, in progress, completed -->
+        </div>
+
+        <div id="taskItem" class="task border-b grid grid-cols-7"> <!-- Task template-->
+            <p class="col-span-3 border pl-4">Redesign based on C4Model</p>
+            <p class="col-span-1 border text-center">High</p>
+            <input type="date" class="col-span-1 border text-center"></input>
+            <p class="col-span-1 border text-center">Project</p>
+            <p class="col-span-1 border text-center">In progress</p>
+        </div>
+
+        <div id="taskItem" class="task border-b grid grid-cols-7"> <!-- Task template-->
+            <p class="col-span-3 border pl-4">Paint garden rails</p>
+            <p class="col-span-1 border text-center">Low</p>
+            <input type="date" class="col-span-1 border text-center"></input>
+            <p class="col-span-1 border text-center">Chore</p>
+            <p class="col-span-1 border text-center">Todo</p>
+        </div>
+
+
+
+    </div>
+
 
     
 </body>
