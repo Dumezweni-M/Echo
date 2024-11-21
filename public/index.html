@@ -15,29 +15,117 @@
     </div>
 
     <div class="wrapper p-2">
-        <div id="taskHeading" class="task border grid grid-cols-7 text-center mb-2">
-            <p class="col-span-3 font-bold">Task</p>
-            <p class="col-span-1 font-bold">Priority</p>  <!-- high, low Medium -->
-            <p class="col-span-1 font-bold">Due date</p>
-            <p class="col-span-1 font-bold">Category</p> <!-- Project, Chore, Routine -->
-            <p class="col-span-1 font-bold">Status</p> <!-- Todo, in progress, completed -->
+
+        <!-- ------------------------------------------------------- -->
+
+
+        <div id="taskEntry" class="task border-b grid grid-cols-12 gap-1 mb-2 p-2 ">
+            <!-- Task Input -->
+            <input type="text" class="col-span-6 border pl-4 text-center" placeholder="Enter a task item">
+        
+            <!-- Priority Dropdown -->
+            <select class="col-span-1 border text-center" name="priority" id="priority">
+                <option value="value1">Low</option>
+                <option value="value2">Medium</option>
+                <option value="value3">High</option>
+            </select>
+        
+            <!-- Date Input -->
+            <input type="date" class="col-span-2 border text-center">
+        
+            <!-- Category Dropdown -->
+            <select class="col-span-1 border text-center" name="category" id="category">
+                <option value="value1">Chore</option>
+                <option value="value2">Task</option>
+                <option value="value3">Project</option>
+            </select>
+        
+            <!-- Status Dropdown -->
+            <select class="col-span-1 border text-center" name="difficulty" id="difficulty">
+                <option value="simple">Simple</option>
+                <option value="hard">Hard</option>
+            </select>
+        
+            <!-- Action Buttons -->
+            <div class="col-span-1 flex items-center justify-center gap-2">
+                <button class="px-2 py-2 ">
+                    <img src="../Assets/plus.png" class="w-6 h-6" alt="Add Button">
+                </button>
+            </div>
         </div>
 
-        <div id="taskItem" class="task border-b grid grid-cols-7"> <!-- Task template-->
-            <p class="col-span-3 border pl-4">Redesign based on C4Model</p>
-            <p class="col-span-1 border text-center">High</p>
-            <input type="date" class="col-span-1 border text-center"></input>
-            <p class="col-span-1 border text-center">Project</p>
-            <p class="col-span-1 border text-center">In progress</p>
+
+
+        <!-- HEADER (TASK LIST) -->
+        <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center">
+            <p class="col-span-6 font-bold">Task</p>
+            <p class="col-span-1 font-bold">Priority</p>  
+            <p class="col-span-2 font-bold">Due date</p>
+            <p class="col-span-1 font-bold">Category</p> 
+            <p class="col-span-1 font-bold">Difficulty</p> 
+            <p class="col-span-1 font-bold">Options</p> <!-- Edit, Checkbox, Delete -->
         </div>
 
-        <div id="taskItem" class="task border-b grid grid-cols-7"> <!-- Task template-->
-            <p class="col-span-3 border pl-4">Paint garden rails</p>
-            <p class="col-span-1 border text-center">Low</p>
-            <input type="date" class="col-span-1 border text-center"></input>
-            <p class="col-span-1 border text-center">Chore</p>
-            <p class="col-span-1 border text-center">Todo</p>
+        <div id="taskItem" class="task border grid grid-cols-12 gap-2 p-2 ">
+            <!-- Task Input -->
+            <p class="col-span-6 pl-4 border-r">Set up layout before server</p>
+        
+            <!-- Priority Dropdown -->
+            <p class="col-span-1 text-center border-r">High</p>
+        
+            <!-- Date Input -->
+            <input type="date" class="col-span-2 text-center border-r">
+        
+            <!-- Category Dropdown -->
+            <p class="col-span-1 text-center border-r">Project</p>
+            
+            <!-- Status Dropdown -->
+            <p class="col-span-1 text-center border-r">Hard</p>
+        
+            <!-- Delete Buttons -->
+            <div class="col-span-1 flex items-center justify-center gap-2">
+                <button class="px-2 py-1">
+                    <img src="../Assets/cancel.png" class="w-4 h-4" alt="Cancel Button">
+                </button>
+            </div>
         </div>
+
+
+        <div id="taskItem" class="task border grid grid-cols-12 gap-2 p-2 ">
+            <!-- Task Input -->
+            <p class="col-span-6 pl-4 border-r">Template tasks view</p>
+        
+            <!-- Priority Dropdown -->
+            <p class="col-span-1 text-center border-r">Medium</p>
+        
+            <!-- Date Input -->
+            <input type="date" class="col-span-2 text-center border-r">
+        
+            <!-- Category Dropdown -->
+            <p class="col-span-1 text-center border-r">Routine</p>
+            
+            <!-- Status Dropdown -->
+            <p class="col-span-1 text-center border-r">Simple</p>
+        
+            <!-- Delete Buttons -->
+            <div class="col-span-1 flex items-center justify-center gap-2">
+                <button class="px-2 py-1">
+                    <img src="../Assets/cancel.png" class="w-4 h-4" alt="Cancel Button">
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
