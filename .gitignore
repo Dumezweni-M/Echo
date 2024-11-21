@@ -1,2 +1,5 @@
 #Prevents loading large node modules file
 node_modules/
+
+#ignore database login details
+.env
