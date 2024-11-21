@@ -15,7 +15,7 @@ console.log("Model Successfully loaded...");
 
 const app = express();
 
-// app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 
 // Error handler middleware
 app.use((err, req, res, next) => {
@@ -33,7 +33,7 @@ mongoose.connect(dbURI)
     .catch(err => console.log("----- Mongoose Connection Issue -----", err))
 
 // Register View 
-// app.set('view engine'. 'ejs');
+app.set('view engine', 'ejs');
 
 // Middleware for folder permissions
 app.use(express.static('public'));
@@ -41,12 +41,36 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 app.use(express.json());
 
+
+// Get home screen route
+app.get('/', (req, res) => {
+    res.render('index', {name: 'index'})
+});
+
+
 // Retrieve Tasks from DB
 
 // Enter a task to DB
+app.post('/addTask',(req, res) => {
+    const task = new Task(req.body);
+    console.log("NOW? ----->  ", task)
+    task.save()
+        .then(() => {
+            res.redirect('/');
+        })
+        .catch((err) => {
+            console.log('----- Error Saving Task -----', err)
+            res.status(500).send('----- Server Error -----')
+        });
+});
 
 // Edit specific task
 
 // Delete an Entry
 
+
+
 // 404 redirect
+app.use((req, res) => {
+    res.status(404).render('404', {name: '404'})
+});

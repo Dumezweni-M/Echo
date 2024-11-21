@@ -4,25 +4,26 @@ const Schema = mongoose.Schema
 const taskSchema = new Schema({
     task: {
         type: String,
-        required: true
+        required: false
      },
     priority: {
         type: String,
-        enum: ["Low","Medium","High",],
+        enum: ["low","medium","high",],
         required: false
      },
     dueDate: {
         type: Date,
-        required: false
+        required: false,
+        default: Date.now
      },
     category: {
         type: String,
-        enum: ["chore", "task", "project",],
-        required: true
+        enum: ["daily", "task", "project",],
+        required: false
      },
     difficulty: {
         type: String,
-        enum: ["Easy", "Intermediate", "Difficult",],
+        enum: ["easy", "intermediate", "difficult",],
         required: false
      },
     isChecked: { 
