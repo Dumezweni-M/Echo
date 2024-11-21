@@ -19,12 +19,12 @@
         <!-- ------------------------------------------------------- -->
 
 
-        <div id="taskEntry" class="task border-2 grid grid-cols-12 gap-2 mb-2 p-2 ">
+        <div id="taskEntry" class="task border-b grid grid-cols-12 gap-1 mb-2 p-2 ">
             <!-- Task Input -->
-            <input type="text" class="col-span-6 border pl-4" placeholder="Enter New Task Item">
+            <input type="text" class="col-span-6 border pl-4 text-center" placeholder="Enter a task item">
         
             <!-- Priority Dropdown -->
-            <select class="col-span-1 border" name="priority" id="priority">
+            <select class="col-span-1 border text-center" name="priority" id="priority">
                 <option value="value1">Low</option>
                 <option value="value2">Medium</option>
                 <option value="value3">High</option>
@@ -34,14 +34,14 @@
             <input type="date" class="col-span-2 border text-center">
         
             <!-- Category Dropdown -->
-            <select class="col-span-1 border" name="category" id="category">
+            <select class="col-span-1 border text-center" name="category" id="category">
                 <option value="value1">Chore</option>
                 <option value="value2">Task</option>
                 <option value="value3">Project</option>
             </select>
         
             <!-- Status Dropdown -->
-            <select class="col-span-1 border" name="difficulty" id="difficulty">
+            <select class="col-span-1 border text-center" name="difficulty" id="difficulty">
                 <option value="simple">Simple</option>
                 <option value="hard">Hard</option>
             </select>
@@ -56,14 +56,14 @@
 
 
 
-        <!-- Entered Tasks -->
-        <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center">
+        <!-- HEADER (TASK LIST) -->
+        <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center">
             <p class="col-span-6 font-bold">Task</p>
             <p class="col-span-1 font-bold">Priority</p>  
             <p class="col-span-2 font-bold">Due date</p>
             <p class="col-span-1 font-bold">Category</p> 
-            <p class="col-span-1 font-bold">Status</p> 
-            <p class="col-span-1 font-bold">Delete</p> 
+            <p class="col-span-1 font-bold">Difficulty</p> 
+            <p class="col-span-1 font-bold">Options</p> <!-- Edit, Checkbox, Delete -->
         </div>
 
         <div id="taskItem" class="task border grid grid-cols-12 gap-2 p-2 ">
