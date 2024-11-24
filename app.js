@@ -43,12 +43,24 @@ app.use(express.json());
 
 
 // Get home screen route
-app.get('/', (req, res) => {
-    res.render('index', {name: 'index'})
-});
+// app.get('/', (req, res) => {
+//     res.render('index', {name: 'index'})
+// });
 
 
 // Retrieve Tasks from DB
+app.get('/', (req, res) => {
+    Task.find()
+        .sort({dueDate: -1})
+        .then(tasks => {
+            res.render('index', {tasks});
+        })
+        .catch(err => {
+            //How to display on home page ????
+            console.log('No tasks found')
+            res.render('index', 'No tasks found')
+        })
+})
 
 // Enter a task to DB
 app.post('/addTask',(req, res) => {

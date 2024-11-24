@@ -8,7 +8,7 @@ const taskSchema = new Schema({
      },
     priority: {
         type: String,
-        enum: ["low","medium","high",],
+        enum: ["Low","Medium","High",],
         required: false
      },
     dueDate: {
@@ -18,12 +18,12 @@ const taskSchema = new Schema({
      },
     category: {
         type: String,
-        enum: ["daily", "task", "project",],
+        enum: ["Daily", "Task", "Project",],
         required: false
      },
     difficulty: {
         type: String,
-        enum: ["easy", "intermediate", "difficult",],
+        enum: ["Easy", "Intermediate", "Difficult",],
         required: false
      },
     isChecked: { 

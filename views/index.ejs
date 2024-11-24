@@ -25,7 +25,7 @@
 <!-- ------------          -------------------------------------------------------------------------------- -->
     <form class="formHead" action="/addTask" method="POST" id="taskEntry">
 
-        <div class="bg-slate-500 border grid grid-cols-12 gap-0 mb-2 rounded-sm">
+        <div class="bg-slate-500 border-b grid grid-cols-12 gap-0 mb-2 rounded-sm">
             <!-- Task Input -->
             <input name="task" id="task-entry-field" type="text" class="col-span-6 rounded-sm text-centered font-bold text-blue-700 pl-4" placeholder="Enter a task item">
         
@@ -41,22 +41,28 @@
         
             <!-- Category Dropdown -->
             <select name="category" id="category" class="col-span-1 border font-bold text-blue-700 text-center rounded-sm">
-                <option value="daily">Daily</option>
-                <option value="task">Task</option>
-                <option value="project">Project</option>
+                <option value="Daily">Daily</option>
+                <option value="Task">Task</option>
+                <option value="Project">Project</option>
             </select>
         
             <!-- Status Dropdown -->
             <select name="difficulty" id="difficulty" class="col-span-1 border font-bold text-blue-700 text-center rounded-sm" >
-                <option value="easy">Easy</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="difficult">Difficult</option>
+                <option value="Easy">Easy</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Difficult">Difficult</option>
             </select>
         
             <!-- Action Buttons -->
             <div class="col-span-1 flex items-center justify-center gap-2">
-                <button type="submit" class="px-2 py-2" title="Add to list">
-                    <img src="../Assets/plus.png" class="w-6 h-6" alt="Add Button">
+                <button class="px-1 py-1" title="Favorites">
+                    <!-- <img src="../Assets/star.png" class="w-4 h-4" alt="Cancel Button"> -->
+                </button>
+                <button class="px-1 py-1" title="Edit">
+                    <img src="../Assets/plus.svg" class="w-6 h-6" alt="Cancel Button">
+                </button>
+                <button class="px-1 py-1" title="Delete">
+                    <!-- <img src="../Assets/cancel.png" class="w-4 h-4" alt="Cancel Button"> -->
                 </button>
             </div>
         </div>
@@ -65,21 +71,25 @@
 
 
 <!-- ------------         ----------------------------------------------------------------------------------- -->
+    <% tasks.forEach(task => { %> 
         <div id="taskItem" class="task border grid grid-cols-12 gap-2 p-2 ">
+
+        
             <!-- Task Input -->
-            <p class="col-span-6 pl-4 border-r">Set up layout before server</p>
+            <p class="col-span-6 pl-4 border-r"><%= task.task %></p>
         
             <!-- Priority Dropdown -->
-            <p class="col-span-1 text-center border-r">High</p>
+            <p class="col-span-1 text-center border-r">
+                <%= task.priority%></p>
         
             <!-- Date Input -->
-            <input type="date" class="col-span-2 text-center border-r" value="2024-11-21">
+            <p class="col-span-2 text-center border-r"><%= task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date' %></p>
         
             <!-- Category Dropdown -->
-            <p class="col-span-1 text-center border-r">Project</p>
+            <p class="col-span-1 text-center border-r"><%= task.category %>Project</p>
             
             <!-- Status Dropdown -->
-            <p class="col-span-1 text-center border-r">Hard</p>
+            <p class="col-span-1 text-center border-r"><%= task.difficulty%></p>
         
             <!-- Delete Buttons -->
             <div class="col-span-1 flex items-center justify-center gap-4">
@@ -95,31 +105,8 @@
                 </button>
             </div>
         </div>
+    <% }); %>
 
-
-        <div id="taskItem" class="task border grid grid-cols-12 gap-2 p-2">
-            <!-- Task Input -->
-            <p class="col-span-6 pl-4 border-r">Template tasks view</p>
-        
-            <!-- Priority Dropdown -->
-            <p class="col-span-1 text-center border-r">Medium</p>
-        
-            <!-- Date Input -->
-            <input type="date" class="col-span-2 text-center border-r" value="2024-11-25">
-        
-            <!-- Category Dropdown -->
-            <p class="col-span-1 text-center border-r">Routine</p>
-            
-            <!-- Status Dropdown -->
-            <p class="col-span-1 text-center border-r">Simple</p>
-        
-            <!-- Delete Buttons -->
-            <div class="col-span-1 flex items-center justify-center gap-2">
-                <button class="px-2 py-1">
-                    <img src="../Assets/cancel.png" class="w-4 h-4" alt="Cancel Button">
-                </button>
-            </div>
-        </div>
 
 
 
