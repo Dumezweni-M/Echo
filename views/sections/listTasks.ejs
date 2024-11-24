@@ -1,0 +1,45 @@
+        <!-- HEADER (TASK LIST) -->
+        <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center">
+            <p class="col-span-6 font-bold">Task</p>
+            <p class="col-span-1 font-bold">Priority</p>  
+            <p class="col-span-2 font-bold">Due date</p>
+            <p class="col-span-1 font-bold">Category</p> 
+            <p class="col-span-1 font-bold">Difficulty</p>
+            <p class="col-span-1 font-bold">Options</p> <!-- Edit, Checkbox, Delete -->
+        </div>
+
+<% tasks.forEach(task => { %> 
+    <div id="taskItem" class="task border grid grid-cols-12 gap-2 items-center ">
+
+    
+        <!-- Task Input -->
+        <p class="col-span-6 pl-4 border-r"><%= task.task %></p>
+    
+        <!-- Priority Dropdown -->
+        <p class="col-span-1 text-center border-r">
+            <%= task.priority%></p>
+    
+        <!-- Date Input -->
+        <p class="col-span-2 text-center border-r"><%= task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date' %></p>
+    
+        <!-- Category Dropdown -->
+        <p class="col-span-1 text-center border-r"><%= task.category %>Project</p>
+        
+        <!-- Status Dropdown -->
+        <p class="col-span-1 text-center border-r"><%= task.difficulty%></p>
+    
+        <!-- Delete Buttons -->
+        <div class="col-span-1 flex items-center justify-center gap-4">
+            <!-- <input type="checkbox" name="isChecked"> -->
+            <button class="px-1 py-1" title="Favorites">
+                <img src="../Assets/star.svg" class="w-6 h-6" alt="Cancel Button">
+            </button>
+            <button class="px-1 py-1" title="Delete">
+                <img src="../Assets/cross.svg" class="w-4 h-4" alt="Cancel Button">
+            </button>
+            <button class="px-1 py-1" title="Edit">
+                <img src="../Assets/settings.svg" class="w-6 h-6" alt="Cancel Button">
+            </button>
+        </div>
+    </div>
+<% }); %>

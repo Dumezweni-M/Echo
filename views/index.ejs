@@ -1,128 +1,21 @@
 <%- include('partials/header') %>
 
 <body>
+    <%- include('partials/nav') %> 
+        <div class="wrapper p-2">
 
-    <div id="nav" class="grid grid-cols-3 border-b p-2">
-        <div class="text-center p-2 m-1"></div>
-        <div class="text-center p-2 m-1 font-bold text-2xl">Echo</div>
-        <div class="text-center p-2 m-1"></div>
-    </div>
 
-    <div class="wrapper p-2">
+<!--------------------------------- -->
+            <%- include('sections/addTask.ejs') %>
 
-        <!-- ------------------------------------------------------- -->
+            <%- include('sections/listTasks.ejs') %>
 
-        <!-- HEADER (TASK LIST) -->
-        <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center">
-            <p class="col-span-6 font-bold">Task</p>
-            <p class="col-span-1 font-bold">Priority</p>  
-            <p class="col-span-2 font-bold">Due date</p>
-            <p class="col-span-1 font-bold">Category</p> 
-            <p class="col-span-1 font-bold">Difficulty</p>
-            <p class="col-span-1 font-bold">Options</p> <!-- Edit, Checkbox, Delete -->
+        
+
+
+
+
         </div>
-
-<!-- ------------          -------------------------------------------------------------------------------- -->
-    <form class="formHead" action="/addTask" method="POST" id="taskEntry">
-
-        <div class="border bg-slate-200 grid grid-cols-12 gap-0 p-2 mb-2 rounded-lg">
-            <!-- Task Input -->
-            <input name="task" id="task-entry-field" type="text" class="col-span-6 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item">
-        
-            <!-- Priority Dropdown -->
-            <select name="priority" id="priority" class="col-span-1 border-none font-bold text-center rounded-sm">
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-            </select>
-        
-            <!-- Date Input -->
-            <input name="dueDate" id="date-input" type="date" class="col-span-2 border-none font-bold text-center rounded-sm" >
-        
-            <!-- Category Dropdown -->
-            <select name="category" id="category" class="col-span-1 border-none font-bold text-center rounded-sm">
-                <option value="Daily">Daily</option>
-                <option value="Task">Task</option>
-                <option value="Project">Project</option>
-            </select>
-        
-            <!-- Status Dropdown -->
-            <select name="difficulty" id="difficulty" class="col-span-1 border-none font-bold text-center rounded-sm" >
-                <option value="Easy">Easy</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Difficult">Difficult</option>
-            </select>
-        
-            <!-- Action Buttons -->
-            <div class="col-span-1 flex items-center justify-center gap-2">
-                <button class="px-1 py-1" title="Favorites">
-                    <!-- <img src="../Assets/star.png" class="w-4 h-4" alt="Cancel Button"> -->
-                </button>
-                <button class="px-1 py-1" title="Edit">
-                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Cancel Button">
-                </button>
-                <button class="px-1 py-1" title="Delete">
-                    <!-- <img src="../Assets/cancel.png" class="w-4 h-4" alt="Cancel Button"> -->
-                </button>
-            </div>
-        </div>
-    </form>
-        
-
-
-<!-- ------------         ----------------------------------------------------------------------------------- -->
-    <% tasks.forEach(task => { %> 
-        <div id="taskItem" class="task border grid grid-cols-12 gap-2 p-2 ">
-
-        
-            <!-- Task Input -->
-            <p class="col-span-6 pl-4 border-r"><%= task.task %></p>
-        
-            <!-- Priority Dropdown -->
-            <p class="col-span-1 text-center border-r">
-                <%= task.priority%></p>
-        
-            <!-- Date Input -->
-            <p class="col-span-2 text-center border-r"><%= task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date' %></p>
-        
-            <!-- Category Dropdown -->
-            <p class="col-span-1 text-center border-r"><%= task.category %>Project</p>
-            
-            <!-- Status Dropdown -->
-            <p class="col-span-1 text-center border-r"><%= task.difficulty%></p>
-        
-            <!-- Delete Buttons -->
-            <div class="col-span-1 flex items-center justify-center gap-4">
-                <!-- <input type="checkbox" name="isChecked"> -->
-                <button class="px-1 py-1" title="Favorites">
-                    <img src="../Assets/star.svg" class="w-6 h-6" alt="Cancel Button">
-                </button>
-                <button class="px-1 py-1" title="Delete">
-                    <img src="../Assets/cross.svg" class="w-4 h-4" alt="Cancel Button">
-                </button>
-                <button class="px-1 py-1" title="Edit">
-                    <img src="../Assets/settings.svg" class="w-6 h-6" alt="Cancel Button">
-                </button>
-            </div>
-        </div>
-    <% }); %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
 
 
     
