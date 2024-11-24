@@ -51,7 +51,7 @@ app.use(express.json());
 // Retrieve Tasks from DB
 app.get('/', (req, res) => {
     Task.find()
-        .sort({dueDate: -1})
+        .sort({dueDate: 1})
         .then(tasks => {
             res.render('index', {tasks});
         })
@@ -79,6 +79,19 @@ app.post('/addTask',(req, res) => {
 // Edit specific task
 
 // Delete an Entry
+app.delete('/delete/:_id', (req, res) => {
+    const id = req.params._id;
+    console.log(`Deleting item: ${id}`)
+    Task.findByIdAndDelete(id)
+        .then(result => {
+            res.json({redirect: '/'})
+            console.log('Task Deleted');
+        })
+        .catch(err => {
+            res.status(500).send('Error Deleting Task')
+            console.log('Unable to Delete Task', err)
+        });
+});
 
 
 

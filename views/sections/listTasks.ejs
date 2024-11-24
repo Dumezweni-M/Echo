@@ -34,7 +34,7 @@
             <button class="px-1 py-1" title="Favorites">
                 <img src="../Assets/star.svg" class="w-6 h-6" alt="Cancel Button">
             </button>
-            <button class="px-1 py-1" title="Delete">
+            <button class="deleteButton px-1 py-1" title="Delete" data-doc="<%= task._id %>">
                 <img src="../Assets/cross.svg" class="w-4 h-4" alt="Cancel Button">
             </button>
             <button class="px-1 py-1" title="Edit">
@@ -43,3 +43,33 @@
         </div>
     </div>
 <% }); %>
+
+
+<script>
+
+    const deleteButtons = document.querySelectorAll('.deleteButton');
+
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener('click', (e) => {
+            const id = deleteButton.dataset.doc;
+
+            const endpoint = `/delete/${id}`;
+
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network Response Issue, FETCH API')
+                }
+                return response.json();
+            })
+            .then((data) => {
+                window.location.href = data.redirect; // Redirect on successful delete
+            })
+            .catch((err) => console.log('Error: catch FETCH API', err));
+        });
+    });
+
+
+</script>
