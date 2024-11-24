@@ -9,7 +9,7 @@
         </div>
 
 <% tasks.forEach(task => { %> 
-    <div id="taskItem" class="task border grid grid-cols-12 gap-2 items-center ">
+    <div id="taskItem" class="task border grid grid-cols-12 gap-2 items-center transition-transform duration-500  hover:bg-slate-200">
 
     
         <!-- Task Input -->
@@ -23,7 +23,7 @@
         <p class="col-span-2 text-center border-r"><%= task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date' %></p>
     
         <!-- Category Dropdown -->
-        <p class="col-span-1 text-center border-r"><%= task.category %>Project</p>
+        <p class="col-span-1 text-center border-r"><%= task.category %></p>
         
         <!-- Status Dropdown -->
         <p class="col-span-1 text-center border-r"><%= task.difficulty%></p>
@@ -31,15 +31,15 @@
         <!-- Delete Buttons -->
         <div class="col-span-1 flex items-center justify-center gap-4">
             <!-- <input type="checkbox" name="isChecked"> -->
-            <button class="px-1 py-1" title="Favorites">
+            <!-- <button class="px-1 py-1" title="Favorites">
                 <img src="../Assets/star.svg" class="w-6 h-6" alt="Cancel Button">
-            </button>
-            <button class="deleteButton px-1 py-1" title="Delete" data-doc="<%= task._id %>">
+            </button> -->
+            <button class="deleteButton px-1 py-1"  title="Delete" data-doc="<%= task._id %>">
                 <img src="../Assets/cross.svg" class="w-4 h-4" alt="Cancel Button">
             </button>
-            <button class="px-1 py-1" title="Edit">
+            <!-- <button class="px-1 py-1" title="Edit">
                 <img src="../Assets/settings.svg" class="w-6 h-6" alt="Cancel Button">
-            </button>
+            </button> -->
         </div>
     </div>
 <% }); %>
