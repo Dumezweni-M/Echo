@@ -19,7 +19,7 @@
         <p class="col-span-1 text-center border-r">
             <%= task.priority%></p>
     
-        <!-- Date Input -->
+        <!-- Date Input --> TODO:
         <p class="col-span-2 text-center border-r"><%= task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date' %></p>
     
         <!-- Category Dropdown -->
@@ -31,24 +31,16 @@
         <!-- Delete Buttons -->
         <div class="col-span-1 flex items-center justify-center gap-4">
  
-            <!-- <button class="deleteButton px-1 py-1"  title="Delete" data-doc="<%= task._id %>">
-                <img src="../Assets/cross.svg" class="w-4 h-4" alt="Cancel Button">
-            </button> -->
+        
             <button class="optionsBtn px-1 py-1" title="more">
                 <img src="../Assets/more.svg" class="w-6 h-6" alt="options button">
             </button>
-
-
-
             <!-- Settings Modal -->
-            
             <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
 
                 <div class="grid grid-cols-1 justify-center text-center m-8">
                     <p class="text-lg font-bold text-center mb-2"> Settings </p>
-
                     
-
                     <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= task._id %>">
                         Edit
                     </p>
@@ -64,13 +56,7 @@
                     <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= task._id %>">
                         Delete
                     </p>
-
-    
-                    <!-- <p>Add task if it's a project</p> -->
-
                 </div>
-
-                
             </dialog>
 
 
