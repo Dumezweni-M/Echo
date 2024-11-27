@@ -9,7 +9,7 @@
         </div>
 
 <% tasks.forEach(task => { %> 
-    <div id="taskItem" class="task border grid grid-cols-12 gap-2 items-center transition-transform duration-500  hover:bg-slate-200">
+    <div id="taskItem" class="task border grid grid-cols-12 gap-2 sm:text-xs items-center transition-transform duration-500  hover:bg-slate-200">
 
     
         <!-- Task Input -->
@@ -35,7 +35,7 @@
             <button class="optionsBtn px-1 py-1" title="more">
                 <img src="../Assets/more.svg" class="w-6 h-6" alt="options button">
             </button>
-            <!-- Settings Modal -->
+            <!-- Settings Modal     TODO: --> 
             <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
 
                 <div class="grid grid-cols-1 justify-center text-center m-8">
@@ -81,6 +81,7 @@
             });
         });
 
+        // Cliking anywhere else on the screen makes modal disappear
         taskModals.forEach((modal) => {
         modal.addEventListener('click', (event) => {
             if (event.target === modal) {

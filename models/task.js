@@ -23,7 +23,7 @@ const taskSchema = new Schema({
      },
     difficulty: {
         type: String,
-        enum: ["Easy", "Intermediate", "Difficult",],
+        enum: ["Todo", "In-progress", "On-hold",],
         required: false
      },
     isChecked: { 
