@@ -1,8 +1,8 @@
-<form class="formHead" action="/addTask" method="POST" id="taskEntry">
+<form class="formHead items-center " action="/addTask" method="POST" id="taskEntry">
 
-    <div class="border bg-slate-200 grid grid-cols-12 gap-0 p-2 mb-2 rounded-lg">
+    <div class="border bg-slate-200 grid grid-cols-12 gap-0 gap-2 p-2 mb-2 rounded-lg">
         <!-- Task Input -->
-        <input name="task" id="task-entry-field" type="text" class="col-span-6 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item">
+        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item">
     
         <!-- Priority Dropdown -->
         <select name="priority" id="priority" class="col-span-1 border-none font-bold text-center rounded-sm">
@@ -22,22 +22,20 @@
         </select>
     
         <!-- Status Dropdown -->
-        <select name="difficulty" id="difficulty" class="col-span-1 border-none font-bold text-center rounded-sm" >
+        <select name="difficulty" id="difficulty" class="col-span-1 w-full border-none font-bold text-center rounded-sm" >
             <option value="Easy">Easy</option>
             <option value="Intermediate">Intermediate</option>
             <option value="Difficult">Difficult</option>
         </select>
     
         <!-- Action Buttons -->
-        <div class="col-span-1 flex items-center justify-center gap-2">
+        <div class="w-full col-span-1 flex items-center justify-center gap-2">
             <button class="px-1 py-1" title="Favorites">
-                <!-- <img src="../Assets/star.png" class="w-4 h-4" alt="Cancel Button"> -->
             </button>
             <button class="px-1 py-1" title="Edit">
                 <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Cancel Button">
             </button>
             <button class="px-1 py-1" title="Delete">
-                <!-- <img src="../Assets/cancel.png" class="w-4 h-4" alt="Cancel Button"> -->
             </button>
         </div>
     </div>
