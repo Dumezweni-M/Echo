@@ -1,40 +1,41 @@
         <!-- HEADER (TASK LIST) -->
         <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center">
-            <p class="col-span-6 font-bold">Task</p>
-            <p class="col-span-1 font-bold">Priority</p>  
-            <p class="col-span-2 font-bold">Due date</p>
-            <p class="col-span-1 font-bold">Category</p> 
-            <p class="col-span-1 font-bold">Difficulty</p>
-            <p class="col-span-1 font-bold">Options</p> <!-- Edit, Checkbox, Delete -->
+            <p class="col-span-6 font-bold">Tasks</p>
+            <p class="col-span-1 font-bold hidden sm:block">Priority</p>  
+            <p class="col-span-2 font-bold">Due</p>
+            <p class="col-span-1 font-bold hidden sm:block">Freq</p> 
+            <p class="col-span-1 font-bold hidden sm:block">Status</p>
+            <p class="col-span-1 font-bold">More</p> <!-- Edit, Checkbox, Delete -->
         </div>
 
 <% tasks.forEach(task => { %> 
     <div id="taskItem" class="task border grid grid-cols-12 gap-2 sm:text-xs items-center transition-transform duration-500  hover:bg-slate-200">
 
-    
         <!-- Task Input -->
         <p class="col-span-6 pl-4 border-r"><%= task.task %></p>
     
         <!-- Priority Dropdown -->
-        <p class="col-span-1 text-center border-r">
-            <%= task.priority%></p>
+        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.priority%></p>
     
         <!-- Date Input -->
-        <p class="col-span-2 text-center border-r"><%= task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date' %></p>
+        <p class="col-span-2 text-center border-r">
+            <%= new Date(task.dueDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'}) %>
+        </p>
     
-        <!-- Category Dropdown -->
-        <p class="col-span-1 text-center border-r"><%= task.category %></p>
+        <!-- Frequency Dropdown -->
+        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.frequency%></p>
         
         <!-- Status Dropdown -->
-        <p class="col-span-1 text-center border-r"><%= task.difficulty%></p>
+        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p>
     
-        <!-- Delete Buttons -->
+        <!-- More Buttons -->
         <div class="col-span-1 flex items-center justify-center gap-4">
  
         
-            <button class="optionsBtn px-1 py-1" title="more">
-                <img src="../Assets/more.svg" class="w-6 h-6" alt="options button">
-            </button>
+        <button class="optionsBtn px-1 py-1" title="more">
+            <img src="../Assets/more.svg" class="w-6 h-6" alt="options button">
+        </button>
+
             <!-- Settings Modal     TODO: --> 
             <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
 
@@ -45,7 +46,7 @@
                         Edit
                     </p>
 
-                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="edit" data-doc="<%= task._id %>">
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
                         Highlight
                     </p>
 
