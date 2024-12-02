@@ -1,7 +1,9 @@
 https://www.flaticon.com/packs/multimedia-collection
 https://www.flaticon.com/packs/interface-icon-collection
 
+<a href="https://www.flaticon.com/free-icons/close" title="close icons">Close icons created by VectorPortal - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/close" title="close icons">Close icons created by Gregor Cresnar - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/close" title="close icons">Close icons created by VectorPortal - Flaticon</a>
 
 
-
+<a href="https://www.flaticon.com/free-icons/more" title="more icons">More icons created by Freepik - Flaticon</a>

@@ -1,0 +1,155 @@
+<form class="formHead items-center lg:block hidden " action="/addTask" method="POST" id="taskEntry">
+
+    <div class="border bg-slate-200 grid grid-cols-12 gap-2 p-2 mb-2 rounded-lg">
+        <!-- Task Input -->
+        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item">
+    
+        <!-- Priority Dropdown -->
+        <select name="priority" id="priority" class="col-span-1 border-none font-bold text-center rounded-sm">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+    
+        <!-- Date Input -->
+        <input name="dueDate" id="date-input" type="date" class="col-span-2 border-none font-bold text-center rounded-sm" >
+    
+        <!-- Category Dropdown -->
+        <select name="frequency" id="frequency" class="col-span-1 border-none font-bold text-center rounded-sm">
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Bi-Weekly">Bi-Weekly</option>
+        </select>
+    
+        <!-- Status Dropdown -->
+        <select name="status" id="status" class="col-span-1 w-full border-none font-bold text-center rounded-sm" >
+            <option value="Todo">Todo</option>
+            <option value="In-progress">In-progress</option>
+            <option value="On-hold">On-hold</option>
+        </select>
+    
+        <!-- Action Buttons -->
+        <div class=" w-full col-span-1 flex items-center justify-center gap-2">
+            <button class="px-1 py-1" title="Favorites">
+            </button>
+            <button class="px-1 py-1" title="Edit">
+                <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Cancel Button">
+            </button>
+            <button class="px-1 py-1" title="Delete">
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<!-- Convert to modal for mobile ----------------------------------------------------------------------->
+
+<!-- Button opens Modal in mobile view-->
+<div class="openModalBtn px-4 py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+    <div class="border bg-black rounded-3xl">
+        <img src="../Assets/pplus.svg" class="w-4 h-4 m-2" alt="Add task">
+    </div>
+</div>
+
+
+<dialog class="taskEntryModal">
+    <form class="formHead justify-center items-center border-2" action="/addTask" method="POST" id="taskEntryModal">
+
+        <div class="border flex flex-col justify-between items-center w-full max-w-md mx-auto">
+            <!-- Task Input -->
+            <div class="border p-2 w-full text-xs">
+                <label for="task-entry-field" class="block font-bold mb-1">Task</label>
+                <input 
+                    name="task" 
+                    id="task-entry-field" 
+                    type="text" 
+                    class="border w-full p-2 rounded" 
+                    placeholder="Enter a task item">
+            </div>
+        
+            <!-- Priority Dropdown -->
+            <div class="border p-2 w-full text-xs">
+                <label for="priority" class="block font-bold mb-1">Priority</label>
+                <select 
+                    name="priority" 
+                    id="priority" 
+                    class="border w-full p-2 rounded">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+        
+            <!-- Date Input -->
+            <div class="border p-2 w-full text-xs">
+                <label for="date-input" class="block font-bold mb-1">Due On</label>
+                <input 
+                    name="dueDate" 
+                    id="date-input" 
+                    type="date" 
+                    class="border w-full p-2 rounded">
+            </div>
+        
+            <!-- Frequency Dropdown -->
+            <div class="border p-2 w-full text-xs">
+                <label for="Frequency" class="block font-bold mb-1">Frequency</label>
+                <select 
+                    name="frequency" 
+                    id="frequency" 
+                    class="border w-full p-2 rounded">
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Bi-Weekly">Bi-Weekly</option>
+                </select>
+            </div>
+        
+            <!-- Status Dropdown -->
+            <div class="border p-2 w-full text-xs">
+                <label for="status" class="block font-bold mb-1">Status</label>
+                <select
+                    name="status"
+                    id="status" 
+                    class="border w-full p-2 rounded">
+                    <option value="Todo">Todo</option>
+                    <option value="In-progress">In-progress</option>
+                    <option value="On-hold">On-hold</option>
+                </select>
+            </div>
+        
+            <!-- Action Buttons -->
+            <div class="border p-2 w-full flex justify-end">
+                <!-- <button class="px-4 py-2 bg-blue-500 text-white rounded" title="Favorites">Favorites</button> -->
+                <button class="px-4 py-2 bg-black text-white rounded" title="Edit">
+                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Edit">
+                </button>
+                <!-- <button class="px-4 py-2 bg-red-500 text-white rounded" title="Delete">Delete</button> -->
+            </div>
+        </div>
+        
+    </form>
+</dialog>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const taskEntryModal = document.querySelector('.taskEntryModal');
+        const openModalBtn = document.querySelector('.openModalBtn');
+
+        openModalBtn.addEventListener('click', () => {
+            const modal = taskEntryModal
+            modal.showModal()
+        })
+
+        taskEntryModal.addEventListener('click', (event) => {
+            if(event.target === taskEntryModal ) {
+                taskEntryModal.close();
+            }
+        })
+
+    });
+
+
+
+
+</script>

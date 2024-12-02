@@ -4,7 +4,8 @@
   "description": "JAVA AND WEB DEVELOPMENT PROJECT (ELECTIVE C)",
   "main": "app.js",
   "scripts": {
-    "build-css": "tailwindcss -i ./src/styles.css -o ./public/styles.css --watch"
+    "build-css": "tailwindcss -i ./src/styles.css -o ./public/styles.css --watch",
+    "nodemon": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,8 @@
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.8.2"
+    "mongoose": "^8.8.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.7"
   }
 }

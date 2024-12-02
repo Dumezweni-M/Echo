@@ -1,0 +1,182 @@
+        <!-- HEADER (TASK LIST) -->
+        <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center ">
+            <p class="col-span-6 font-bold hidden sm:block">Tasks</p>
+            <p class="col-span-1 font-bold hidden sm:block">Priority</p>  
+            <p class="col-span-2 font-bold hidden sm:block">Due</p>
+            <p class="col-span-1 font-bold hidden sm:block">Freq</p> 
+            <p class="col-span-1 font-bold hidden sm:block">Status</p>
+            <p class="col-span-1 font-bold hidden sm:block">More</p> <!-- Edit, Checkbox, Delete -->
+        </div>
+
+<% tasks.forEach(task => { %> 
+    <div id="taskItem"
+        class="task border grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hidden sm:grid hover:bg-slate-200">
+
+        <!-- Task Input -->
+        <p class="col-span-6 sm:cols-span-6 pl-4 border-r "><%= task.task %></p>
+    
+        <!-- Priority Dropdown -->
+        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.priority%></p>
+    
+        <!-- Date Input -->
+        <p class="col-span-2 text-center border-r ">
+            <%= new Date(task.dueDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'}) %>
+        </p>
+    
+        <!-- Frequency Dropdown -->
+        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.frequency%></p>
+        
+        <!-- Status Dropdown -->
+        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p>
+    
+        <!-- More Buttons -->
+        <div class="col-span-1 flex items-center justify-center gap-4">
+ 
+        
+        <button class="optionsBtn px-1 py-1" title="more">
+            <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button">
+        </button>
+
+
+            <!-- Settings Modal     TODO: --> 
+            <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
+
+                <div class="grid grid-cols-1 justify-center text-center m-8">
+                    <p class="text-lg font-bold text-center mb-2"> Settings </p>
+                    
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= task._id %>">
+                        Edit
+                    </p>
+
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
+                        Highlight
+                    </p>
+
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub tasks" data-doc="<%= task._id %>">
+                        Archive
+                    </p>
+
+                    <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= task._id %>">
+                        Delete
+                    </p>
+                </div>
+            </dialog>
+
+
+        </div>
+    </div>
+<% }); %>
+
+<!-- ------------------------------------------------------------------------------ -->
+
+<% tasks.forEach(task => { %> 
+    <div id="taskItem"
+        class="task border-b m-2 grid grid-cols-9 lg:text-xs sm:text-[8px] block md:hidden">
+
+        
+        <p class="col-span-6"><%= task.task %></p>
+    
+    
+        <p class="col-span-2 text-center">
+            <%= new Date(task.dueDate).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'}) %>
+        </p>
+    
+        <div class="col-span-1 flex items-center justify-center gap-2">
+ 
+        
+        <button class="optionsBtn px-1 py-1" title="more">
+            <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button">
+        </button>
+
+
+            <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
+
+                <div class="grid grid-cols-1 justify-center text-center m-8">
+                    <p class="text-lg font-bold text-center mb-2"> Settings </p>
+                    
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= task._id %>">
+                        Edit
+                    </p>
+
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
+                        Highlight
+                    </p>
+
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub tasks" data-doc="<%= task._id %>">
+                        Archive
+                    </p>
+
+                    <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= task._id %>">
+                        Delete
+                    </p>
+                </div>
+            </dialog>
+
+
+        </div>
+    </div>
+<% }); %>
+
+<!-- ------------------------------------------------------------------------------ -->
+
+
+
+<script>
+
+        // Control "OPTIONS" modal TODO:
+        document.addEventListener('DOMContentLoaded', function() {
+
+        const optionsButtons = document.querySelectorAll('.optionsBtn')
+        const taskModals = document.querySelectorAll('.taskOptions')
+        // const closeButton = document.getElementById('closeButton')
+
+        optionsButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                const modal = taskModals[index];
+                modal.showModal();
+            });
+        });
+
+        // Cliking anywhere else on the screen makes modal disappear
+        taskModals.forEach((modal) => {
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.close();
+                }
+            });
+        });
+
+
+
+    });
+
+
+
+
+    // Fetch Data and Delete selected Item
+    const deleteButtons = document.querySelectorAll('.deleteButton');
+
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener('click', (e) => {
+            const id = deleteButton.dataset.doc;
+
+            const endpoint = `/delete/${id}`;
+
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network Response Issue, FETCH API')
+                }
+                return response.json();
+            })
+            .then((data) => {
+                window.location.href = data.redirect; // Redirect on successful delete
+            })
+            .catch((err) => console.log('Error: catch FETCH API', err));
+        });
+    });
+
+
+</script>
