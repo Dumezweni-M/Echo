@@ -71,10 +71,10 @@
 
 <% tasks.forEach(task => { %> 
     <div id="taskItem"
-        class="task border-b m-2 grid grid-cols-9 lg:text-xs sm:text-[8px] block md:hidden">
+        class="task border rounded-md m-2 grid grid-cols-9 lg:text-xs sm:text-[8px] block md:hidden items-center bg-slate-200">
 
         
-        <p class="col-span-6"><%= task.task %></p>
+        <p class="col-span-6 p-2"><%= task.task %></p>
     
     
         <p class="col-span-2 text-center">
