@@ -1,5 +1,5 @@
         <!-- HEADER (TASK LIST) -->
-        <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center ">
+        <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center ">
             <p class="col-span-6 font-bold hidden sm:block">Tasks</p>
             <p class="col-span-1 font-bold hidden sm:block">Priority</p>  
             <p class="col-span-2 font-bold hidden sm:block">Due</p>
@@ -10,10 +10,15 @@
 
 <% tasks.forEach(task => { %> 
     <div id="taskItem"
-        class="task border grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hidden sm:grid hover:bg-slate-200">
+        class="task border-b grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hidden sm:grid hover:bg-gray-800 hover:text-white hover:font-bold">
 
         <!-- Task Input -->
-        <p class="col-span-6 sm:cols-span-6 pl-4 border-r "><%= task.task %></p>
+        <div class="col-span-6 p-2">
+            <div class="flex flex-row items-center">
+                <img src="../Assets/logo.svg" class="w-12 h-8 pr-4" alt="icon">
+                <p><%= task.task %></p>
+            </div>
+        </div>
     
         <!-- Priority Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.priority%></p>
@@ -71,10 +76,17 @@
 
 <% tasks.forEach(task => { %> 
     <div id="taskItem"
-        class="task border rounded-md m-2 grid grid-cols-9 lg:text-xs sm:text-[8px] block md:hidden items-center bg-slate-200">
+        class="task border rounded-md m-2 grid grid-cols-9 lg:text-xs sm:text-[8px] block md:hidden items-center hover:bg-slate-200">
+
 
         
-        <p class="col-span-6 p-2"><%= task.task %></p>
+        <div class="col-span-6 p-2">
+            <div class="flex flex-row items-center">
+                <img src="../Assets/app.svg" class="w-4 h-4 pl-4" alt="">
+                <p><%= task.task %></p>
+            </div>
+        </div>
+        
     
     
         <p class="col-span-2 text-center">
@@ -85,7 +97,7 @@
  
         
         <button class="optionsBtn px-1 py-1" title="more">
-            <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button">
+            <img src="../Assets/more2.svg" class="w-6 h-6" alt="options button">
         </button>
 
 

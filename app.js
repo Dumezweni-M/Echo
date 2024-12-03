@@ -77,6 +77,26 @@ app.post('/addTask',(req, res) => {
 });
 
 // Edit specific task
+app.patch('/edit/:_id', (req, res) => {
+    let id = req.params/_id;
+    const {task, priority, dueDate, freq, status} = req.body; 
+
+    console.log('Edit request:', req.body);
+
+    Task.findByIdAndUpdate, (id, {task, prioirty, dueDate, freq, status},
+    {new: true, runValidators: true})
+    .then(result => {
+        if (result) {
+            res.json({message: 'Task updated successfully'});
+            console.log('Task edited', result);
+        }
+    })
+    .catch(err => {
+        console.log('Edit was unsuccessful', err);
+        res.status(500).send('Error editing entry')
+    });
+
+});
 
 // Delete an Entry
 app.delete('/delete/:_id', (req, res) => {

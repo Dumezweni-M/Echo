@@ -5,8 +5,9 @@ module.exports = {
      "./views/**/*.ejs"],
   theme: {
     extend: {
-      fontFamilu: {
-        custom: ["Silkscreen", 'sans-serif'], 
+      fontFamily: {
+        silkscreen: ['Silkscreen', 'sans-serif'],
+        poppins:['poppins','sans-serif']
       },
       screens: {
         sm: '640px',

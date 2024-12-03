@@ -1,5 +1,0 @@
-Git status - Shows current branch
-Git Switch <branchname>
-
-
-Create issue - gh issue create --title "Your Issue Title" --body "Details about the issue."
