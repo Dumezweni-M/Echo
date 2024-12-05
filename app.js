@@ -11,6 +11,7 @@ const path = require('path');
 // Import models here
 console.log("Loading Model...");
 const Task = require('./models/task')
+const Note = require('./models/note')
 console.log("Model Successfully loaded...");
 
 const app = express();
@@ -34,6 +35,8 @@ mongoose.connect(dbURI)
 
 // Register View 
 app.set('view engine', 'ejs');
+console.log("EJS registered");
+
 
 // Middleware for folder permissions
 app.use(express.static('public'));
@@ -47,20 +50,22 @@ app.use(express.json());
 //     res.render('index', {name: 'index'})
 // });
 
-
-// Retrieve Tasks from DB
+// Retrieve Data from DB (Tasks and Notes)
 app.get('/', (req, res) => {
-    Task.find()
-        .sort({dueDate: 1})
-        .then(tasks => {
-            res.render('index', {tasks});
+    const tasksPromise = Task.find().sort({ dueDate: 1 });
+    const notesPromise = Note.find();
+
+    Promise.all([tasksPromise, notesPromise])
+        .then(([tasks, notes]) => {
+            res.render('index', { tasks, notes });
         })
         .catch(err => {
-            //How to display on home page ????
-            console.log('No tasks found')
-            res.render('index', 'No tasks found')
-        })
-})
+            console.log('Error fetching tasks or notes:', err);
+            res.render('index', { tasks: [], notes: [], message: 'Error loading data.' });
+        });
+});
+
+
 
 // Enter a task to DB
 app.post('/addTask',(req, res) => {
@@ -72,6 +77,20 @@ app.post('/addTask',(req, res) => {
         })
         .catch((err) => {
             console.log('----- Error Saving Task -----', err)
+            res.status(500).send('----- Server Error -----')
+        });
+});
+
+// TODO: Enter a Note to DB
+app.post('/addNote',(req, res) => {
+    const note = new Note(req.body);
+    console.log("NOW? ----->  ", note)
+    note.save()
+        .then(() => {
+            res.redirect('/');
+        })
+        .catch((err) => {
+            console.log('----- Error Saving Note -----', err)
             res.status(500).send('----- Server Error -----')
         });
 });

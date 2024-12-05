@@ -1,0 +1,88 @@
+
+<!-- <form class="col-span-1 formHead items-center lg:block hidden " action="/addNote" method="POST" id="noteEntry">
+
+    <div class="border grid grid-cols-3 bg-gray-800 grid grid-cols-12 gap-2 p-2 m-2 rounded-lg">
+        
+        <input name="title" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note title">
+
+        <input name="note" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note">
+    
+    
+      
+        <div class=" w-full col-span-1 flex items-center justify-center gap-2">
+            <button class="px-1 py-1" title="Favorites">
+            </button>
+            <button class="px-1 py-1" title="Edit">
+                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
+            </button>
+            <button class="px-1 py-1" title="Delete">
+            </button>
+        </div>
+    </div>
+</form> -->
+
+
+<!-- Convert to modal for mobile ----------------------------------------------------------------------->
+
+<!-- Button opens Modal in mobile view-->
+<div class="border openModalBtn py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+    <div class="border bg-black rounded-3xl">
+        <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
+    </div>
+</div>
+
+
+<dialog class="noteEntryModal">
+    <form class="formHead justify-center items-center border-2" action="/addNote" method="POST" id="noteEntryModal">
+
+        <div class="border flex flex-col justify-between items-center w-full max-w-md mx-auto">
+            <!-- note Input -->
+            <div class="border p-2 w-full text-xs">
+                <label for="note-entry-field" class="block font-bold mb-1">note</label>
+                <input 
+                    name="note" 
+                    id="note-entry-field" 
+                    type="text" 
+                    class="border w-full p-2 rounded" 
+                    placeholder="Enter a note item">
+            </div>
+                
+
+        
+            <!-- Action Buttons -->
+            <div class="border p-2 w-full flex justify-end">
+                <!-- <button class="px-4 py-2 bg-blue-500 text-white rounded" title="Favorites">Favorites</button> -->
+                <button class="px-4 py-2 bg-black text-white rounded" title="Edit">
+                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Edit">
+                </button>
+                <!-- <button class="px-4 py-2 bg-red-500 text-white rounded" title="Delete">Delete</button> -->
+            </div>
+        </div>
+        
+    </form>
+</dialog>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const noteEntryModal = document.querySelector('.noteEntryModal');
+        const openModalBtn = document.querySelector('.openModalBtn');
+
+        openModalBtn.addEventListener('click', () => {
+            const modal = noteEntryModal
+            modal.showModal()
+        })
+
+        noteEntryModal.addEventListener('click', (event) => {
+            if(event.target === noteEntryModal ) {
+                noteEntryModal.close();
+            }
+        })
+
+    });
+
+
+
+
+</script>

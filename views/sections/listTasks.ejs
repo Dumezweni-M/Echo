@@ -1,4 +1,6 @@
         <!-- HEADER (TASK LIST) -->
+<div class="col-span-4">
+
         <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center ">
             <p class="col-span-6 font-bold hidden sm:block">Tasks</p>
             <p class="col-span-1 font-bold hidden sm:block">Priority</p>  
@@ -8,38 +10,41 @@
             <p class="col-span-1 font-bold hidden sm:block">More</p> <!-- Edit, Checkbox, Delete -->
         </div>
 
-<% tasks.forEach(task => { %> 
+    <% tasks.forEach(task => { %> 
     <div id="taskItem"
         class="task border-b grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hidden sm:grid hover:bg-gray-800 hover:text-white hover:font-bold">
 
         <!-- Task Input -->
         <div class="col-span-6 p-2">
             <div class="flex flex-row items-center">
-                <img src="../Assets/logo.svg" class="w-12 h-8 pr-4" alt="icon">
+                <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon">
                 <p><%= task.task %></p>
             </div>
         </div>
-    
+
         <!-- Priority Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.priority%></p>
-    
+
         <!-- Date Input -->
         <p class="col-span-2 text-center border-r ">
             <%= new Date(task.dueDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'}) %>
         </p>
-    
+
         <!-- Frequency Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.frequency%></p>
         
         <!-- Status Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p>
-    
+
         <!-- More Buttons -->
         <div class="col-span-1 flex items-center justify-center gap-4">
- 
-        
-        <button class="optionsBtn px-1 py-1" title="more">
-            <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button">
+
+        <div class="relative inline-block group">
+
+    </div class="border">
+        <button class="optionsBtn px-1 py-1 " title="more">
+            <span class="text-2xl">...</span>
+            <!-- <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button"> -->
         </button>
 
 
@@ -70,7 +75,8 @@
 
         </div>
     </div>
-<% }); %>
+    <% }); %>
+</div>
 
 <!-- ------------------------------------------------------------------------------ -->
 

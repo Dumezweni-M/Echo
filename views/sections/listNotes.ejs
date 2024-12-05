@@ -1,0 +1,138 @@
+        <!-- HEADER (Notes LIST) -->
+<div class=" border-2 border-gray-800 col-span-1 justify-center">
+
+        <div id="noteHeading" class="flex px-4 justify-between items-center note mt-4 text-center border-b-4 pb-2">
+            <p class="col-span-3 font-bold text-xl hidden sm:block">Notes</p>
+            <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="icon">
+        </div>
+
+    <% notes.forEach(note => { %> 
+    <div id="noteItem"
+        class="note border rounded-sm border-black bg-white  m-2 grid grid-cols-4 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hidden sm:grid hover:scale-105">
+
+        <!-- note Input Title -->
+        <div class="col-span-3 p-2">
+            <div class="flex flex-row items-center font-bold">
+                <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon">
+                <p><%= note.title %></p>
+            </div>
+        </div>
+
+        <!-- note Input Body -->
+        <div class="col-span-3 p-2">
+            <div class="flex flex-row items-center">
+                <img src="../Assets/heart.svg" class="w-8 h-4 pr-4" alt="icon">
+                <p><%= note.note %></p>
+            </div>
+        </div>
+
+
+        <!-- More Buttons -->
+        <div class="col-span-1 flex items-center justify-center gap-4">
+
+        <div class="relative inline-block group">
+
+    </div>
+        <button class="optionsBtn px-1 py-1" title="more">
+            <span class="text-2xl">...</span>
+            <!-- <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button"> -->
+        </button>
+
+
+            <!-- Settings Modal     TODO: --> 
+            <dialog data-modal="addNote" class="noteOptions text-sm p-2 absolute shadow-lg z-50">
+
+                <div class="grid grid-cols-1 justify-center text-center m-8">
+                    <p class="text-lg font-bold text-center mb-2"> Settings </p>
+                    
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= note._id %>">
+                        Edit
+                    </p>
+
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= note._id %>">
+                        Highlight
+                    </p>
+
+                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub notes" data-doc="<%= note._id %>">
+                        Archive
+                    </p>
+
+                    <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= note._id %>">
+                        Delete
+                    </p>
+                </div>
+            </dialog>
+
+
+        </div>
+    </div>
+    <% }); %>
+</div>
+
+<!-- ------------------------------------------------------------------------------ -->
+
+
+
+<!-- ------------------------------------------------------------------------------ -->
+
+
+
+<script>
+
+        // Control "OPTIONS" modal TODO:
+        document.addEventListener('DOMContentLoaded', function() {
+
+        const optionsButtons = document.querySelectorAll('.optionsBtn')
+        const noteModals = document.querySelectorAll('.noteOptions')
+        // const closeButton = document.getElementById('closeButton')
+
+        optionsButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                const modal = noteModals[index];
+                modal.showModal();
+            });
+        });
+
+        // Cliking anywhere else on the screen makes modal disappear
+        noteModals.forEach((modal) => {
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.close();
+                }
+            });
+        });
+
+
+
+    });
+
+
+
+
+    // Fetch Data and Delete selected Item
+    const deleteButtons = document.querySelectorAll('.deleteButton');
+
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener('click', (e) => {
+            const id = deleteButton.dataset.doc;
+
+            const endpoint = `/delete/${id}`;
+
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network Response Issue, FETCH API')
+                }
+                return response.json();
+            })
+            .then((data) => {
+                window.location.href = data.redirect; // Redirect on successful delete
+            })
+            .catch((err) => console.log('Error: catch FETCH API', err));
+        });
+    });
+
+
+</script>

@@ -2,13 +2,19 @@
 
 <body>
     <%- include('partials/nav') %> 
-        <div class="wrapper">
+        <div class="wrapper px-2">
 
 
 <!--------------------------------- -->
             <%- include('sections/addTask.ejs') %>
+            <%- include('sections/addNote.ejs') %>
 
-            <%- include('sections/listTasks.ejs') %>
+            <div class="grid grid-cols-5">
+                <%- include('sections/listTasks.ejs') %>
+                <%- include('sections/listNotes.ejs') %>
+            </div>
+            
+
 
         
 
