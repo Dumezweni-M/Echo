@@ -590,6 +590,10 @@ video {
   grid-column: span 6 / span 6;
 }
 
+.row-span-1 {
+  grid-row: span 1 / span 1;
+}
+
 .m-2 {
   margin: 0.5rem;
 }
@@ -609,6 +613,10 @@ video {
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .mt-4 {
@@ -647,6 +655,10 @@ video {
   height: 100px;
 }
 
+.h-\[80px\] {
+  height: 80px;
+}
+
 .w-4 {
   width: 1rem;
 }
@@ -661,6 +673,10 @@ video {
 
 .w-\[100px\] {
   width: 100px;
+}
+
+.w-\[80px\] {
+  width: 80px;
 }
 
 .w-full {
@@ -685,14 +701,6 @@ video {
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .grid-cols-9 {
@@ -779,14 +787,14 @@ video {
   border-style: none;
 }
 
-.border-black {
+.border-gray-400 {
   --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+  border-color: rgb(156 163 175 / var(--tw-border-opacity, 1));
 }
 
-.border-gray-800 {
+.border-gray-600 {
   --tw-border-opacity: 1;
-  border-color: rgb(31 41 55 / var(--tw-border-opacity, 1));
+  border-color: rgb(75 85 99 / var(--tw-border-opacity, 1));
 }
 
 .bg-black {
@@ -802,6 +810,11 @@ video {
 .bg-gray-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+}
+
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity, 1));
 }
 
 .bg-red-500 {
@@ -849,6 +862,10 @@ video {
 
 .pb-2 {
   padding-bottom: 0.5rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
 }
 
 .pl-4 {
@@ -924,6 +941,11 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:border-gray-700:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
+}
+
 .hover\:bg-gray-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
@@ -953,18 +975,12 @@ video {
     display: block;
   }
 
-  .sm\:grid {
-    display: grid;
+  .sm\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .sm\:text-\[8px\] {
     font-size: 8px;
-  }
-}
-
-@media (min-width: 768px) {
-  .md\:hidden {
-    display: none;
   }
 }
 

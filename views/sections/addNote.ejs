@@ -1,9 +1,9 @@
 
-<!-- <form class="col-span-1 formHead items-center lg:block hidden " action="/addNote" method="POST" id="noteEntry">
+<form class="col-span-1 formHead items-center hidden" action="/addNote" method="POST" id="noteEntry">
 
-    <div class="border grid grid-cols-3 bg-gray-800 grid grid-cols-12 gap-2 p-2 m-2 rounded-lg">
+    <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 m-2 rounded-lg">
         
-        <input name="title" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note title">
+        <input name="title" id="title-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note title">
 
         <input name="note" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note">
     
@@ -19,15 +19,16 @@
             </button>
         </div>
     </div>
-</form> -->
+</form>
 
 
 <!-- Convert to modal for mobile ----------------------------------------------------------------------->
 
 <!-- Button opens Modal in mobile view-->
-<div class="border openModalBtn py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
-    <div class="border bg-black rounded-3xl">
+<div class="border openNoteModalBtn py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+    <div class="flex items-center rounded-3xl">
         <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
+        <label for="">Note</label>
     </div>
 </div>
 
@@ -36,24 +37,35 @@
     <form class="formHead justify-center items-center border-2" action="/addNote" method="POST" id="noteEntryModal">
 
         <div class="border flex flex-col justify-between items-center w-full max-w-md mx-auto">
+
             <!-- note Input -->
             <div class="border p-2 w-full text-xs">
-                <label for="note-entry-field" class="block font-bold mb-1">note</label>
-                <input 
+                <label for="title-entry-field" class="block font-bold mb-1">Title</label>
+                <input
+                    name="title"
+                    type="text"
+                    class="border w-full p-2 mb-2 rounded">
+
+                <label for="note-entry-field" class="block font-bold mb-1">Note</label>
+                <input
                     name="note" 
-                    id="note-entry-field" 
                     type="text" 
                     class="border w-full p-2 rounded" 
                     placeholder="Enter a note item">
             </div>
+
+            <!-- <div class="border p-2 w-full text-xs">
+                
+                
+            </div> -->
                 
 
         
             <!-- Action Buttons -->
             <div class="border p-2 w-full flex justify-end">
                 <!-- <button class="px-4 py-2 bg-blue-500 text-white rounded" title="Favorites">Favorites</button> -->
-                <button class="px-4 py-2 bg-black text-white rounded" title="Edit">
-                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Edit">
+                <button class="px-4 py-2 text-white rounded" title="Note Modal">
+                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Plus button">
                 </button>
                 <!-- <button class="px-4 py-2 bg-red-500 text-white rounded" title="Delete">Delete</button> -->
             </div>
@@ -67,19 +79,19 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const noteEntryModal = document.querySelector('.noteEntryModal');
-        const openModalBtn = document.querySelector('.openModalBtn');
+        const openNoteModalBtn = document.querySelector('.openNoteModalBtn');
 
-        openModalBtn.addEventListener('click', () => {
-            const modal = noteEntryModal
-            modal.showModal()
-        })
+        // Open the modal on button click
+        openNoteModalBtn.addEventListener('click', function() {
+            noteEntryModal.showModal();  // open modal
+        });
 
-        noteEntryModal.addEventListener('click', (event) => {
-            if(event.target === noteEntryModal ) {
-                noteEntryModal.close();
+        // Close the modal when clicking outside of it
+        noteEntryModal.addEventListener('click', function(event) {
+            if (event.target === noteEntryModal) {
+                noteEntryModal.close();  // close modal
             }
-        })
-
+        });
     });
 
 

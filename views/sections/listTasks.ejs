@@ -1,5 +1,5 @@
         <!-- HEADER (TASK LIST) -->
-<div class="col-span-4">
+<div class="col-span-4 hidden sm:block">
 
         <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center ">
             <p class="col-span-6 font-bold hidden sm:block">Tasks</p>
@@ -12,12 +12,12 @@
 
     <% tasks.forEach(task => { %> 
     <div id="taskItem"
-        class="task border-b grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hidden sm:grid hover:bg-gray-800 hover:text-white hover:font-bold">
+        class="task border-b grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-800 hover:text-white hover:font-bold">
 
         <!-- Task Input -->
         <div class="col-span-6 p-2">
             <div class="flex flex-row items-center">
-                <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon">
+                <!-- <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon"> -->
                 <p><%= task.task %></p>
             </div>
         </div>
@@ -82,26 +82,22 @@
 
 <% tasks.forEach(task => { %> 
     <div id="taskItem"
-        class="task border rounded-md m-2 grid grid-cols-9 lg:text-xs sm:text-[8px] block md:hidden items-center hover:bg-slate-200">
+        class="task border rounded-md  sm:block lg:hidden grid grid-cols-9 lg:text-xs sm:text-[8px] hover:bg-slate-200">
 
 
         
-        <div class="col-span-6 p-2">
-            <div class="flex flex-row items-center">
-                <img src="../Assets/app.svg" class="w-4 h-4 pl-4" alt="">
+        <div class="col-span-6">
+            <div class="items-center">
                 <p><%= task.task %></p>
             </div>
         </div>
         
     
-    
         <p class="col-span-2 text-center">
             <%= new Date(task.dueDate).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'}) %>
         </p>
     
-        <div class="col-span-1 flex items-center justify-center gap-2">
- 
-        
+        <div class="col-span-1 flex items-center justify-center gap-2">       
         <button class="optionsBtn px-1 py-1" title="more">
             <img src="../Assets/more2.svg" class="w-6 h-6" alt="options button">
         </button>
