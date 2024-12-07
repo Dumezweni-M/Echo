@@ -174,7 +174,7 @@
         deleteButton.addEventListener('click', (e) => {
             const id = deleteButton.dataset.doc;
 
-            const endpoint = `/delete/${id}`;
+            const endpoint = `/delete/task/${id}`;
 
             fetch(endpoint, {
                 method: 'DELETE'
