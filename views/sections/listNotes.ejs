@@ -11,7 +11,7 @@
 
     <% notes.forEach(note => { %> 
     <div id="noteItem"
-        class="note border rounded-sm border-gray-400 hover:border-gray-700 bg-white  m-2 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:scale-105">
+        class="note border rounded-sm border-gray-400 hover:border-gray-700 bg-white  m-1 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:scale-105">
 
         <!-- note Input Title -->
         <div class="p-2">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="flex flex-row items-center mt-2">
-                <img src="../Assets/heart.svg" class="w-8 h-4 pr-4" alt="icon">
+                <!-- <img src="../Assets/heart.svg" class="w-8 h-4 pr-4" alt="icon"> -->
                 <p><%= note.note %></p>
             </div>
         </div>
@@ -52,11 +52,11 @@
                 <div class="grid grid-cols-1 justify-center text-center m-8">
                     <p class="text-lg font-bold text-center mb-2"> Settings </p>
                     
-                    <p class="edit px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= note._id %>">
+                    <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= note._id %>">
                         Edit
                     </p>
 
-                    <p class="delete px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= note._id %>">
+                    <p class="deleteBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600" title="Delete" data-doc="<%= note._id %>" data-type="'note">
                         Delete
                     </p>
                 </div>
@@ -166,7 +166,40 @@
                 }
             });
         });
-    });
- 
-    
+
+
+        // Detele Note
+        const deleteButtons = document.querySelectorAll('.deleteBtn');
+
+        deleteButtons.forEach(deleteButton => {
+            deleteButton.addEventListener('click', (e) => {
+
+                console.log('Delete Clicked')
+
+                const id = deleteButton.dataset.doc;
+
+                const endpoint = `/delete/note/${id}`;
+
+                fetch(endpoint, {
+                    method: 'DELETE'
+                })
+                .then((response) => {
+                    if(!response.ok) {
+                        throw new Error('Note Deletion Error')
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    window.location.href = data.redirect;
+                })
+                .catch ((err) => { console.log ( 'Note Deletion error catch', err);
+
+                })
+            })
+        })
+
+
+
+
+    });    
 </script>

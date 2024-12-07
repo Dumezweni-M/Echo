@@ -117,20 +117,71 @@ app.patch('/edit/:_id', (req, res) => {
 
 });
 
-// Delete an Entry
-app.delete('/delete/:_id', (req, res) => {
-    const id = req.params._id;
-    console.log(`Deleting item: ${id}`)
-    Task.findByIdAndDelete(id)
+// // Delete an Entry
+// app.delete('/delete/:_id', (req, res) => {
+//     const id = req.params._id;
+//     console.log(`Deleting item: ${id}`)
+//     Task.findByIdAndDelete(id)
+//         .then(result => {
+//             res.json({redirect: '/'})
+//             console.log('Task Deleted');
+//         })
+//         .catch(err => {
+//             res.status(500).send('Error Deleting Task')
+//             console.log('Unable to Delete Task', err)
+//         });
+// });
+
+
+// // Delete Note Entry
+// app.delete('/delete/:_id', (req, res) => {
+//     const id = req.params._id;
+//     console.log(`Deleting item: ${id}`)
+//     Note.findByIdAndDelete(id)
+//         .then(result => {
+//             res.json({redirect: '/'})
+//             console.log('Note Deleted');
+//         })
+//         .catch(err => {
+//             res.status(500).send('Error Deleting Note')
+//             console.log('Unable to Delete Note', err)
+//         });
+// });
+
+
+app.delete('/delete/:type/:_id', (req, res) => {
+
+    const { type, _id } = req.params;
+    console.log(`Deleting: ${type}: ${_id}`)
+
+    let deletePromise;
+
+    if (type === 'task') {
+        deletePromise = Task.findByIdAndDelete(_id);  // Delete Task
+    } else if (type === 'note') {
+        deletePromise = Note.findByIdAndDelete(_id);  // Delete Note
+    } else {
+        return res.status(400).json({ message: 'Invalid type. It should be "task" or "note".' });
+    }
+
+
+    deletePromise
         .then(result => {
-            res.json({redirect: '/'})
-            console.log('Task Deleted');
+            if (result) {
+                res.json({redirect: '/'})
+                // res.json({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.` });
+            } else {
+                res.status(404).json({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} not found.` });
+            }
         })
         .catch(err => {
-            res.status(500).send('Error Deleting Task')
-            console.log('Unable to Delete Task', err)
-        });
+            console.error(`Error deleting ${type}:`, err);
+            res.status(500).json({ message: `Error deleting ${type}.` });
+    })
 });
+
+
+
 
 
 
