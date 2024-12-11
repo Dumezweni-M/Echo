@@ -71,25 +71,32 @@
 
 <!-- --------------------------MOBILE VIEW---------------------------------------------------- -->
 
-<div class=" border-2 border-gray-600  bg-green-400 col-span-1 justify-center sm:block lg:hidden">
+<div class=" border-2 border-gray-600   col-span-1 justify-center sm:block lg:hidden">
 
 
 <% notes.forEach(note => { %> 
 <div id="noteItem"
-    class="note border rounded-sm border-gray-400 hover:border-gray-700 bg-white  m-2 grid grid-cols-1 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:scale-105">
+    class="note border p-2 rounded-sm border-gray-400 bg-white  m-2 grid grid-cols-1 gap-2 lg:text-xs sm:text-[8px] items-center">
 
     <!-- note Input Title  TODO:--> 
-    <div class="">
-        <div class="optionsBtn">
-            <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon">
-            <p><%= note.title %></p>
+    <div class="p-2 border">
+        <div class="flex justify-between items-center font-bold pb-2 border-b">
+            <div class="flex">
+                <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon">
+                <p><%= note.title %></p>
+            </div>
+            
+            
+            <!-- TODO: Notes Modal more options -->
+            <button class="noteBtn px-1 z-50" data-note-id="<%= note._id %>" title="more">
+                <img src="../Assets/more2.svg" class="w-8 h-4 pr-4" alt="icon">
+            </button>
         </div>
-    </div>
 
     <!-- note Input Body -->
     <div class="">
         <div class="">
-            <img src="../Assets/heart.svg" class="w-8 h-4" alt="icon">
+            <!-- <img src="../Assets/heart.svg" class="w-8 h-4" alt="icon"> -->
             <p><%= note.note %></p>
         </div>
     </div>
@@ -139,7 +146,7 @@
 
 <!-- ------------------------------------------------------------------------------ -->
 
-
+<script src="./scripts/dateTime.js" defer></script>
 
 <script>
 

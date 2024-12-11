@@ -1,5 +1,5 @@
 
-<form class="col-span-1 formHead items-center " action="/addNote" method="POST" id="noteEntry">
+<form class="col-span-1 formHead items-center hidden " action="/addNote" method="POST" id="noteEntry">
 
     <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 m-2 rounded-lg">
         
@@ -8,15 +8,10 @@
         <input name="note" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note">
     
     
-      
+      <!-- Add a Note -->
         <div class=" w-full col-span-1 flex items-center justify-center gap-2">
-            <button class="px-1 py-1" title="Favorites">
-                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
-            </button>
             <button class="px-1 py-1" title="Edit">
                 <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
-            </button>
-            <button class="px-1 py-1" title="Delete">
             </button>
         </div>
     </div>
