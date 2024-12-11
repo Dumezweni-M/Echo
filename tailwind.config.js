@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         silkscreen: ['Silkscreen', 'sans-serif'],
-        poppins:['poppins','sans-serif']
+        poppins:['Poppins','sans-serif'],
+        danfo:['Danfo','sans-serif'],
       },
       screens: {
         sm: '640px',
