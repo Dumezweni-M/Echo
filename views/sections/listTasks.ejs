@@ -11,16 +11,18 @@
         </div>
 
     <% tasks.forEach(task => { %> 
-    <div id="taskItem"
+    <div id="taskItem-<%= task._id %>"
         class="task border-b grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-800 hover:text-white hover:font-bold">
 
         <!-- Task Input -->
         <div class="col-span-6 p-2">
-            <div class="flex flex-row items-center">
-                <!-- <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon"> -->
-                <p><%= task.task %></p>
+            <div class="task-name">
+                <span class="view-mode"><%= task.task %></span>
+                <input type="text" class="edit-mode hidden p-2 rounded-lg text-black" value="<%= task.task %>" />
             </div>
         </div>
+
+        
 
         <!-- Priority Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.priority%></p>
@@ -58,7 +60,14 @@
                         Edit
                     </p>
 
-                    <!-- TODO: -->
+                    <p class="saveButton hidden px-1 py-1 cursor-pointer border-b transition-transform duration-500 hover:bg-slate-200" title="save" data-doc="<%= task._id %>">
+                        Save
+                    </p>
+                    <p class="cancelButton hidden px-1 py-1 cursor-pointer border-b transition-transform duration-500 hover:bg-slate-200" title="cancel" data-doc="<%= task._id %>">
+                        Cancel
+                    </p>
+
+                    
                     <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
                         Highlight
                     </p>
@@ -138,7 +147,7 @@
 
 <script>
 
-        // Control "OPTIONS" modal TODO:
+        // Control "OPTIONS" modal
         document.addEventListener('DOMContentLoaded', function() {
 
         const optionsButtons = document.querySelectorAll('.optionsBtn')
@@ -194,7 +203,88 @@
 
 
         // Edit tasks
-        // i neen help here!
+        const editButtons = document.querySelectorAll('.editButton');
+    const saveButtons = document.querySelectorAll('.saveButton');
+    const cancelButtons = document.querySelectorAll('.cancelButton');
+
+    // Edit Mode
+    editButtons.forEach((editButton) => {
+        editButton.addEventListener('click', () => {
+            const taskId = editButton.dataset.doc;
+            const taskItem = document.querySelector(`#taskItem-${taskId}`);
+            
+            // Get task elements
+            const taskText = taskItem.querySelector('.view-mode');
+            const taskInput = taskItem.querySelector('.edit-mode');
+
+            // Toggle visibility
+            taskText.classList.add('hidden');
+            taskInput.classList.remove('hidden');
+            
+            // Show Save/Cancel buttons and hide Edit button
+            editButton.classList.add('hidden');
+            taskItem.querySelector('.saveButton').classList.remove('hidden');
+            taskItem.querySelector('.cancelButton').classList.remove('hidden');
+        });
+    });
+
+    // Save Changes
+    saveButtons.forEach((saveButton) => {
+        saveButton.addEventListener('click', () => {
+            const taskId = saveButton.dataset.doc;
+            const taskItem = document.querySelector(`#taskItem-${taskId}`);
+            
+            const updatedTaskName = taskItem.querySelector('.edit-mode').value;
+
+            // Send update to backend
+            fetch(`/edit/${taskId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ task: updatedTaskName }),
+            })
+                .then((response) => {
+                    if (!response.ok) throw new Error('Failed to update task');
+                    return response.json();
+                })
+                .then((data) => {
+                    // Update UI
+                    taskItem.querySelector('.view-mode').textContent = updatedTaskName;
+
+                    // Exit edit mode
+                    taskItem.querySelector('.edit-mode').classList.add('hidden');
+                    taskItem.querySelector('.view-mode').classList.remove('hidden');
+
+                    saveButton.classList.add('hidden');
+                    taskItem.querySelector('.cancelButton').classList.add('hidden');
+                    taskItem.querySelector('.editButton').classList.remove('hidden');
+                })
+                .catch((error) => console.error('Error updating task:', error));
+        });
+    });
+
+    // Cancel Edit
+    cancelButtons.forEach((cancelButton) => {
+        cancelButton.addEventListener('click', () => {
+            const taskId = cancelButton.dataset.doc;
+            const taskItem = document.querySelector(`#taskItem-${taskId}`);
+            
+            const taskText = taskItem.querySelector('.view-mode');
+            const taskInput = taskItem.querySelector('.edit-mode');
+
+            // Restore original value
+            taskInput.value = taskText.textContent;
+
+            // Toggle visibility
+            taskInput.classList.add('hidden');
+            taskText.classList.remove('hidden');
+
+            cancelButton.classList.add('hidden');
+            taskItem.querySelector('.saveButton').classList.add('hidden');
+            taskItem.querySelector('.editButton').classList.remove('hidden');
+        });
+    });
 
 
 
