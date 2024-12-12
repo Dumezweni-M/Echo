@@ -95,10 +95,12 @@ app.post('/addNote',(req, res) => {
         });
 });
 
+
+
 // Edit specific task
 app.patch('/edit/:_id', (req, res) => {
     let id = req.params/_id;
-    const {task, priority, dueDate, freq, status} = req.body; 
+    const { task, priority, dueDate, freq, status} = req.body; 
 
     console.log('Edit request:', req.body);
 
@@ -114,39 +116,10 @@ app.patch('/edit/:_id', (req, res) => {
         console.log('Edit was unsuccessful', err);
         res.status(500).send('Error editing entry')
     });
-
 });
 
-// // Delete an Entry
-// app.delete('/delete/:_id', (req, res) => {
-//     const id = req.params._id;
-//     console.log(`Deleting item: ${id}`)
-//     Task.findByIdAndDelete(id)
-//         .then(result => {
-//             res.json({redirect: '/'})
-//             console.log('Task Deleted');
-//         })
-//         .catch(err => {
-//             res.status(500).send('Error Deleting Task')
-//             console.log('Unable to Delete Task', err)
-//         });
-// });
 
 
-// // Delete Note Entry
-// app.delete('/delete/:_id', (req, res) => {
-//     const id = req.params._id;
-//     console.log(`Deleting item: ${id}`)
-//     Note.findByIdAndDelete(id)
-//         .then(result => {
-//             res.json({redirect: '/'})
-//             console.log('Note Deleted');
-//         })
-//         .catch(err => {
-//             res.status(500).send('Error Deleting Note')
-//             console.log('Unable to Delete Note', err)
-//         });
-// });
 
 
 app.delete('/delete/:type/:_id', (req, res) => {

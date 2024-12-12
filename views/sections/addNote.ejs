@@ -1,5 +1,5 @@
 
-<form class="col-span-1 formHead items-center hidden " action="/addNote" method="POST" id="noteEntry">
+<form class="col-span-1 formHead items-center hidden" action="/addNote" method="POST" id="noteEntry">
 
     <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 m-2 rounded-lg">
         
@@ -10,7 +10,7 @@
     
       <!-- Add a Note -->
         <div class=" w-full col-span-1 flex items-center justify-center gap-2">
-            <button class="px-1 py-1" title="Edit">
+            <button class="openNoteModalBtn px-1 py-1" title="Edit">
                 <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
             </button>
         </div>
@@ -20,8 +20,8 @@
 
 <!-- Convert to modal for mobile ----------------------------------------------------------------------->
 
-<!-- Button opens Modal in mobile view-->
-<div class="border openNoteModalBtn py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+<!-- TODO:  Button opens Modal in mobile view-->
+<div class="noteAdd border py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
     <div class="flex items-center rounded-3xl">
         <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
         <label for="">Note</label>
@@ -88,8 +88,11 @@
                 noteEntryModal.close();  // close modal
             }
         });
+        const noteAdd = document.querySelectorAll(".noteAdd");
+        noteAdd.addEventListener('click', function() {
+            console.log('Clicked')
+        })
     });
-
 
 
 

@@ -48,7 +48,7 @@
         </button>
 
 
-            <!-- Settings Modal     TODO: --> 
+            <!-- Settings Modal --> 
             <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
 
                 <div class="grid grid-cols-1 justify-center text-center m-8">
@@ -58,6 +58,7 @@
                         Edit
                     </p>
 
+                    <!-- TODO: -->
                     <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
                         Highlight
                     </p>
@@ -190,7 +191,12 @@
             })
             .catch((err) => console.log('Error: catch FETCH API', err));
         });
+
+
+        // Edit tasks
+        // i neen help here!
+
+
+
     });
-
-
 </script>
