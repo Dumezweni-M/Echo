@@ -3,7 +3,7 @@
 
     <div class="border bg-gray-800 grid grid-cols-12 gap-2 p-2 rounded-lg">
         <!-- Task Input -->
-        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item">
+        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item" required>
     
         <!-- Priority Dropdown -->
         <select name="priority" id="priority" class="col-span-1 border-none font-bold text-center rounded-sm">
@@ -17,6 +17,7 @@
     
         <!-- Category Dropdown -->
         <select name="frequency" id="frequency" class="col-span-1 border-none font-bold text-center rounded-sm">
+            <option value="Once-off">Once</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
             <option value="Bi-Weekly">Bi-Weekly</option>

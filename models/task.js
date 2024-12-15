@@ -18,7 +18,7 @@ const taskSchema = new Schema({
      },
     frequency: {
         type: String,
-        enum: ["Daily", "Weekly", "Bi-Weekly",],
+        enum: ["Once-off", "Daily", "Weekly", "Bi-Weekly",],
         required: false
      },
     status: {

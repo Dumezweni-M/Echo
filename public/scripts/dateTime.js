@@ -17,8 +17,8 @@ setInterval(() => {
     console.log(currentTime);
 
     dateDisplay.innerHTML = `
-    <p class="text-2xl">${currentTime}</p>
-    <p class="text-xl "> ${weekday} ${day} ${month} </p>
+    <p class="text-2xl mr-2">${currentTime}</p>
+    <p class="text-2xl ml-2"> ${weekday} ${day} ${month} </p>
     `;
 
 }, 1000);

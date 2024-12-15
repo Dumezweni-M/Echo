@@ -1,5 +1,5 @@
         <!-- HEADER (Notes LIST) -->
-<div class=" border-2 border-gray-600 col-span-1 justify-center hidden sm:block">
+<div class=" border-2 border-gray-600 col-span-1 justify-center hidden sm:block max-h-[75vh] overflow-y-auto">
 
         <div id="noteHeading" class="flex px-4 pb-2 justify-between items-center note mt-4 text-center border-b-4">
             <p class="col-span-3 font-bold text-xl hidden sm:block">Notes</p>
@@ -45,13 +45,13 @@
                 <div class="grid grid-cols-1 justify-center text-center m-8">
                     <p class="text-lg font-bold text-center mb-2"> Settings </p>
                     
-                    <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
+                    <!-- <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
                         Edit
-                    </p>
+                    </p> -->
 
-                    <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
+                    <!-- <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
                         Save
-                    </p>
+                    </p> -->
 
                     <p class="deleteBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600 rounded" title="Delete" data-doc="<%= note._id %>" data-type="'note">
                         Delete
@@ -121,13 +121,13 @@
                     Edit
                 </p>
 
-                <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= note._id %>">
+                <!-- <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= note._id %>">
                     Highlight
-                </p>
+                </p> -->
 
-                <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub notes" data-doc="<%= note._id %>">
+                <!-- <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub notes" data-doc="<%= note._id %>">
                     Archive
-                </p>
+                </p> -->
 
                 <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= note._id %>">
                     Delete
@@ -246,4 +246,66 @@
         }
 
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+    // Handle Edit Button Click
+    const editButtons = document.querySelectorAll('.editBtn');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const noteId = button.dataset.doc;
+            const noteItem = button.closest('#noteItem');
+            
+            // Toggle Edit Mode
+            const noteContent = noteItem.querySelector('p'); // Locate note content
+            const currentNote = noteContent.textContent;
+
+            // Replace content with textarea
+            const textarea = document.createElement('textarea');
+            textarea.classList.add('w-full', 'p-2', 'border', 'rounded');
+            textarea.value = currentNote;
+            noteContent.replaceWith(textarea);
+
+            // Change the Edit button to Save button
+            button.textContent = 'Save';
+            button.classList.remove('editBtn');
+            button.classList.add('saveBtn');
+
+            // Add event listener for the Save button
+            button.addEventListener('click', () => {
+                const updatedNote = textarea.value;
+
+                // Send updated note to the server
+                fetch(`/update/note/${noteId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ note: updatedNote }),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error updating note');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Replace textarea with updated note content
+                        const updatedContent = document.createElement('p');
+                        updatedContent.textContent = updatedNote;
+                        textarea.replaceWith(updatedContent);
+
+                        // Change Save button back to Edit
+                        button.textContent = 'Edit';
+                        button.classList.add('editBtn');
+                        button.classList.remove('saveBtn');
+                    })
+                    .catch(err => {
+                        console.error('Error:', err);
+                    });
+            }, { once: true });
+        });
+    });
+});
+
 </script>

@@ -97,7 +97,7 @@ app.post('/addNote',(req, res) => {
 
 
 
-// TODO: Edit specific task
+// Edit specific task
 app.patch('/edit/:_id', (req, res) => {
     let id = req.params._id;
     const { task } = req.body; 
@@ -118,8 +118,6 @@ app.patch('/edit/:_id', (req, res) => {
         res.status(500).send('Error editing entry')
     });
 });
-
-
 
 
 
