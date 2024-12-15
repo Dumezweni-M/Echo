@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const taskSchema = new Schema({
     task: {
         type: String,
-        required: false
+        required: true
      },
     priority: {
         type: String,

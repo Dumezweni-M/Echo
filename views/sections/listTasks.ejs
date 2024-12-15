@@ -1,5 +1,7 @@
         <!-- HEADER (TASK LIST) -->
-        <div id="taskHeading" class="task grid grid-cols-12 mt-4 mb-4 text-center ">
+<div class="col-span-4 hidden sm:block">
+
+        <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center font-Danfo ">
             <p class="col-span-6 font-bold hidden sm:block">Tasks</p>
             <p class="col-span-1 font-bold hidden sm:block">Priority</p>  
             <p class="col-span-2 font-bold hidden sm:block">Due</p>
@@ -8,37 +10,47 @@
             <p class="col-span-1 font-bold hidden sm:block">More</p> <!-- Edit, Checkbox, Delete -->
         </div>
 
-<% tasks.forEach(task => { %> 
-    <div id="taskItem"
-        class="task border grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hidden sm:grid hover:bg-slate-200">
+    <% tasks.forEach(task => { %> 
+    <div id="taskItem-<%= task._id %>"
+        class="task border-b grid grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-800 hover:text-white hover:font-bold">
 
         <!-- Task Input -->
-        <p class="col-span-6 sm:cols-span-6 pl-4 border-r "><%= task.task %></p>
-    
+        <div class="col-span-6 p-2">
+            <div class="task-name">
+                <span class="view-mode"><%= task.task %></span>
+                <input type="text" class="edit-mode hidden p-2 rounded-lg bg-cyan-800 w-full" value="<%= task.task %>" />
+            </div>
+        </div>
+
+        
+
         <!-- Priority Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.priority%></p>
-    
+
         <!-- Date Input -->
         <p class="col-span-2 text-center border-r ">
             <%= new Date(task.dueDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'}) %>
         </p>
-    
+
         <!-- Frequency Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.frequency%></p>
         
         <!-- Status Dropdown -->
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p>
-    
+
         <!-- More Buttons -->
         <div class="col-span-1 flex items-center justify-center gap-4">
- 
-        
-        <button class="optionsBtn px-1 py-1" title="more">
-            <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button">
+
+        <div class="relative inline-block group">
+
+    </div class="border">
+        <button class="optionsBtn px-1 py-1 " title="more">
+            <span class="text-2xl">...</span>
+            <!-- <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button"> -->
         </button>
 
 
-            <!-- Settings Modal     TODO: --> 
+            <!-- Settings Modal --> 
             <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
 
                 <div class="grid grid-cols-1 justify-center text-center m-8">
@@ -48,6 +60,14 @@
                         Edit
                     </p>
 
+                    <p class="saveButton hidden px-1 py-1 cursor-pointer border-b transition-transform duration-500 hover:bg-slate-200" title="save" data-doc="<%= task._id %>">
+                        Save
+                    </p>
+                    <p class="cancelButton hidden px-1 py-1 cursor-pointer border-b transition-transform duration-500 hover:bg-slate-200" title="cancel" data-doc="<%= task._id %>">
+                        Cancel
+                    </p>
+
+                    
                     <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
                         Highlight
                     </p>
@@ -65,27 +85,31 @@
 
         </div>
     </div>
-<% }); %>
+    <% }); %>
+</div>
 
 <!-- ------------------------------------------------------------------------------ -->
 
 <% tasks.forEach(task => { %> 
-    <div id="taskItem"
-        class="task border-b m-2 grid grid-cols-9 lg:text-xs sm:text-[8px] block md:hidden">
+    <div id="taskItem flex items-center"
+        class="task border rounded-md  sm:block lg:hidden grid grid-cols-9 lg:text-xs sm:text-[8px] hover:bg-slate-200">
+
 
         
-        <p class="col-span-6"><%= task.task %></p>
+        <div class="col-span-6 p-2">
+            <div class="items-center">
+                <p><%= task.task %></p>
+            </div>
+        </div>
+        
     
-    
-        <p class="col-span-2 text-center">
+        <p class="col-span-2 text-center flex items-center">
             <%= new Date(task.dueDate).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'}) %>
         </p>
     
-        <div class="col-span-1 flex items-center justify-center gap-2">
- 
-        
+        <div class="col-span-1 flex items-center justify-center gap-2">       
         <button class="optionsBtn px-1 py-1" title="more">
-            <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button">
+            <img src="../Assets/more2.svg" class="w-6 h-6" alt="options button">
         </button>
 
 
@@ -106,7 +130,7 @@
                         Archive
                     </p>
 
-                    <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= task._id %>">
+                    <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-type="task" data-doc="<%= task._id %>">
                         Delete
                     </p>
                 </div>
@@ -123,7 +147,7 @@
 
 <script>
 
-        // Control "OPTIONS" modal TODO:
+        // Control "OPTIONS" modal
         document.addEventListener('DOMContentLoaded', function() {
 
         const optionsButtons = document.querySelectorAll('.optionsBtn')
@@ -160,7 +184,7 @@
         deleteButton.addEventListener('click', (e) => {
             const id = deleteButton.dataset.doc;
 
-            const endpoint = `/delete/${id}`;
+            const endpoint = `/delete/task/${id}`;
 
             fetch(endpoint, {
                 method: 'DELETE'
@@ -176,7 +200,93 @@
             })
             .catch((err) => console.log('Error: catch FETCH API', err));
         });
+
+
+        // Edit tasks
+        const editButtons = document.querySelectorAll('.editButton');
+        const saveButtons = document.querySelectorAll('.saveButton');
+        const cancelButtons = document.querySelectorAll('.cancelButton');
+
+    // Edit Mode
+            editButtons.forEach((editButton) => {
+            editButton.addEventListener('click', () => {
+            const taskId = editButton.dataset.doc;
+            const taskItem = document.querySelector(`#taskItem-${taskId}`);
+            
+            // Get task elements
+            const taskText = taskItem.querySelector('.view-mode');
+            const taskInput = taskItem.querySelector('.edit-mode');
+
+            // Toggle visibility
+            taskText.classList.add('hidden');
+            taskInput.classList.remove('hidden');
+            
+            // Show Save/Cancel buttons and hide Edit button
+            editButton.classList.add('hidden');
+            taskItem.querySelector('.saveButton').classList.remove('hidden');
+            taskItem.querySelector('.cancelButton').classList.remove('hidden');
+        });
+    });
+
+    // Save Changes
+    saveButtons.forEach((saveButton) => {
+        saveButton.addEventListener('click', () => {
+            const taskId = saveButton.dataset.doc;
+            const taskItem = document.querySelector(`#taskItem-${taskId}`);
+            
+            const updatedTaskName = taskItem.querySelector('.edit-mode').value;
+
+            // Send update to backend
+            fetch(`/edit/${taskId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ task: updatedTaskName }),
+            })
+                .then((response) => {
+                    if (!response.ok) throw new Error('Failed to update task');
+                    return response.json();
+                })
+                .then((data) => {
+                    // Update UI
+                    taskItem.querySelector('.view-mode').textContent = updatedTaskName;
+
+                    // Exit edit mode
+                    taskItem.querySelector('.edit-mode').classList.add('hidden');
+                    taskItem.querySelector('.view-mode').classList.remove('hidden');
+
+                    saveButton.classList.add('hidden');
+                    taskItem.querySelector('.cancelButton').classList.add('hidden');
+                    taskItem.querySelector('.editButton').classList.remove('hidden');
+                })
+                .catch((error) => console.error('Error updating task:', error));
+        });
+    });
+
+    // Cancel Edit
+    cancelButtons.forEach((cancelButton) => {
+        cancelButton.addEventListener('click', () => {
+            const taskId = cancelButton.dataset.doc;
+            const taskItem = document.querySelector(`#taskItem-${taskId}`);
+            
+            const taskText = taskItem.querySelector('.view-mode');
+            const taskInput = taskItem.querySelector('.edit-mode');
+
+            // Restore original value
+            taskInput.value = taskText.textContent;
+
+            // Toggle visibility
+            taskInput.classList.add('hidden');
+            taskText.classList.remove('hidden');
+
+            cancelButton.classList.add('hidden');
+            taskItem.querySelector('.saveButton').classList.add('hidden');
+            taskItem.querySelector('.editButton').classList.remove('hidden');
+        });
     });
 
 
+
+    });
 </script>

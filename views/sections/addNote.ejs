@@ -1,0 +1,94 @@
+
+<form class="border col-span-1 formHead items-center" action="/addNote" method="POST" id="noteEntry">
+
+    <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 rounded-lg">
+        
+        <input name="title" id="title-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note title">
+
+        <input name="note" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note">
+    
+    
+      <!-- Add a Note -->
+        <div class=" w-full col-span-1 flex items-center justify-start gap-2">
+            <button class="openNoteModalBtn px-1 py-1" title="Edit">
+                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Add Button">
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<!-- Convert to modal for mobile ----------------------------------------------------------------------->
+
+<!-- TODO:  Button opens Modal in mobile view-->
+<div class="noteAdd border py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+    <div class="flex items-center rounded-3xl">
+        <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
+        <label for="">Note</label>
+    </div>
+</div>
+
+
+<dialog class="noteEntryModal">
+    <form class="formHead justify-center items-center border-2" action="/addNote" method="POST" id="noteEntryModal">
+
+        <div class="border flex flex-col justify-between items-center w-full max-w-md mx-auto">
+
+            <!-- note Input -->
+            <div class="border p-2 w-full text-xs">
+                <label for="title" class="block font-bold mb-1">Title</label>
+                <input
+                    name="title"
+                    type="text"
+                    class="border w-full p-2 mb-2 rounded">
+
+                <label for="note" class="block font-bold mb-1">Note</label>
+                <input
+                    name="note" 
+                    type="text" 
+                    class="border w-full p-2 rounded" 
+                    placeholder="Enter a note item">
+            </div>                
+
+        
+            <!-- Action Buttons -->
+            <div class="border p-2 w-full flex justify-end">
+                <button class="px-4 py-2 text-white rounded" title="Note Modal">
+                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Plus button">
+                </button>
+            </div>
+        </div>
+        
+    </form>
+</dialog>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const noteEntryModal = document.querySelector('.noteEntryModal');
+        const openNoteModalBtn = document.querySelector('.openNoteModalBtn');
+
+        // Open the modal on button click
+        openNoteModalBtn.addEventListener('click', function() {
+            noteEntryModal.showModal();  // open modal
+        });
+
+        // Close the modal when clicking outside of it
+        noteEntryModal.addEventListener('click', function(event) {
+            if (event.target === noteEntryModal) {
+                noteEntryModal.close();  // close modal
+            }
+        });
+        // const noteAdd = document.querySelectorAll(".noteAdd");
+        // noteAdd.addEventListener('click', function() {
+        //     console.log('Clicked')
+        // })
+    });
+
+    
+
+
+
+
+</script>

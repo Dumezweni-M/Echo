@@ -1,6 +1,7 @@
-<form class="formHead items-center lg:block hidden " action="/addTask" method="POST" id="taskEntry">
 
-    <div class="border bg-slate-200 grid grid-cols-12 gap-2 p-2 mb-2 rounded-lg">
+<form class="border col-span-5 formHead items-center lg:block hidden " action="/addTask" method="POST" id="taskEntry">
+
+    <div class="border bg-gray-800 grid grid-cols-12 gap-2 p-2 rounded-lg">
         <!-- Task Input -->
         <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item">
     
@@ -33,7 +34,7 @@
             <button class="px-1 py-1" title="Favorites">
             </button>
             <button class="px-1 py-1" title="Edit">
-                <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Cancel Button">
+                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
             </button>
             <button class="px-1 py-1" title="Delete">
             </button>
@@ -45,9 +46,10 @@
 <!-- Convert to modal for mobile ----------------------------------------------------------------------->
 
 <!-- Button opens Modal in mobile view-->
-<div class="openModalBtn px-4 py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
-    <div class="border bg-black rounded-3xl">
-        <img src="../Assets/pplus.svg" class="w-4 h-4 m-2" alt="Add task">
+<div class="border openModalBtn py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+    <div class="flex rounded-3xl">
+        <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add task">
+        <label for="task">Task</label>
     </div>
 </div>
 
@@ -82,7 +84,7 @@
         
             <!-- Date Input -->
             <div class="border p-2 w-full text-xs">
-                <label for="date-input" class="block font-bold mb-1">Due On</label>
+                <label for="date-input" class="block font-bold mb-1">Due</label>
                 <input 
                     name="dueDate" 
                     id="date-input" 
