@@ -1,7 +1,7 @@
 
-<form class="col-span-1 formHead items-center hidden" action="/addNote" method="POST" id="noteEntry">
+<form class="border col-span-1 formHead items-center" action="/addNote" method="POST" id="noteEntry">
 
-    <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 m-2 rounded-lg">
+    <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 rounded-lg">
         
         <input name="title" id="title-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note title">
 
@@ -9,9 +9,9 @@
     
     
       <!-- Add a Note -->
-        <div class=" w-full col-span-1 flex items-center justify-center gap-2">
+        <div class=" w-full col-span-1 flex items-center justify-start gap-2">
             <button class="openNoteModalBtn px-1 py-1" title="Edit">
-                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
+                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Add Button">
             </button>
         </div>
     </div>
@@ -48,22 +48,14 @@
                     type="text" 
                     class="border w-full p-2 rounded" 
                     placeholder="Enter a note item">
-            </div>
-
-            <!-- <div class="border p-2 w-full text-xs">
-                
-                
-            </div> -->
-                
+            </div>                
 
         
             <!-- Action Buttons -->
             <div class="border p-2 w-full flex justify-end">
-                <!-- <button class="px-4 py-2 bg-blue-500 text-white rounded" title="Favorites">Favorites</button> -->
                 <button class="px-4 py-2 text-white rounded" title="Note Modal">
                     <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Plus button">
                 </button>
-                <!-- <button class="px-4 py-2 bg-red-500 text-white rounded" title="Delete">Delete</button> -->
             </div>
         </div>
         
@@ -88,11 +80,14 @@
                 noteEntryModal.close();  // close modal
             }
         });
-        const noteAdd = document.querySelectorAll(".noteAdd");
-        noteAdd.addEventListener('click', function() {
-            console.log('Clicked')
-        })
+        // const noteAdd = document.querySelectorAll(".noteAdd");
+        // noteAdd.addEventListener('click', function() {
+        //     console.log('Clicked')
+        // })
     });
+
+    
+
 
 
 

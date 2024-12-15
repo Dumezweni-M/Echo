@@ -3,9 +3,10 @@
 
         <div id="noteHeading" class="flex px-4 pb-2 justify-between items-center note mt-4 text-center border-b-4">
             <p class="col-span-3 font-bold text-xl hidden sm:block">Notes</p>
-            <!-- TODO: -->
-            <div id="addNote" class="cursor-pointer">
-                <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="icon">
+
+            <!-- TODO: Add note button in Notes list-->
+            <div class="addNote cursor-pointer">
+                <!-- <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="icon"> -->
             </div>
         </div>
 
@@ -39,24 +40,20 @@
         <!-- More Buttons -->
         <div class="col-span-1 flex justify-end ">
 
-        <!-- <div class="relative inline-block group">
-
-        </div> -->
-        <!-- <button class="optionsBtn px-1 z-50" title="more">
-            <span class="text-2xl">...</span>
-        </button> -->
-
-
             <!-- Settings Modal     TODO: --> 
-            <dialog data-modal="<%= note._id%>" class="noteOptions text-sm p-2 absolute shadow-lg z-50">
+            <dialog data-modal="<%= note._id%>" class="noteOptions text-sm p-2 absolute shadow-lg z-50 rounded-md">
                 <div class="grid grid-cols-1 justify-center text-center m-8">
                     <p class="text-lg font-bold text-center mb-2"> Settings </p>
                     
-                    <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= note._id %>">
+                    <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
                         Edit
                     </p>
 
-                    <p class="deleteBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600" title="Delete" data-doc="<%= note._id %>" data-type="'note">
+                    <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
+                        Save
+                    </p>
+
+                    <p class="deleteBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600 rounded" title="Delete" data-doc="<%= note._id %>" data-type="'note">
                         Delete
                     </p>
                 </div>
@@ -204,9 +201,49 @@
                 })
             })
         })
-
-
-
+       
 
     });    
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Add event listener to the "Add Note" button to open the modal
+        const addNoteButton = document.querySelector('.addNote');
+        const addNoteModal = document.getElementById('addNoteModal');
+
+        // If the button exists, add event listener
+        if (addNoteButton && addNoteModal) {
+            addNoteButton.addEventListener('click', () => {
+                console.log('Add note clicked!');
+                addNoteModal.showModal(); // Show the modal when Add Note is clicked
+            });
+        }
+
+        // Close the modal if the backdrop is clicked (optional)
+        addNoteModal.addEventListener('click', (event) => {
+            if (event.target === addNoteModal) {
+                addNoteModal.close(); // Close the modal if backdrop is clicked
+            }
+        });
+
+        // Handle form submission (optional, for saving note data)
+        const addNoteForm = document.getElementById('addNoteForm');
+        if (addNoteForm) {
+            addNoteForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const formData = new FormData(addNoteForm);
+                const title = formData.get('title');
+                const note = formData.get('note');
+
+                // You can send this data to your server here
+                console.log('Title:', title, 'Note:', note);
+
+                // After saving, close the modal
+                addNoteModal.close();
+            });
+        }
+
+        });
 </script>

@@ -18,7 +18,7 @@
         <div class="col-span-6 p-2">
             <div class="task-name">
                 <span class="view-mode"><%= task.task %></span>
-                <input type="text" class="edit-mode hidden p-2 rounded-lg bg-black w-full" value="<%= task.task %>" />
+                <input type="text" class="edit-mode hidden p-2 rounded-lg bg-cyan-800 w-full" value="<%= task.task %>" />
             </div>
         </div>
 
@@ -91,19 +91,19 @@
 <!-- ------------------------------------------------------------------------------ -->
 
 <% tasks.forEach(task => { %> 
-    <div id="taskItem"
+    <div id="taskItem flex items-center"
         class="task border rounded-md  sm:block lg:hidden grid grid-cols-9 lg:text-xs sm:text-[8px] hover:bg-slate-200">
 
 
         
-        <div class="col-span-6">
+        <div class="col-span-6 p-2">
             <div class="items-center">
                 <p><%= task.task %></p>
             </div>
         </div>
         
     
-        <p class="col-span-2 text-center">
+        <p class="col-span-2 text-center flex items-center">
             <%= new Date(task.dueDate).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'}) %>
         </p>
     
@@ -204,12 +204,12 @@
 
         // Edit tasks
         const editButtons = document.querySelectorAll('.editButton');
-    const saveButtons = document.querySelectorAll('.saveButton');
-    const cancelButtons = document.querySelectorAll('.cancelButton');
+        const saveButtons = document.querySelectorAll('.saveButton');
+        const cancelButtons = document.querySelectorAll('.cancelButton');
 
     // Edit Mode
-    editButtons.forEach((editButton) => {
-        editButton.addEventListener('click', () => {
+            editButtons.forEach((editButton) => {
+            editButton.addEventListener('click', () => {
             const taskId = editButton.dataset.doc;
             const taskItem = document.querySelector(`#taskItem-${taskId}`);
             
