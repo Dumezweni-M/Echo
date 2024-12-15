@@ -1,0 +1,30 @@
+#This txt is simply to help us along, feel free to add any other useful commands you come across
+
+
+MOST COMMON COMMANDS:
+Authenticate with GitHub:
+    gh auth login
+
+List Issues:
+    gh issue list
+
+Create an Issue: 
+    gh issue create
+
+View an Issue: 
+    gh issue view <issue-number> eg: "gh issue view 12"
+
+Close an Issue: 
+    gh issue close <issue-number> eg: "gh issue close 12"
+
+Comment on Issue: 
+    gh issue comment 12 --body "refactor: create function to handle..."
+    
+Create a Pull Request: 
+    gh pr create
+    
+List Pull Requests: 
+    gh pr list
+
+
+

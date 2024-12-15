@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const taskSchema = new Schema({
     task: {
         type: String,
-        required: false
+        required: true
      },
     priority: {
         type: String,
@@ -16,14 +16,14 @@ const taskSchema = new Schema({
         required: false,
         default: Date.now
      },
-    category: {
+    frequency: {
         type: String,
-        enum: ["Daily", "Task", "Project",],
+        enum: ["Daily", "Weekly", "Bi-Weekly",],
         required: false
      },
-    difficulty: {
+    status: {
         type: String,
-        enum: ["Easy", "Intermediate", "Difficult",],
+        enum: ["Todo", "In-progress", "On-hold",],
         required: false
      },
     isChecked: { 
