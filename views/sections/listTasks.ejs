@@ -1,5 +1,5 @@
         <!-- HEADER (TASK LIST) -->
-<div class="col-span-4 hidden sm:block">
+<div class="col-span-4 hidden sm:block sm:m-2">
 
         <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center font-Danfo ">
             <p class="col-span-6 font-bold hidden sm:block">Tasks</p>
@@ -92,18 +92,18 @@
 
 <% tasks.forEach(task => { %> 
     <div id="taskItem flex items-center"
-        class="task border rounded-md  sm:block lg:hidden grid grid-cols-9 lg:text-xs sm:text-[8px] hover:bg-slate-200">
+        class="task border rounded-md  sm:block lg:hidden grid grid-cols-9 lg:text-xs sm:text-[8px] hover:bg-slate-200 border-b-4">
 
 
         
-        <div class="col-span-6 p-2">
+        <div class="col-span-8 p-2">
             <div class="items-center">
                 <p><%= task.task %></p>
             </div>
         </div>
         
     
-        <p class="col-span-2 text-center flex items-center">
+        <p class="col-span-2 text-center flex items-center hidden sm:block">
             <%= new Date(task.dueDate).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'}) %>
         </p>
     
@@ -122,13 +122,13 @@
                         Edit
                     </p>
 
-                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
+                    <!-- <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
                         Highlight
-                    </p>
+                    </p> -->
 
-                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub tasks" data-doc="<%= task._id %>">
+                    <!-- <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub tasks" data-doc="<%= task._id %>">
                         Archive
-                    </p>
+                    </p> -->
 
                     <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-type="task" data-doc="<%= task._id %>">
                         Delete

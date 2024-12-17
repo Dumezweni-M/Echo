@@ -590,8 +590,8 @@ video {
   grid-column: span 6 / span 6;
 }
 
-.row-span-1 {
-  grid-row: span 1 / span 1;
+.col-span-8 {
+  grid-column: span 8 / span 8;
 }
 
 .m-1 {
@@ -661,10 +661,6 @@ video {
 
 .h-\[80px\] {
   height: 80px;
-}
-
-.max-h-\[75vh\] {
-  max-height: 75vh;
 }
 
 .w-4 {
@@ -995,8 +991,16 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:m-2 {
+    margin: 0.5rem;
+  }
+
   .sm\:block {
     display: block;
+  }
+
+  .sm\:flex {
+    display: flex;
   }
 
   .sm\:grid-cols-5 {
@@ -1015,6 +1019,10 @@ video {
 
   .lg\:hidden {
     display: none;
+  }
+
+  .lg\:max-h-\[75vh\] {
+    max-height: 75vh;
   }
 
   .lg\:text-xs {
