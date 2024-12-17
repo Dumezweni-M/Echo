@@ -93,9 +93,7 @@
 <% tasks.forEach(task => { %> 
     <div id="taskItem flex items-center"
         class="task border rounded-md  sm:block lg:hidden grid grid-cols-9 lg:text-xs sm:text-[8px] hover:bg-slate-200 border-b-4">
-
-
-        
+       
         <div class="col-span-8 p-2">
             <div class="items-center">
                 <p><%= task.task %></p>
@@ -118,9 +116,9 @@
                 <div class="grid grid-cols-1 justify-center text-center m-8">
                     <p class="text-lg font-bold text-center mb-2"> Settings </p>
                     
-                    <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= task._id %>">
+                    <!-- <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= task._id %>">
                         Edit
-                    </p>
+                    </p> -->
 
                     <!-- <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
                         Highlight
