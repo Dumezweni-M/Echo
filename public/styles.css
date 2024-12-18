@@ -991,10 +991,6 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:m-2 {
-    margin: 0.5rem;
-  }
-
   .sm\:block {
     display: block;
   }
@@ -1009,6 +1005,16 @@ video {
 
   .sm\:text-\[8px\] {
     font-size: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+
+  .md\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 }
 
