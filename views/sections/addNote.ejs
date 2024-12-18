@@ -1,17 +1,18 @@
 
-<form class="border col-span-1 formHead items-center hidden sm:block" action="/addNote" method="POST" id="noteEntry">
+<form class="col-span-1 formHead items-center hidden sm:block" action="/addNote" method="POST" id="noteEntry">
 
-    <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 rounded-lg">
+    <div class="grid grid-cols-11 gap-2 rounded-lg">
         
-        <input name="title" id="title-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered hidden font-bold pl-4" placeholder="Note title">
+        <input name="title" id="title-entry-field" type="text" class="col-span-5 grid-cols-1 rounded-sm text-centered font-bold pl-4">
 
-        <input name="note" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered hidden font-bold pl-4" placeholder="Note" required>
+        <input name="note" id="note-entry-field" type="text" class="col-span-5 grid-cols-1 rounded-sm text-centered font-bold pl-4"  required>
     
     
       <!-- Add a Note -->
-        <div class=" w-full col-span-1 flex items-center justify-start gap-2">
-            <button class="openNoteModalBtn px-1 py-1" title="Edit">
-                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Add Button">
+        <div class="col-span-1 flex items-center justify-center gap-2 hover:bg-slate-400 rounded-md p-2">
+            <button class="openNoteModalBtn px-1 py-1 flex" title="Add Note">
+                <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="Add Button">
+                <p class="text-gray-800 pl-2">Note</p>
             </button>
         </div>
     </div>
@@ -30,33 +31,38 @@
 </div>
 
 
-<dialog class="noteEntryModal">
+<dialog class="noteEntryModal rounded shadow-2xl">
     <form class="formHead justify-center items-center" action="/addNote" method="POST" id="noteEntryModal">
 
         <div class="flex flex-col justify-between items-center w-full max-w-md mx-auto p-4">
 
             <!-- note Input -->
             <div class="w-full text-xs">
-                <label for="title" class="block font-bold mb-1">Title</label>
+                <label for="title" class="block font-bold mb-2 ">Note Title</label>
                 <input
                     name="title"
                     type="text"
                     class="border w-full p-2 mb-2 rounded">
 
-                <label for="note" class="block font-bold mb-1">Note</label>
-                <input
+                <label for="note" class="block font-bold mb-2 ">Note</label>
+                <!-- <input
                     name="note" 
                     type="text" 
                     class="p-2 rounded w-[300px]" 
-                    placeholder="Enter a note item" required>
+                    placeholder="Enter a note item" required> -->
+
+                <textarea
+                name="note"
+                class="p-2 rounded w-[300px]"
+                placeholder="Enter a note item"
+                required></textarea>    
             </div>                
 
         
             <!-- Action Buttons -->
-            <div class="p-2 w-full flex justify-end">
+            <div class="p-2 w-full flex justify-center">
                 <button class="px-4 py-2 text-white rounded" title="Note Modal">
-                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Plus button">
-                    add note
+                    <img src="../Assets/plus (2).svg" class="w-6 h-6 m-2" alt="Add note">
                 </button>
             </div>
         </div>

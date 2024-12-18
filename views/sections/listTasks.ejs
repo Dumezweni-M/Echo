@@ -15,8 +15,9 @@
         class="task border-b grid grid-cols-9 md:grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-800 hover:text-white hover:font-bold">
 
         <!-- Task Input -->
-        <div class="col-span-8 md:col-span-6 p-2">
-            <div class="task-name">
+        <div class="col-span-8 md:col-span-6 ">
+            <div class="task-name flex items-center">
+                <img src="../Assets/logo.svg" class="w-8 h-4 px-2" alt="icon">
                 <span class="view-mode"><%= task.task %></span>
                 <input type="text" class="edit-mode hidden p-2 rounded-lg bg-cyan-800 w-full" value="<%= task.task %>" />
             </div>
@@ -43,7 +44,9 @@
 
         <div class="relative inline-block group">
 
-    </div class="border">
+        </div>
+
+
         <button class="optionsBtn px-1 py-1 " title="more">
             <span class="text-2xl items-center">...</span>
         </button>
@@ -87,13 +90,9 @@
     <% }); %>
 </div>
 
-<!-- ------------------------------------------------------------------------------ -->
 
 
-<!-- ------------------------------------------------------------------------------ -->
-
-
-
+<!-- -----TODO: EXPORT ME TO A SEPARATE FILE------------------------------------------------------------------------- -->
 <script>
 
         // Control "OPTIONS" modal
@@ -156,7 +155,7 @@
         const saveButtons = document.querySelectorAll('.saveButton');
         const cancelButtons = document.querySelectorAll('.cancelButton');
 
-    // Edit Mode
+        // Edit Mode
             editButtons.forEach((editButton) => {
             editButton.addEventListener('click', () => {
             const taskId = editButton.dataset.doc;

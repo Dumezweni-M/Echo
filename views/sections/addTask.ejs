@@ -1,9 +1,9 @@
 
-<form class="border col-span-5 formHead items-center lg:block hidden " action="/addTask" method="POST" id="taskEntry">
+<form class="col-span-5 formHead items-center lg:block hidden " action="/addTask" method="POST" id="taskEntry">
 
-    <div class="border bg-gray-800 grid grid-cols-12 gap-2 p-2 rounded-lg">
+    <div class="border grid grid-cols-12 gap-2 px-4 py-2 bg-gray-800 rounded-md lg:mb-4">
         <!-- Task Input -->
-        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Enter a task item" required>
+        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-md text-centered font-bold pl-4" placeholder="Enter a task item" required>
     
         <!-- Priority Dropdown -->
         <select name="priority" id="priority" class="col-span-1 border-none font-bold text-center rounded-sm">
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-
+<!-- Modal for Mobile View. When add task is clicked -->
 <dialog class="taskEntryModal">
     <form class="formHead justify-center items-center border-2" action="/addTask" method="POST" id="taskEntryModal">
 
@@ -120,11 +120,9 @@
         
             <!-- Action Buttons -->
             <div class="border p-2 w-full flex justify-end">
-                <!-- <button class="px-4 py-2 bg-blue-500 text-white rounded" title="Favorites">Favorites</button> -->
                 <button class="px-4 py-2 bg-black text-white rounded" title="Edit">
                     <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Edit">
                 </button>
-                <!-- <button class="px-4 py-2 bg-red-500 text-white rounded" title="Delete">Delete</button> -->
             </div>
         </div>
         
