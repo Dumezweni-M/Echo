@@ -81,7 +81,7 @@ app.post('/addTask',(req, res) => {
         });
 });
 
-// TODO: Enter a Note to DB
+// Enter a Note to DB
 app.post('/addNote',(req, res) => {
     const note = new Note(req.body);
     console.log("NOW? ----->  ", note)
@@ -99,17 +99,18 @@ app.post('/addNote',(req, res) => {
 
 // Edit specific task
 app.patch('/edit/:_id', (req, res) => {
-    let id = req.params/_id;
-    const { task, priority, dueDate, freq, status} = req.body; 
+    let id = req.params._id;
+    const { task } = req.body; 
 
     console.log('Edit request:', req.body);
 
-    Task.findByIdAndUpdate, (id, {task, prioirty, dueDate, freq, status},
-    {new: true, runValidators: true})
+    Task.findByIdAndUpdate(id, {task}, {new: true, runValidators: true})
     .then(result => {
         if (result) {
             res.json({message: 'Task updated successfully'});
             console.log('Task edited', result);
+        } else {
+            res.status(404).send('Task not found')
         }
     })
     .catch(err => {
@@ -117,8 +118,6 @@ app.patch('/edit/:_id', (req, res) => {
         res.status(500).send('Error editing entry')
     });
 });
-
-
 
 
 

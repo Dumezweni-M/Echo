@@ -14,11 +14,10 @@ const month = months[ date.getMonth()]
 setInterval(() => {
     const time = new Date();
     const currentTime = time.toLocaleTimeString([], {hour:'2-digit', minute: '2-digit'});
-    console.log(currentTime);
 
     dateDisplay.innerHTML = `
-    <p class="text-2xl">${currentTime}</p>
-    <p class="text-xl "> ${weekday} ${day} ${month} </p>
+    <p class="text-2xl mr-2">${currentTime}</p>
+    <p class="text-2xl ml-2"> ${weekday} ${day} ${month} </p>
     `;
 
 }, 1000);

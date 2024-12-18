@@ -1,17 +1,18 @@
 
-<form class="col-span-1 formHead items-center hidden" action="/addNote" method="POST" id="noteEntry">
+<form class="col-span-1 formHead items-center hidden sm:block" action="/addNote" method="POST" id="noteEntry">
 
-    <div class="border grid grid-cols-3 bg-gray-800 gap-2 p-2 m-2 rounded-lg">
+    <div class="grid grid-cols-11 gap-2 rounded-lg">
         
-        <input name="title" id="title-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note title">
+        <input name="title" id="title-entry-field" type="text" class="col-span-5 grid-cols-1 rounded-sm text-centered font-bold pl-4">
 
-        <input name="note" id="note-entry-field" type="text" class="col-span-1 grid-cols-1 rounded-sm text-centered font-bold pl-4" placeholder="Note">
+        <input name="note" id="note-entry-field" type="text" class="col-span-5 grid-cols-1 rounded-sm text-centered font-bold pl-4"  required>
     
     
       <!-- Add a Note -->
-        <div class=" w-full col-span-1 flex items-center justify-center gap-2">
-            <button class="openNoteModalBtn px-1 py-1" title="Edit">
-                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
+        <div class="col-span-1 flex items-center justify-center gap-2 hover:bg-slate-400 rounded-md p-2">
+            <button class="openNoteModalBtn px-1 py-1 flex" title="Add Note">
+                <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="Add Button">
+                <p class="text-gray-800 pl-2">Note</p>
             </button>
         </div>
     </div>
@@ -21,49 +22,48 @@
 <!-- Convert to modal for mobile ----------------------------------------------------------------------->
 
 <!-- TODO:  Button opens Modal in mobile view-->
-<div class="noteAdd border py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
-    <div class="flex items-center rounded-3xl">
+<div class="py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+
+    <div class="noteModalBtn flex items-center rounded-3xl">
         <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
-        <label for="">Note</label>
+        <label for="">Add Note</label>
     </div>
 </div>
 
 
-<dialog class="noteEntryModal">
-    <form class="formHead justify-center items-center border-2" action="/addNote" method="POST" id="noteEntryModal">
+<dialog class="noteEntryModal rounded shadow-2xl">
+    <form class="formHead justify-center items-center" action="/addNote" method="POST" id="noteEntryModal">
 
-        <div class="border flex flex-col justify-between items-center w-full max-w-md mx-auto">
+        <div class="flex flex-col justify-between items-center w-full max-w-md mx-auto p-4">
 
             <!-- note Input -->
-            <div class="border p-2 w-full text-xs">
-                <label for="title" class="block font-bold mb-1">Title</label>
+            <div class="w-full text-xs">
+                <label for="title" class="block font-bold mb-2 ">Note Title</label>
                 <input
                     name="title"
                     type="text"
                     class="border w-full p-2 mb-2 rounded">
 
-                <label for="note" class="block font-bold mb-1">Note</label>
-                <input
+                <label for="note" class="block font-bold mb-2 ">Note</label>
+                <!-- <input
                     name="note" 
                     type="text" 
-                    class="border w-full p-2 rounded" 
-                    placeholder="Enter a note item">
-            </div>
+                    class="p-2 rounded w-[300px]" 
+                    placeholder="Enter a note item" required> -->
 
-            <!-- <div class="border p-2 w-full text-xs">
-                
-                
-            </div> -->
-                
+                <textarea
+                name="note"
+                class="p-2 rounded w-[300px]"
+                placeholder="Enter a note item"
+                required></textarea>    
+            </div>                
 
         
             <!-- Action Buttons -->
-            <div class="border p-2 w-full flex justify-end">
-                <!-- <button class="px-4 py-2 bg-blue-500 text-white rounded" title="Favorites">Favorites</button> -->
+            <div class="p-2 w-full flex justify-center">
                 <button class="px-4 py-2 text-white rounded" title="Note Modal">
-                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Plus button">
+                    <img src="../Assets/plus (2).svg" class="w-6 h-6 m-2" alt="Add note">
                 </button>
-                <!-- <button class="px-4 py-2 bg-red-500 text-white rounded" title="Delete">Delete</button> -->
             </div>
         </div>
         
@@ -76,11 +76,18 @@
     document.addEventListener('DOMContentLoaded', function () {
         const noteEntryModal = document.querySelector('.noteEntryModal');
         const openNoteModalBtn = document.querySelector('.openNoteModalBtn');
+        const noteModalBtn = document.querySelector('.noteModalBtn')
 
         // Open the modal on button click
         openNoteModalBtn.addEventListener('click', function() {
             noteEntryModal.showModal();  // open modal
         });
+
+        noteModalBtn.addEventListener('click', function() {
+            noteEntryModal.showModal();  // open modal
+        });
+
+        
 
         // Close the modal when clicking outside of it
         noteEntryModal.addEventListener('click', function(event) {
@@ -88,11 +95,11 @@
                 noteEntryModal.close();  // close modal
             }
         });
-        const noteAdd = document.querySelectorAll(".noteAdd");
-        noteAdd.addEventListener('click', function() {
-            console.log('Clicked')
-        })
+
     });
+
+    
+
 
 
 

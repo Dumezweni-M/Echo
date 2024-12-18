@@ -1,11 +1,12 @@
         <!-- HEADER (Notes LIST) -->
-<div class=" border-2 border-gray-600 col-span-1 justify-center hidden sm:block">
+<div class=" border-2 border-gray-600 col-span-1 justify-center lg:max-h-[75vh] overflow-y-auto">
 
         <div id="noteHeading" class="flex px-4 pb-2 justify-between items-center note mt-4 text-center border-b-4">
-            <p class="col-span-3 font-bold text-xl hidden sm:block">Notes</p>
-            <!-- TODO: -->
-            <div id="addNote" class="cursor-pointer">
-                <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="icon">
+            <p class="col-span-3 font-bold text-xl">Notes</p>
+
+            <!-- TODO: Add note button in Notes list-->
+            <div class="addNote cursor-pointer">
+                <!-- <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="icon"> -->
             </div>
         </div>
 
@@ -17,7 +18,7 @@
         <div class="p-2">
             <div class="flex justify-between items-center font-bold pb-2 border-b">
                 <div class="flex">
-                    <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon">
+                    <img src="../Assets/logo.svg" class="w-8 h-4 pr-4 hidden sm:block" alt="icon">
                     <p><%= note.title %></p>
                 </div>
                 
@@ -29,7 +30,6 @@
             </div>
 
             <div class="flex flex-row items-center mt-2">
-                <!-- <img src="../Assets/heart.svg" class="w-8 h-4 pr-4" alt="icon"> -->
                 <p><%= note.note %></p>
             </div>
         </div>
@@ -39,24 +39,20 @@
         <!-- More Buttons -->
         <div class="col-span-1 flex justify-end ">
 
-        <!-- <div class="relative inline-block group">
-
-        </div> -->
-        <!-- <button class="optionsBtn px-1 z-50" title="more">
-            <span class="text-2xl">...</span>
-        </button> -->
-
-
             <!-- Settings Modal     TODO: --> 
-            <dialog data-modal="<%= note._id%>" class="noteOptions text-sm p-2 absolute shadow-lg z-50">
+            <dialog data-modal="<%= note._id%>" class="noteOptions text-sm p-2 absolute shadow-lg z-50 rounded-md">
                 <div class="grid grid-cols-1 justify-center text-center m-8">
                     <p class="text-lg font-bold text-center mb-2"> Settings </p>
                     
-                    <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= note._id %>">
+                    <!-- <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
                         Edit
-                    </p>
+                    </p> -->
 
-                    <p class="deleteBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600" title="Delete" data-doc="<%= note._id %>" data-type="'note">
+                    <!-- <p class="editBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200 rounded" title="edit" data-doc="<%= note._id %>">
+                        Save
+                    </p> -->
+
+                    <p class="deleteBtn px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600 rounded" title="Delete" data-doc="<%= note._id %>" data-type="'note">
                         Delete
                     </p>
                 </div>
@@ -69,83 +65,11 @@
     <% }); %>
 </div>
 
-<!-- --------------------------MOBILE VIEW---------------------------------------------------- -->
 
-<div class=" border-2 border-gray-600   col-span-1 justify-center sm:block lg:hidden">
-
-
-<% notes.forEach(note => { %> 
-<div id="noteItem"
-    class="note border p-2 rounded-sm border-gray-400 bg-white  m-2 grid grid-cols-1 gap-2 lg:text-xs sm:text-[8px] items-center">
-
-    <!-- note Input Title  TODO:--> 
-    <div class="p-2 border">
-        <div class="flex justify-between items-center font-bold pb-2 border-b">
-            <div class="flex">
-                <img src="../Assets/logo.svg" class="w-8 h-4 pr-4" alt="icon">
-                <p><%= note.title %></p>
-            </div>
-            
-            
-            <!-- TODO: Notes Modal more options -->
-            <button class="noteBtn px-1 z-50" data-note-id="<%= note._id %>" title="more">
-                <img src="../Assets/more2.svg" class="w-8 h-4 pr-4" alt="icon">
-            </button>
-        </div>
-
-    <!-- note Input Body -->
-    <div class="">
-        <div class="">
-            <!-- <img src="../Assets/heart.svg" class="w-8 h-4" alt="icon"> -->
-            <p><%= note.note %></p>
-        </div>
-    </div>
+<!-- TODO: EXPORT ME TO A SEPARATE FILE -->
 
 
-    <!-- More Buttons -->
-    <div class="">
-
-    <div class="relative inline-block group">
-
-</div>
-    <button class="grid grid-row-3 optionsBtn px-1 py-1 border" title="more">
-        <!-- <span class="text-2xl row-span-1">...</span> -->
-        <!-- <img src="../Assets/more2.svg" class="w-6 h-6 " alt="options button"> -->
-    </button>
-
-
-        <!-- Settings Modal     TODO: --> 
-        <dialog data-modal="addNote" class="noteOptions text-sm p-2 absolute shadow-lg z-50">
-
-            <div class="grid grid-cols-1 justify-center text-center m-8">
-                <p class="text-lg font-bold text-center mb-2"> Settings </p>
-                
-                <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="edit" data-doc="<%= note._id %>">
-                    Edit
-                </p>
-
-                <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= note._id %>">
-                    Highlight
-                </p>
-
-                <p class="editButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub notes" data-doc="<%= note._id %>">
-                    Archive
-                </p>
-
-                <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= note._id %>">
-                    Delete
-                </p>
-            </div>
-        </dialog>
-
-
-    </div>
-</div>
-<% }); %>
-</div>
-
-<!-- ------------------------------------------------------------------------------ -->
-
+<!-- Date time module -->
 <script src="./scripts/dateTime.js" defer></script>
 
 <script>
@@ -204,9 +128,11 @@
                 })
             })
         })
-
-
-
+       
 
     });    
+
+
+   
+
 </script>
