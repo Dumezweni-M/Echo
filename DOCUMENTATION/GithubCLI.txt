@@ -22,6 +22,8 @@ Comment on Issue:
     
 Create a Pull Request: 
     gh pr create
+    gh pr create --base develop --head refactor --title "Your PR Title" --body "Your PR description"
+
     
 List Pull Requests: 
     gh pr list

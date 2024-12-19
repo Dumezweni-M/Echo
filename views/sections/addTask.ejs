@@ -3,20 +3,20 @@
 
     <div class="border grid grid-cols-12 gap-2 px-4 py-2 bg-gray-800 rounded-md lg:mb-4">
         <!-- Task Input -->
-        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-md text-centered font-bold pl-4" placeholder="Enter a task item" required>
+        <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-md text-centered pl-4" placeholder="Enter a task item" required>
     
         <!-- Priority Dropdown -->
-        <select name="priority" id="priority" class="col-span-1 border-none font-bold text-center rounded-sm">
+        <select name="priority" id="priority" class="col-span-1 border-none text-center rounded-sm">
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
         </select>
     
         <!-- Date Input -->
-        <input name="dueDate" id="date-input" type="date" class="col-span-2 border-none font-bold text-center rounded-sm" >
+        <input name="dueDate" id="date-input" type="date" class="col-span-2 border-none text-center rounded-sm" >
     
         <!-- Category Dropdown -->
-        <select name="frequency" id="frequency" class="col-span-1 border-none font-bold text-center rounded-sm">
+        <select name="frequency" id="frequency" class="col-span-1 border-none text-center rounded-sm">
             <option value="Once-off">Once</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
@@ -24,7 +24,7 @@
         </select>
     
         <!-- Status Dropdown -->
-        <select name="status" id="status" class="col-span-1 w-full border-none font-bold text-center rounded-sm" >
+        <select name="status" id="status" class="col-span-1 w-full border-none text-center rounded-sm" >
             <option value="Todo">Todo</option>
             <option value="In-progress">In-progress</option>
             <option value="On-hold">On-hold</option>
@@ -46,10 +46,10 @@
 
 
 <!-- Button opens Modal in mobile view-->
-<div class="openModalBtn py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
-    <div class="flex rounded-3xl">
+<div class="openModalBtn py-1 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+    <div class="flex rounded-3xl items-center">
         <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add task">
-        <label for="task">Add Task</label>
+        <label for="task">Task</label>
     </div>
 </div>
 

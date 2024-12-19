@@ -1,18 +1,18 @@
 
-<form class="col-span-1 formHead items-center hidden sm:block" action="/addNote" method="POST" id="noteEntry">
+<form class="col-span-5 formHead items-center hidden sm:block" action="/addNote" method="POST" id="noteEntry">
 
-    <div class="grid grid-cols-11 gap-2 rounded-lg">
+    <div class="grid grid-cols-12 gap-2 px-4 rounded-lg">
         
-        <input name="title" id="title-entry-field" type="text" class="col-span-5 grid-cols-1 rounded-sm text-centered font-bold pl-4">
+        <div name="title" id="title-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-sm text-centered font-bold pl-4"></div>
 
-        <input name="note" id="note-entry-field" type="text" class="col-span-5 grid-cols-1 rounded-sm text-centered font-bold pl-4"  required>
+        <div name="note" id="note-entry-field" type="text" class="col-span-5 grid-cols-1 rounded-sm text-centered font-bold pl-4"  required></div>
     
     
       <!-- Add a Note -->
-        <div class="col-span-1 flex items-center justify-center gap-2 hover:bg-slate-400 rounded-md p-2">
-            <button class="openNoteModalBtn px-1 py-1 flex" title="Add Note">
+        <div class="col-span-1 flex items-center justify-between gap-2 hover:bg-boarder-2 rounded-md mb-2">
+            <button class="openNoteModalBtn px-3 py-2 flex hover:border" title="Add Note" type="button">
                 <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="Add Button">
-                <p class="text-gray-800 pl-2">Note</p>
+                <p class="hover:text-blue-400 font-bold pl-2">Note</p>
             </button>
         </div>
     </div>
@@ -22,11 +22,11 @@
 <!-- Convert to modal for mobile ----------------------------------------------------------------------->
 
 <!-- TODO:  Button opens Modal in mobile view-->
-<div class="py-2 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+<div class="py-1 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
 
     <div class="noteModalBtn flex items-center rounded-3xl">
         <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
-        <label for="">Add Note</label>
+        <label for="">Note</label>
     </div>
 </div>
 
@@ -97,10 +97,5 @@
         });
 
     });
-
-    
-
-
-
 
 </script>

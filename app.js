@@ -53,7 +53,7 @@ app.use(express.json());
 // Retrieve Data from DB (Tasks and Notes)
 app.get('/', (req, res) => {
     const tasksPromise = Task.find().sort({ dueDate: 1 });
-    const notesPromise = Note.find();
+    const notesPromise = Note.find().sort({createdAt: -1 });
 
     Promise.all([tasksPromise, notesPromise])
         .then(([tasks, notes]) => {

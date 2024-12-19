@@ -1,18 +1,13 @@
         <!-- HEADER (Notes LIST) -->
-<div class=" border-2 border-gray-600 col-span-1 justify-center lg:max-h-[75vh] overflow-y-auto">
+<div class=" md:border-l md:border-t md:border-r border-gray-600 col-span-1 justify-center lg:max-h-[75vh] overflow-y-auto overflow-x-hidden px-2">
 
-        <div id="noteHeading" class="flex px-4 pb-2 justify-between items-center note mt-4 text-center border-b-4">
-            <p class="col-span-3 font-bold text-xl">Notes</p>
-
-            <!-- TODO: Add note button in Notes list-->
-            <div class="addNote cursor-pointer">
-                <!-- <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="icon"> -->
-            </div>
+        <div id="noteHeading" class="flex px-4 pb-2 justify-start items-center note mt-4 text-center">
+            <p class="col-span-3 font-bold">Notes</p>
         </div>
 
     <% notes.forEach(note => { %> 
     <div id="noteItem"
-        class="note border rounded-sm border-gray-400 hover:border-gray-700 bg-white  m-1 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:scale-105">
+        class="note border rounded-sm border-gray-400 hover:shadow-lg  bg-white  m-1 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:border-blue-400 hover:scale-105">
 
         <!-- note Input Title -->
         <div class="p-2">
@@ -88,12 +83,12 @@
             });
         });
 
-        // Close the modal when clicking outside it
+        // CloseS the modal when clicking outside it
         const noteOptions = document.querySelectorAll('.noteOptions');
         noteOptions.forEach(modal => {
             modal.addEventListener('click', (event) => {
                 if (event.target === modal) {
-                    modal.close(); // Close the modal when clicking on the backdrop
+                    modal.close(); 
                 }
             });
         });
