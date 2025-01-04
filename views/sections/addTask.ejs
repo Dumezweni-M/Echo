@@ -1,7 +1,7 @@
 
-<form class="col-span-5 formHead items-center lg:block hidden " action="/addTask" method="POST" id="taskEntry">
+<form class="col-span-5 formHead items-center lg:block hidden px-4 mb-4" action="/addTask" method="POST" id="taskEntry" >
 
-    <div class="border grid grid-cols-12 gap-2 px-4 py-2 bg-gray-800 rounded-md lg:mb-4">
+    <div class="border grid grid-cols-12 gap-2 px-4 py-2">
         <!-- Task Input -->
         <input name="task" id="task-entry-field" type="text" class="col-span-6 grid-cols-1 rounded-md text-centered pl-4" placeholder="Enter a task item" required>
     
@@ -32,12 +32,11 @@
     
         <!-- Action Buttons -->
         <div class=" w-full col-span-1 flex items-center justify-center gap-2">
-            <button class="px-1 py-1" title="Favorites">
-            </button>
-            <button class="px-1 py-1" title="Edit">
-                <img src="../Assets/plus (1).svg" class="w-6 h-6" alt="Cancel Button">
+            <button class="px-1 py-1 hover:scale-95 border-white" title="Add Task">
+                <img src="../Assets/plus (2).svg" class="w-6 h-6 filter invert" alt="Add Task">
             </button>
             <button class="px-1 py-1" title="Delete">
+                
             </button>
         </div>
     </div>
@@ -46,15 +45,17 @@
 
 
 <!-- Button opens Modal in mobile view-->
-<div class="openModalBtn py-1 rounded-full block lg:hidden text-center flex justify-center items-center" title="Edit">
+<div class="openModalBtn py-1 rounded-full block lg:hidden text-center flex justify-center items-center" title="Add Task">
     <div class="flex rounded-3xl items-center">
         <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add task">
         <label for="task">Task</label>
     </div>
 </div>
 
+
+
 <!-- Modal for Mobile View. When add task is clicked -->
-<dialog class="taskEntryModal">
+<dialog class="taskEntryModal p-2">
     <form class="formHead justify-center items-center border-2" action="/addTask" method="POST" id="taskEntryModal">
 
         <div class="border flex flex-col justify-between items-center w-full max-w-md mx-auto">
@@ -65,7 +66,7 @@
                     name="task" 
                     id="task-entry-field" 
                     type="text" 
-                    class="border w-[300px] p-2 rounded" 
+                    class="border w-[280px] p-2 rounded" 
                     placeholder="Enter a task item">
             </div>
         
@@ -120,8 +121,8 @@
         
             <!-- Action Buttons -->
             <div class="border p-2 w-full flex justify-end">
-                <button class="px-4 py-2 bg-black text-white rounded" title="Edit">
-                    <img src="../Assets/pplus.svg" class="w-6 h-6" alt="Edit">
+                <button class="px-4 py-2 text-white rounded" title="Edit">
+                    <img src="../Assets/plus (2).svg" class="w-6 h-6" alt="Edit">
                 </button>
             </div>
         </div>

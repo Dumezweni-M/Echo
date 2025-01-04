@@ -13,7 +13,12 @@ const month = months[ date.getMonth()]
 
 setInterval(() => {
     const time = new Date();
-    const currentTime = time.toLocaleTimeString([], {hour:'2-digit', minute: '2-digit'});
+
+    const currentTime = time.toLocaleTimeString([], {
+        hour:'2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
 
     dateDisplay.innerHTML = `
     <p class="text-2xl mr-2">${currentTime}</p>

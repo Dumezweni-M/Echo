@@ -1,17 +1,39 @@
 <%- include('partials/header') %>
 
 <body>
-    <div class="wrapper border px-4 font-Poppins">
-            <%- include('partials/nav') %> 
+    <div class="wrapper border font-Poppins relative mb-8">
 
+            <!-- <div 
+            class="absolute inset-0 bg-cover bg-center opacity-15"
+            style="background-image: url(./Assets/img/micke-lindstrom-Mu39DUwHhP4-unsplash.jpg);">
+            </div> -->
+            <div 
+            class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url(./Assets/img/philip-oroni-02Pbi_1m0XI-unsplash.jpg);">
+            </div>
+            <!-- <div 
+            class="absolute inset-0 bg-cover bg-center opacity-30"
+            style="background-image: url(./Assets/img/viktor-forgacs-UEbBTgU3sS0-unsplash.jpg);">
+            </div> -->
+            <!-- <div 
+            class="absolute inset-0 bg-cover bg-center opacity-30"
+            style="background-image: url(./Assets/img/amr-taha-FM-hksAOgls.jpg);">
+            </div> -->
+            <!-- <div 
+            class="absolute inset-0 bg-cover bg-center opacity-40"
+            style="background-image: url(./Assets/img/alyani-yang-WajET_vzPmI-unsplash.jpg);">
+            </div> -->
 
-<!--------------------------------- -->
-            <%- include('sections/addTask.ejs') %>
-            <%- include('sections/addNote.ejs') %>
-
-            <div class="grid grid-cols-1 sm:grid-cols-5">
-                <%- include('sections/listTasks.ejs') %>
-                <%- include('sections/listNotes.ejs') %>
+            
+            <div class="relative z-10">
+                <%- include('partials/nav') %> 
+    
+                <%- include('sections/addTask.ejs') %>
+    
+                <div class="grid grid-cols-1 sm:grid-cols-5">
+                    <%- include('sections/listNotes.ejs') %>
+                    <%- include('sections/listTasks.ejs') %>
+                </div>
             </div>
             
 

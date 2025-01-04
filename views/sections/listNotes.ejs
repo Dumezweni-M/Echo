@@ -1,13 +1,80 @@
-        <!-- HEADER (Notes LIST) -->
-<div class=" md:border-l md:border-t md:border-r border-gray-600 col-span-1 justify-center lg:max-h-[75vh] overflow-y-auto overflow-x-hidden px-2">
 
-        <div id="noteHeading" class="flex px-4 pb-2 justify-start items-center note mt-4 text-center">
-            <p class="col-span-3 font-bold">Notes</p>
+
+
+<!-- List notes Container -->
+<div class="col-span-1 justify-center lg:max-h-[84vh] overflow-y-auto overflow-x-hidden scrollbar-hidden px-6">
+
+    <form class="col-span-5 formHead items-center hidden sm:block justify-center" action="/addNote" method="POST" id="noteEntry">
+
+        <div class="grid grid-cols-12 gap-2 px-4">      
+        
+          <!-- Add a Note -->
+            <div class="col-span-1 flex items-center gap-2 hover:scale-95">
+                <button class="openNoteModalBtn flex items-center justify-center" title="Add Note" type="button">
+                    <img src="../Assets/plus (2).svg" class="w-4 h-4" alt="Add Button">
+                    <p class="font-bold pl-4">Notes</p>
+                </button>
+            </div>
+        </div>
+    </form>
+    
+      
+    <!-- TODO:  Button opens Modal in mobile view-->
+    <div class="py-1 rounded-full block lg:hidden text-center flex justify-center items-center p-2" title="Edit">
+    
+        <div class="noteModalBtn flex items-center rounded-3xl">
+            <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
+            <label for="">Note</label>
+        </div>
+    </div>
+    
+    
+    <!-- Note Modal -->
+    <dialog class="noteEntryModal rounded shadow-2xl">
+        <form class="formHead justify-center items-center" action="/addNote" method="POST" id="noteEntryModal">
+    
+            <div class="flex flex-col justify-between items-center w-full max-w-md mx-auto p-4">
+    
+                <div class="w-full text-xs">
+                    <!-- Title Input -->
+                    <label for="title" class="block font-bold mb-2 "></label>
+                    <input
+                        name="title"
+                        type="text"
+                        class="border w-full p-2 mb-2 rounded"
+                        placeholder="Enter a note title">
+    
+                    <!-- Note Input -->
+                    <label for="note" class="block font-bold mb-2 "></label>   
+                    <textarea
+                    name="note"
+                    class="p-2 rounded w-[300px] h-[100px] border"
+                    placeholder="Enter a note item"
+                    required></textarea>    
+                </div>                
+    
+            
+                <!-- Action Buttons -->
+                <div class="p-2 w-full flex justify-center">
+                    <button class="px-4 py-2 text-white rounded" title="Note Modal">
+                        <img src="../Assets/plus (2).svg" class="w-6 h-6 m-2" alt="Add note">
+                    </button>
+                </div>
+            </div>
+            
+        </form>
+    </dialog>
+
+
+
+
+        <div id="noteHeading" class="flex px-4 justify-start items-center note mt-1 text-center border-t-2 lg:border-opacity-0 border-black">
+            <!-- <p class="col-span-3 font-bold text-lg">Notes</p> -->
         </div>
 
     <% notes.forEach(note => { %> 
     <div id="noteItem"
-        class="note border rounded-sm border-gray-400 hover:shadow-lg  bg-white  m-1 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:border-blue-400 hover:scale-105">
+        class="note border rounded-sm border-gray-400 hover:shadow-lg  bg-white  mt-1 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:border-blue-400 hover:scale-105">
 
         <!-- note Input Title -->
         <div class="p-2">
@@ -123,11 +190,33 @@
                 })
             })
         })
-       
-
     });    
+</script>
 
 
-   
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const noteEntryModal = document.querySelector('.noteEntryModal');
+        const openNoteModalBtn = document.querySelector('.openNoteModalBtn');
+        const noteModalBtn = document.querySelector('.noteModalBtn')
+
+        // Open the modal on button click
+        openNoteModalBtn.addEventListener('click', function() {
+            noteEntryModal.showModal();  // open modal
+        });
+
+        noteModalBtn.addEventListener('click', function() {
+            noteEntryModal.showModal();  // open modal
+        });
+
+        // Close the modal when clicking outside of it
+        noteEntryModal.addEventListener('click', function(event) {
+            if (event.target === noteEntryModal) {
+                noteEntryModal.close();  // close modal
+            }
+        });
+
+
+    });
 </script>

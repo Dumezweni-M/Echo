@@ -1,18 +1,20 @@
-        <!-- HEADER (TASK LIST) -->
-<div class="col-span-4 px-2">
+<!-- Task List Container -->
+<div class="col-span-4 px-12 lg:max-h-[82vh] overflow-y-auto overflow-x-hidden scrollbar-hidden">
 
+        <!-- Task list header -->
         <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center font-Danfo ">
             <p class="col-span-6 font-bold hidden sm:block">Tasks</p>
             <p class="col-span-1 font-bold hidden sm:block">Priority</p>  
             <p class="col-span-2 font-bold hidden sm:block">Due</p>
             <p class="col-span-1 font-bold hidden sm:block">Freq</p> 
             <p class="col-span-1 font-bold hidden sm:block">Status</p>
-            <p class="col-span-1 font-bold hidden sm:block">More</p> <!-- Edit, Checkbox, Delete -->
+            <p class="col-span-1 font-bold hidden sm:block">...</p>
         </div>
 
+    <!-- Task item container -->
     <% tasks.forEach(task => { %> 
     <div id="taskItem-<%= task._id %>"
-        class="task border md:border-b mb-1 md:m-0 grid grid-cols-9 md:grid-cols-12 gap-2 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-700 md:hover:scale-105 hover:text-white hover:font-bold hover:shadow-lg">
+        class="task md:border-b grid grid-cols-9 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 md:hover:scale-105 hover:text-white hover:shadow-lg mb-1 min-h-[100px] md:min-h-0">
 
         <!-- Task Input -->
         <div class="col-span-8 md:col-span-6 ">
@@ -40,15 +42,9 @@
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p>
 
         <!-- More Buttons -->
-        <div class="col-span-1 flex items-center justify-center gap-4">
-
-        <div class="relative inline-block group">
-        <!-- Do you have a function?  -->
-        </div>
-
-        <!-- More options button/ opens modal -->
-        <button class="optionsBtn px-1 mr-1" title="more">
-            <span class="text-2xl items-center">...</span>
+        <div class="col-span-1 flex items-center justify-center gap-4 hover:invert">
+        <button class="optionsBtn px-1 mr-1 flex items-center justify-center" title="more">
+            <img src="../Assets/settings.svg" class="w-8 h-8 px-2 py-2 filter  " alt="icon">
         </button>
 
 
