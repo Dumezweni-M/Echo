@@ -14,22 +14,23 @@
     <!-- Task item container -->
     <% tasks.forEach(task => { %> 
     <div id="taskItem-<%= task._id %>"
-        class="task border grid grid-cols-9 p-2 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 hover:text-white hover:shadow-lg min-h-[80px] md:min-h-0">
+        class="task border grid grid-cols-9 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 hover:text-white hover:shadow-lg min-h-[50px] md:min-h-0">
 
         <!-- Task Input -->
-        <div class="col-span-8 md:col-span-6 ">
-            <div class="task-name flex items-center">
+        <div class="task col-span-8 md:col-span-6 ">
+            <div class="task flex items-center">
                 <img src="../Assets/logo.svg" class="w-8 h-4 px-2" alt="icon">
                 <span class="task view-mode"><%= task.task %></span>
-                <input type="text" class="task edit-mode hidden p-2 rounded-lg bg-gray-600 w-full" value="<%= task.task %>" />
+                <input type="text" class="task edit-mode hidden p-2 rounded-lg bg-gray-400 w-full" value="<%= task.task %>" />
             </div>
         </div>
 
         
 
         <!-- TODO: Priority Dropdown -->
-        <div class="col-span-1 text-center text-white border-r hidden sm:block">
-            <select class="priority p-1 rounded-lg bg-gray-400 w-full w-full">
+        <div class="priority col-span-1 text-center border-r hidden sm:block">
+            <span class="priority view-mode"><%= task.priority %></span>
+            <select class="priority edit-mode hidden p-1 rounded-lg bg-gray-400 w-full">
                 <option value="Low" <%= task.priority === 'Low' ? 'selected' : '' %>>Low</option>
                 <option value="Medium" <%= task.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
                 <option value="High" <%= task.priority === 'High' ? 'selected' : '' %>>High</option>
@@ -44,29 +45,20 @@
 
 
         <!-- Frequency Dropdown -->
-        <div class="col-span-1 text-center border-r hidden sm:block">
+        <div class="frequency col-span-1 text-center border-r hidden sm:block">
             <span class="frequency view-mode"><%= task.frequency %></span>
-            <select class="frequency edit-mode hidden p-1 rounded-lg bg-gray-400 w-full w-full">
+            <select class="frequency edit-mode hidden p-1 rounded-lg bg-gray-400 w-full">
                 <option value="Daily" <%= task.frequency === 'Daily' ? 'selected' : '' %>>Daily</option>
                 <option value="Weekly" <%= task.frequency === 'Weekly' ? 'selected' : '' %>>Weekly</option>
                 <option value="Bi-Weekly" <%= task.frequency === 'Bi-Weekly' ? 'selected' : '' %>>Bi-Weekly</option>
             </select>
         </div>
-        <!-- <p class="col-span-1 text-center border-r hidden sm:block"><%= task.frequency%></p> -->
+
         
-        <!-- Status Dropdown -->
-        <!-- <div class="col-span-1 text-center border-r hidden sm:block">
-            <span class="status view-mode"><%= task.status %></span>
-            <select class="status edit-mode hidden p-1 rounded-lg bg-gray-200 w-full">
-                <option value="Todo" <%= task.status === 'Todo' ? 'selected' : '' %>>Todo</option>
-                <option value="In-progress" <%= task.status === 'In-progress' ? 'selected' : '' %>>In-progress</option>
-                <option value="On-Hold" <%= task.status === 'On-Hold' ? 'selected' : '' %>>On-Hold</option>
-            </select>
-        </div> -->
         <!-- <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p> -->
 
         <!-- Options buttons -->
-        <div class="col-span-1 flex items-center justify-center gap-4 hover:invert border sm:border-0">
+        <div class="col-span-1 flex items-center justify-center gap-4 hover:invert">
         <button class="optionsBtn px-1 mr-1 flex items-center justify-center" title="more">
             <img src="../Assets/settings.svg" class=" w-8 h-8 px-2 py-2 filter  " alt="icon">
         </button>
@@ -130,160 +122,186 @@
         });
 
 
-
-    });
-
-
-
-
-    // Fetch Data and Delete selected Item
-    const deleteButtons = document.querySelectorAll('.deleteButton');
-
-    deleteButtons.forEach(deleteButton => {
-        deleteButton.addEventListener('click', (e) => {
-            const id = deleteButton.dataset.doc;
-
-            const endpoint = `/delete/task/${id}`;
-
-            fetch(endpoint, {
-                method: 'DELETE'
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network Response Issue, FETCH API')
-                }
-                return response.json();
-            })
-            .then((data) => {
-                window.location.href = data.redirect; // Redirect on successful delete
-            })
-            .catch((err) => console.log('Error: catch FETCH API', err));
-        });
-
-
-        // Edit tasks
-        const editButtons = document.querySelectorAll('.editButton');
-        const saveButtons = document.querySelectorAll('.saveButton');
-        const cancelButtons = document.querySelectorAll('.cancelButton');
-
-        // Edit Mode
-            editButtons.forEach((editButton) => {
-            editButton.addEventListener('click', () => {
-            console.log("Edit initiated")
-            const taskId = editButton.dataset.doc;
-            const taskItem = document.querySelector(`#taskItem-${taskId}`);
-            
-            // Get task elements
-            const taskText = taskItem.querySelector('.view-mode');
-            const taskInput = taskItem.querySelector('.edit-mode');
-            const dateText = taskItem.querySelector('.view-mode.date');
-            const dateinput = taskItem.querySelector('input[type="date"].edit-mode');
-            const frequencyText = taskItem.querySelector('.col-span-1 .view-mode');
-            const frequencySelect = taskItem.querySelector('.col-span-1 .edit-mode');
-            // const statusText = taskItem.querySelector('.view-mode.status');
-            // const statusSelect = taskItem.querySelector('.edit-mode');
-
-            // Toggle visibility
-            taskText.classList.add('hidden');
-            taskInput.classList.remove('hidden');
-            dateText.classList.add('hidden');
-            dateinput.classList.remove('hidden');
-            frequencyText.classList.add('hidden');
-            frequencySelect.classList.remove('hidden');
-            // statusText.classList.add('hidden');
-            // statusSelect.classList.remove('hidden');
-            
-            // Show Save/Cancel buttons and hide Edit button
-            editButton.classList.add('hidden');
-            taskItem.querySelector('.saveButton').classList.remove('hidden');
-            taskItem.querySelector('.cancelButton').classList.remove('hidden');
-        });
-    });
-
-    // Save Changes
-    saveButtons.forEach((saveButton) => {
-        saveButton.addEventListener('click', () => {
-            const taskId = saveButton.dataset.doc;
-            const taskItem = document.querySelector(`#taskItem-${taskId}`);
-            
-            const updatedTaskName = taskItem.querySelector('.edit-mode').value;
-            const updatedPriority = taskItem.querySelector('select').value;
-            const updatedDate = taskItem.querySelector('input[type="date"].edit-mode').value
-            const updatedFrequency = taskItem.querySelector('select.edit-mode').value
-
-            // Send update to backend
-            fetch(`/edit/${taskId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    task: updatedTaskName,
-                    priority: updatedPriority,
-                    dueDate: updatedDate,
-                    frequency: updatedFrequency,
-                }),
-            })
+        // Fetch Data and Delete selected Item
+        const deleteButtons = document.querySelectorAll('.deleteButton');
+        
+        deleteButtons.forEach(deleteButton => {
+            deleteButton.addEventListener('click', (e) => {
+                const id = deleteButton.dataset.doc;
+        
+                const endpoint = `/delete/task/${id}`;
+        
+                fetch(endpoint, {
+                    method: 'DELETE'
+                })
                 .then((response) => {
-                    if (!response.ok) throw new Error('Failed to update task');
+                    if (!response.ok) {
+                        throw new Error('Network Response Issue, FETCH API')
+                    }
                     return response.json();
                 })
                 .then((data) => {
-                    // Update UI
-                    taskItem.querySelector('.view-mode').textContent = updatedTaskName;
-                    taskItem.querySelector('select').value = updatedPriority;
-                    console.log(updatedDate)
-                    taskItem.querySelector('.view-mode.date').textContent = new Date(updatedDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'});
-                    taskItem.querySelector('.view-mode').textContent = updatedFrequency;
-
-                    
-                    // Exit edit mode
-                    taskItem.querySelector('.edit-mode').classList.add('hidden');
-                    taskItem.querySelector('.view-mode').classList.remove('hidden');
-                    taskItem.querySelector('input[type="date"].edit-mode').classList.add('hidden');
-                    taskItem.querySelector('view-mode.date').classList.remove('hidden');
-                    taskItem.querySelector('.frequency .edit-mode').classList.add('hidden');
-                    taskItem.querySelector('.frequency .view-mode').classList.remove('hidden');
-
-                    saveButton.classList.add('hidden');
-                    taskItem.querySelector('.cancelButton').classList.add('hidden');
-                    taskItem.querySelector('.editButton').classList.remove('hidden');
+                    window.location.href = data.redirect; // Redirect on successful delete
                 })
-                .catch((error) => console.error('Error updating task:', error));
+                .catch((err) => console.log('Error: catch FETCH API', err));
+            });
+        
+        
+            // Edit tasks
+            const editButtons = document.querySelectorAll('.editButton');
+            const saveButtons = document.querySelectorAll('.saveButton');
+            const cancelButtons = document.querySelectorAll('.cancelButton');
+        
+            // Edit Mode
+                editButtons.forEach((editButton) => {
+                editButton.addEventListener('click', () => {
+                
+                const taskId = editButton.dataset.doc;
+                const taskItem = document.querySelector(`#taskItem-${taskId}`);
+
+                console.log("Edit initiated")
+                
+                // Get task element and apply edit mode
+                const taskText = taskItem.querySelector('.task .view-mode');
+                const taskInput = taskItem.querySelector('.task .edit-mode');
+                const priorityText = taskItem.querySelector('.priority .view-mode');
+                const prioritySelect = taskItem.querySelector('.priority .edit-mode')
+                const dateText = taskItem.querySelector('.view-mode.date');
+                const dateinput = taskItem.querySelector('input[type="date"].edit-mode');
+                const frequencyText = taskItem.querySelector('.frequency .view-mode');
+                const frequencySelect = taskItem.querySelector('.frequency .edit-mode');
+                // const statusText = taskItem.querySelector('.status .view-mode');
+                // const statusSelect = taskItem.querySelector('.status .edit-mode');
+        
+                // Toggle visibility
+                taskText.classList.add('hidden');
+                taskInput.classList.remove('hidden');
+                priorityText.classList.add('hidden');
+                prioritySelect.classList.remove('hidden');
+                dateText.classList.add('hidden');
+                dateinput.classList.remove('hidden');
+                frequencyText.classList.add('hidden');
+                frequencySelect.classList.remove('hidden');
+                // statusText.classList.add('hidden');
+                // statusSelect.classList.remove('hidden');
+                
+                // Show Save/Cancel buttons and hide Edit button
+                editButton.classList.add('hidden');
+                taskItem.querySelector('.saveButton').classList.remove('hidden');
+                taskItem.querySelector('.cancelButton').classList.remove('hidden');
+        
+                const modal = taskItem.querySelector('.taskOptions');
+                modal.close();
+            });
         });
-    });
+        
+        // Save Changes
+        saveButtons.forEach((saveButton) => {
+            saveButton.addEventListener('click', () => {
+                const taskId = saveButton.dataset.doc;
+                const taskItem = document.querySelector(`#taskItem-${taskId}`);
+                
+                console.log("Save button clicked")
+                
+                const updatedTaskName = taskItem.querySelector('.task .edit-mode').value;
+                const updatedPriority = taskItem.querySelector('.priority select.edit-mode').value;
+                const updatedDate = taskItem.querySelector('input[type="date"].edit-mode').value
+                const updatedFrequency = taskItem.querySelector('.frequency select.edit-mode').value
+                
 
-    // Cancel Edit
-    cancelButtons.forEach((cancelButton) => {
-        cancelButton.addEventListener('click', () => {
-            const taskId = cancelButton.dataset.doc;
-            const taskItem = document.querySelector(`#taskItem-${taskId}`);
-            
-            const taskText = taskItem.querySelector('.view-mode');
-            const taskInput = taskItem.querySelector('.edit-mode');
-            const prioritySelect = taskItem.querySelector('select.edit-mode');
-            const priorityView = taskItem.querySelector('.view-mode.priority');
-            const dateText = taskItem.querySelector('.view-mode.date');
-            const dateInput = taskItem.querySelector('input[type="date"].edit-mode');
+                // Send update to backend
+                fetch(`/edit/${taskId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        task: updatedTaskName,
+                        priority: updatedPriority,
+                        dueDate: updatedDate,
+                        frequency: updatedFrequency,
+                    }),
+                })
+                    .then((response) => {
+                        if (!response.ok) throw new Error('Failed to update task');
+                        return response.json();
+                    })
+                    .then((data) => {
+                        // Update UI
+                        taskItem.querySelector('.view-mode').textContent = updatedTaskName;
+                        taskItem.querySelector('select').value = updatedPriority;
+                        taskItem.querySelector('.view-mode.date').textContent = new Date(updatedDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'});
+                        taskItem.querySelector('.view-mode').textContent = updatedFrequency;
+        
+                        
+                        // Exit edit mode
+                        taskItem.querySelector('.edit-mode').classList.add('hidden');
+                        taskItem.querySelector('.view-mode').classList.remove('hidden');
+                        taskItem.querySelector('input[type="date"].edit-mode').classList.add('hidden');
+                        taskItem.querySelector('view-mode.date').classList.remove('hidden');
+                        taskItem.querySelector('.frequency .edit-mode').classList.add('hidden');
+                        taskItem.querySelector('.frequency .view-mode').classList.remove('hidden');
+        
+                        saveButton.classList.add('hidden');
+                        taskItem.querySelector('.cancelButton').classList.add('hidden');
+                        taskItem.querySelector('.editButton').classList.remove('hidden');
+        
 
-            // Restore original value
-            taskInput.value = taskText.textContent;
-            prioritySelect.value = priorityView.textContent;
-            dateInput.value = new Date(dateText.textContent).toISOString().split('T')[0];
-
-            // Toggle visibility
-            taskInput.classList.add('hidden');
-            taskText.classList.remove('hidden');
-            dateInput.classList.add('hidden');
-            dateText.classList.remove('hidden');
-
-            cancelButton.classList.add('hidden');
-            taskItem.querySelector('.saveButton').classList.add('hidden');
-            taskItem.querySelector('.editButton').classList.remove('hidden');
+                        console.log("Reload triggered");
+                        location.reload();
+                        location.reload();
+                        const modal = taskItem.querySelector('.taskOptions');
+                        modal.close();
+                        
+                    })
+                    .catch((error) => console.error('Error updating task:', error));
+            });
         });
+        
+        // Cancel Edit
+        cancelButtons.forEach((cancelButton) => {
+            cancelButton.addEventListener('click', () => {
+                const taskId = cancelButton.dataset.doc;
+                const taskItem = document.querySelector(`#taskItem-${taskId}`);
+                
+                const taskText = taskItem.querySelector('.view-mode');
+                const taskInput = taskItem.querySelector('.edit-mode');
+                const prioritySelect = taskItem.querySelector('select.edit-mode');
+                const priorityView = taskItem.querySelector('.view-mode.priority');
+                const dateText = taskItem.querySelector('.view-mode.date');
+                const dateInput = taskItem.querySelector('input[type="date"].edit-mode');
+        
+                // Restore original value
+                taskInput.value = taskText.textContent;
+                prioritySelect.value = priorityView.textContent;
+                dateInput.value = new Date(dateText.textContent).toISOString().split('T')[0];
+        
+                // Toggle visibility
+                taskInput.classList.add('hidden');
+                taskText.classList.remove('hidden');
+                dateInput.classList.add('hidden');
+                dateText.classList.remove('hidden');
+        
+                cancelButton.classList.add('hidden');
+                taskItem.querySelector('.saveButton').classList.add('hidden');
+                taskItem.querySelector('.editButton').classList.remove('hidden');
+        
+        
+                const modal = taskItem.querySelector('.taskOptions');
+                modal.close();
+                location.reload();
+            });
+        });
+        
+        
+        
     });
-
-
-
+    
+    
+    
 });
+
+
+
+
 </script>
