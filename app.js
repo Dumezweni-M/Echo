@@ -100,14 +100,18 @@ app.post('/addNote',(req, res) => {
 // Edit specific task
 app.patch('/edit/:_id', (req, res) => {
     let id = req.params._id;
-    const { task } = req.body; 
+    const { task, priority } = req.body; 
 
     console.log('Edit request:', req.body);
 
-    Task.findByIdAndUpdate(id, {task}, {new: true, runValidators: true})
+    Task.findByIdAndUpdate(
+        id,
+        { task, priority },
+        {new: true, runValidators: true}
+    )
     .then(result => {
         if (result) {
-            res.json({message: 'Task updated successfully'});
+            res.json({ message: 'Task updated successfully'});
             console.log('Task edited', result);
         } else {
             res.status(404).send('Task not found')

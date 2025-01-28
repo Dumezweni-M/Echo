@@ -1,5 +1,5 @@
 <!-- Task List Container -->
-<div class="col-span-4 px-12 lg:max-h-[82vh] overflow-y-auto overflow-x-hidden scrollbar-hidden">
+<div class="col-span-4 px-2 lg:max-h-[82vh] overflow-y-auto overflow-x-hidden scrollbar-hidden">
 
         <!-- Task list header -->
         <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center font-Danfo ">
@@ -14,7 +14,7 @@
     <!-- Task item container -->
     <% tasks.forEach(task => { %> 
     <div id="taskItem-<%= task._id %>"
-        class="task md:border-b grid grid-cols-9 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 md:hover:scale-105 hover:text-white hover:shadow-lg mb-1 min-h-[100px] md:min-h-0">
+        class="task border grid grid-cols-9 p-2 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 md:hover:scale-105 hover:text-white hover:shadow-lg min-h-[80px] md:min-h-0">
 
         <!-- Task Input -->
         <div class="col-span-8 md:col-span-6 ">
@@ -27,8 +27,14 @@
 
         
 
-        <!-- Priority Dropdown -->
-        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.priority%></p>
+        <!-- TODO: Priority Dropdown -->
+        <div class="col-span-1 text-center border-r hidden sm:block">
+            <select class="p-1 rounded-lg bg-gray-200 w-full">
+                <option value="Low" <%= task.priority === 'Low' ? 'selected' : '' %>>Low</option>
+                <option value="Medium" <%= task.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
+                <option value="High" <%= task.priority === 'High' ? 'selected' : '' %>>High</option>
+            </select>
+        </div>
 
         <!-- Date Input -->
         <p class="col-span-2 text-center border-r hidden sm:block">
@@ -42,9 +48,9 @@
         <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p>
 
         <!-- More Buttons -->
-        <div class="col-span-1 flex items-center justify-center gap-4 hover:invert">
+        <div class="col-span-1 flex items-center justify-center gap-4 hover:invert border sm:border-0">
         <button class="optionsBtn px-1 mr-1 flex items-center justify-center" title="more">
-            <img src="../Assets/settings.svg" class="w-8 h-8 px-2 py-2 filter  " alt="icon">
+            <img src="../Assets/settings.svg" class=" w-8 h-8 px-2 py-2 filter  " alt="icon">
         </button>
 
 
@@ -88,7 +94,7 @@
 
 
 
-<!-- -----TODO: EXPORT ME TO A SEPARATE FILE------------------------------------------------------------------------- -->
+<!-- ----- EXPORT ME TO A SEPARATE FILE------------------------------------------------------------------------- -->
 <script>
 
         // Control "OPTIONS" modal
@@ -179,6 +185,7 @@
             const taskItem = document.querySelector(`#taskItem-${taskId}`);
             
             const updatedTaskName = taskItem.querySelector('.edit-mode').value;
+            const updatedPriority = taskItem.querySelector('select').value;
 
             // Send update to backend
             fetch(`/edit/${taskId}`, {
@@ -186,7 +193,10 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ task: updatedTaskName }),
+                body: JSON.stringify({
+                    task: updatedTaskName,
+                    priority: updatedPriority
+                }),
             })
                 .then((response) => {
                     if (!response.ok) throw new Error('Failed to update task');
@@ -195,10 +205,12 @@
                 .then((data) => {
                     // Update UI
                     taskItem.querySelector('.view-mode').textContent = updatedTaskName;
+                    taskItem.querySelector('select').value = updatedPriority;
 
                     // Exit edit mode
                     taskItem.querySelector('.edit-mode').classList.add('hidden');
                     taskItem.querySelector('.view-mode').classList.remove('hidden');
+                    taskItem.querySelector('select.edit-mode').classList.add('hidden');
 
                     saveButton.classList.add('hidden');
                     taskItem.querySelector('.cancelButton').classList.add('hidden');
@@ -216,9 +228,12 @@
             
             const taskText = taskItem.querySelector('.view-mode');
             const taskInput = taskItem.querySelector('.edit-mode');
+            const prioritySelect = taskItem.querySelector('select.edit-mode');
+            const priorityView = taskItem.querySelector('.view-mode.priority');
 
             // Restore original value
             taskInput.value = taskText.textContent;
+            prioritySelect.value = priorityView.textContent; 
 
             // Toggle visibility
             taskInput.classList.add('hidden');
