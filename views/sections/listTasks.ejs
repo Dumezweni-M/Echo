@@ -7,29 +7,29 @@
             <p class="col-span-1 font-bold hidden sm:block">Priority</p>  
             <p class="col-span-2 font-bold hidden sm:block">Due</p>
             <p class="col-span-1 font-bold hidden sm:block">Freq</p> 
-            <p class="col-span-1 font-bold hidden sm:block">Status</p>
+            <p class="col-span-1 font-bold hidden sm:block">Options</p>
             <p class="col-span-1 font-bold hidden sm:block">...</p>
         </div>
 
     <!-- Task item container -->
     <% tasks.forEach(task => { %> 
     <div id="taskItem-<%= task._id %>"
-        class="task border grid grid-cols-9 p-2 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 md:hover:scale-105 hover:text-white hover:shadow-lg min-h-[80px] md:min-h-0">
+        class="task border grid grid-cols-9 p-2 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 hover:text-white hover:shadow-lg min-h-[80px] md:min-h-0">
 
         <!-- Task Input -->
         <div class="col-span-8 md:col-span-6 ">
             <div class="task-name flex items-center">
                 <img src="../Assets/logo.svg" class="w-8 h-4 px-2" alt="icon">
-                <span class="view-mode"><%= task.task %></span>
-                <input type="text" class="edit-mode hidden p-2 rounded-lg bg-gray-600 w-full" value="<%= task.task %>" />
+                <span class="task view-mode"><%= task.task %></span>
+                <input type="text" class="task edit-mode hidden p-2 rounded-lg bg-gray-600 w-full" value="<%= task.task %>" />
             </div>
         </div>
 
         
 
         <!-- TODO: Priority Dropdown -->
-        <div class="col-span-1 text-center border-r hidden sm:block">
-            <select class="p-1 rounded-lg bg-gray-200 w-full">
+        <div class="col-span-1 text-center text-white border-r hidden sm:block">
+            <select class="priority p-1 rounded-lg bg-gray-400 w-full w-full">
                 <option value="Low" <%= task.priority === 'Low' ? 'selected' : '' %>>Low</option>
                 <option value="Medium" <%= task.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
                 <option value="High" <%= task.priority === 'High' ? 'selected' : '' %>>High</option>
@@ -37,17 +37,35 @@
         </div>
 
         <!-- Date Input -->
-        <p class="col-span-2 text-center border-r hidden sm:block">
-            <%= new Date(task.dueDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'}) %>
-        </p>
+        <div class="col-span-2 text-center border-r hidden sm:block">
+            <span class="view-mode date"><%= new Date(task.dueDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'}) %></span>
+            <input type="date" class="edit-mode hidden p-1 rounded-lg bg-gray-400 w-full" value="<%= new Date(task.dueDate).toISOString().split('T')[0] %>" />
+        </div>
+
 
         <!-- Frequency Dropdown -->
-        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.frequency%></p>
+        <div class="col-span-1 text-center border-r hidden sm:block">
+            <span class="frequency view-mode"><%= task.frequency %></span>
+            <select class="frequency edit-mode hidden p-1 rounded-lg bg-gray-400 w-full w-full">
+                <option value="Daily" <%= task.frequency === 'Daily' ? 'selected' : '' %>>Daily</option>
+                <option value="Weekly" <%= task.frequency === 'Weekly' ? 'selected' : '' %>>Weekly</option>
+                <option value="Bi-Weekly" <%= task.frequency === 'Bi-Weekly' ? 'selected' : '' %>>Bi-Weekly</option>
+            </select>
+        </div>
+        <!-- <p class="col-span-1 text-center border-r hidden sm:block"><%= task.frequency%></p> -->
         
         <!-- Status Dropdown -->
-        <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p>
+        <!-- <div class="col-span-1 text-center border-r hidden sm:block">
+            <span class="status view-mode"><%= task.status %></span>
+            <select class="status edit-mode hidden p-1 rounded-lg bg-gray-200 w-full">
+                <option value="Todo" <%= task.status === 'Todo' ? 'selected' : '' %>>Todo</option>
+                <option value="In-progress" <%= task.status === 'In-progress' ? 'selected' : '' %>>In-progress</option>
+                <option value="On-Hold" <%= task.status === 'On-Hold' ? 'selected' : '' %>>On-Hold</option>
+            </select>
+        </div> -->
+        <!-- <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p> -->
 
-        <!-- More Buttons -->
+        <!-- Options buttons -->
         <div class="col-span-1 flex items-center justify-center gap-4 hover:invert border sm:border-0">
         <button class="optionsBtn px-1 mr-1 flex items-center justify-center" title="more">
             <img src="../Assets/settings.svg" class=" w-8 h-8 px-2 py-2 filter  " alt="icon">
@@ -70,15 +88,6 @@
                     <p class="cancelButton hidden px-1 py-1 cursor-pointer border-b transition-transform duration-500 hover:bg-slate-200" title="cancel" data-doc="<%= task._id %>">
                         Cancel
                     </p>
-
-                    <!-- TODO: For future implemntation -->
-                    <!-- <p class="highlightButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200"  title="highlight" data-doc="<%= task._id %>">
-                        Highlight
-                    </p> -->
-
-                    <!-- <p class="archiveButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-slate-200" title="Add sub tasks" data-doc="<%= task._id %>">
-                        Archive
-                    </p> -->
 
                     <p class="deleteButton px-1 py-1 cursor-pointer border-b transition-transform duration-500  hover:bg-red-600"  title="Delete" data-doc="<%= task._id %>">
                         Delete
@@ -160,16 +169,29 @@
         // Edit Mode
             editButtons.forEach((editButton) => {
             editButton.addEventListener('click', () => {
+            console.log("Edit initiated")
             const taskId = editButton.dataset.doc;
             const taskItem = document.querySelector(`#taskItem-${taskId}`);
             
             // Get task elements
             const taskText = taskItem.querySelector('.view-mode');
             const taskInput = taskItem.querySelector('.edit-mode');
+            const dateText = taskItem.querySelector('.view-mode.date');
+            const dateinput = taskItem.querySelector('input[type="date"].edit-mode');
+            const frequencyText = taskItem.querySelector('.col-span-1 .view-mode');
+            const frequencySelect = taskItem.querySelector('.col-span-1 .edit-mode');
+            // const statusText = taskItem.querySelector('.view-mode.status');
+            // const statusSelect = taskItem.querySelector('.edit-mode');
 
             // Toggle visibility
             taskText.classList.add('hidden');
             taskInput.classList.remove('hidden');
+            dateText.classList.add('hidden');
+            dateinput.classList.remove('hidden');
+            frequencyText.classList.add('hidden');
+            frequencySelect.classList.remove('hidden');
+            // statusText.classList.add('hidden');
+            // statusSelect.classList.remove('hidden');
             
             // Show Save/Cancel buttons and hide Edit button
             editButton.classList.add('hidden');
@@ -186,6 +208,8 @@
             
             const updatedTaskName = taskItem.querySelector('.edit-mode').value;
             const updatedPriority = taskItem.querySelector('select').value;
+            const updatedDate = taskItem.querySelector('input[type="date"].edit-mode').value
+            const updatedFrequency = taskItem.querySelector('select.edit-mode').value
 
             // Send update to backend
             fetch(`/edit/${taskId}`, {
@@ -195,7 +219,9 @@
                 },
                 body: JSON.stringify({
                     task: updatedTaskName,
-                    priority: updatedPriority
+                    priority: updatedPriority,
+                    dueDate: updatedDate,
+                    frequency: updatedFrequency,
                 }),
             })
                 .then((response) => {
@@ -206,11 +232,18 @@
                     // Update UI
                     taskItem.querySelector('.view-mode').textContent = updatedTaskName;
                     taskItem.querySelector('select').value = updatedPriority;
+                    console.log(updatedDate)
+                    taskItem.querySelector('.view-mode.date').textContent = new Date(updatedDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'});
+                    taskItem.querySelector('.view-mode').textContent = updatedFrequency;
 
+                    
                     // Exit edit mode
                     taskItem.querySelector('.edit-mode').classList.add('hidden');
                     taskItem.querySelector('.view-mode').classList.remove('hidden');
-                    taskItem.querySelector('select.edit-mode').classList.add('hidden');
+                    taskItem.querySelector('input[type="date"].edit-mode').classList.add('hidden');
+                    taskItem.querySelector('view-mode.date').classList.remove('hidden');
+                    taskItem.querySelector('.frequency .edit-mode').classList.add('hidden');
+                    taskItem.querySelector('.frequency .view-mode').classList.remove('hidden');
 
                     saveButton.classList.add('hidden');
                     taskItem.querySelector('.cancelButton').classList.add('hidden');
@@ -230,14 +263,19 @@
             const taskInput = taskItem.querySelector('.edit-mode');
             const prioritySelect = taskItem.querySelector('select.edit-mode');
             const priorityView = taskItem.querySelector('.view-mode.priority');
+            const dateText = taskItem.querySelector('.view-mode.date');
+            const dateInput = taskItem.querySelector('input[type="date"].edit-mode');
 
             // Restore original value
             taskInput.value = taskText.textContent;
-            prioritySelect.value = priorityView.textContent; 
+            prioritySelect.value = priorityView.textContent;
+            dateInput.value = new Date(dateText.textContent).toISOString().split('T')[0];
 
             // Toggle visibility
             taskInput.classList.add('hidden');
             taskText.classList.remove('hidden');
+            dateInput.classList.add('hidden');
+            dateText.classList.remove('hidden');
 
             cancelButton.classList.add('hidden');
             taskItem.querySelector('.saveButton').classList.add('hidden');
@@ -247,5 +285,5 @@
 
 
 
-    });
+});
 </script>
