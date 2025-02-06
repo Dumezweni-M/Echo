@@ -2,7 +2,7 @@
 
 
 <!-- List notes Container -->
-<div class="col-span-1 justify-center lg:max-h-[84vh] overflow-y-auto overflow-x-hidden scrollbar-hidden px-4">
+<div class="col-span-1 justify-center lg:max-h-[84vh] overflow-y-auto overflow-x-hidden scrollbar-hidden px-2">
 
     <form class="col-span-5 formHead items-center hidden sm:block justify-center" action="/addNote" method="POST" id="noteEntry">
 
@@ -22,15 +22,15 @@
     <!-- TODO:  Button opens Modal in mobile view-->
     <div class="py-1 rounded-full block lg:hidden text-center flex justify-center items-center p-2" title="Edit">
     
-        <div class="noteModalBtn flex items-center rounded-3xl">
+        <div class="noteModalBtn flex items-center rounded-3xl ">
             <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add note">
-            <label for="">Note</label>
+            <label for="">Notes</label>
         </div>
     </div>
     
     
     <!-- Note Modal -->
-    <dialog class="noteEntryModal rounded shadow-2xl">
+    <dialog class="noteEntryModal rounded shadow-2xl ">
         <form class="formHead justify-center items-center" action="/addNote" method="POST" id="noteEntryModal">
     
             <div class="flex flex-col justify-between items-center w-full max-w-md mx-auto p-4">
@@ -42,15 +42,15 @@
                         name="title"
                         type="text"
                         class="border w-full p-2 mb-2 rounded"
-                        placeholder="Enter a note title">
+                        placeholder="Enter a note">
     
                     <!-- Note Input -->
-                    <label for="note" class="block font-bold mb-2 "></label>   
+                    <!-- <label for="note" class="block font-bold mb-2 "></label>   
                     <textarea
                     name="note"
                     class="p-2 rounded w-[300px] h-[100px] border"
                     placeholder="Enter a note item"
-                    required></textarea>    
+                    required></textarea>     -->
                 </div>                
     
             
@@ -68,17 +68,17 @@
 
 
 
-        <div id="noteHeading" class="flex px-4 justify-start items-center note mt-1 text-center border-t-2 lg:border-opacity-0 border-black">
+        <div id="noteHeading" class="flex px-4 justify-start items-center note mt-1 text-center border-t-2 lg:border-opacity-0 border">
             <!-- <p class="col-span-3 font-bold text-lg">Notes</p> -->
         </div>
 
     <% notes.forEach(note => { %> 
     <div id="noteItem"
-        class="note border rounded-sm border-gray-400 hover:shadow-lg  bg-white  mt-1 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:border-blue-400 hover:scale-105">
+        class="note border rounded-lg border-gray-400 hover:shadow-lg  bg-white  mt-1 grid grid-cols-1 lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:border-blue-400 hover:scale-105">
 
         <!-- note Input Title -->
         <div class="p-2">
-            <div class="flex justify-between items-center font-bold pb-2 border-b">
+            <div class="flex justify-between items-center">
                 <div class="flex">
                     <img src="../Assets/logo.svg" class="w-8 h-4 pr-4 hidden sm:block" alt="icon">
                     <p><%= note.title %></p>
@@ -91,9 +91,9 @@
                 </button>
             </div>
 
-            <div class="flex flex-row items-center mt-2">
+            <!-- <div class="flex flex-row items-center mt-2">
                 <p><%= note.note %></p>
-            </div>
+            </div> -->
         </div>
 
 

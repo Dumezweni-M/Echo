@@ -1,5 +1,5 @@
 <!-- Task List Container -->
-<div class="col-span-4 px-2 lg:max-h-[82vh] overflow-y-auto overflow-x-hidden scrollbar-hidden">
+<div class="col-span-4 px-2 lg:max-h-[82vh] overflow-y-auto overflow-x-hidden scrollbar-hidden bg-blue-50">
 
         <!-- Task list header -->
         <div id="taskHeading" class="task grid grid-cols-12 mt-4 text-center font-Danfo ">
@@ -8,20 +8,20 @@
             <p class="col-span-2 font-bold hidden sm:block">Due</p>
             <p class="col-span-1 font-bold hidden sm:block">Freq</p> 
             <p class="col-span-1 font-bold hidden sm:block">Options</p>
-            <p class="col-span-1 font-bold hidden sm:block">...</p>
+            <p class="col-span-1 font-bold hidden sm:block"></p>
         </div>
 
     <!-- Task item container -->
     <% tasks.forEach(task => { %> 
     <div id="taskItem-<%= task._id %>"
-        class="task border grid grid-cols-9 md:grid-cols-12 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:bg-gray-400 hover:text-white hover:shadow-lg min-h-[50px] md:min-h-0">
+        class="task border grid grid-cols-9 md:grid-cols-12 mb-2 gap-2 bg-white lg:text-xs sm:text-[8px] items-center transition-transform duration-500 hover:border-blue-400 hover:shadow-lg min-h-[50px] md:min-h-0 rounded-lg">
 
         <!-- Task Input -->
         <div class="task col-span-8 md:col-span-6 ">
             <div class="task flex items-center">
                 <img src="../Assets/logo.svg" class="w-8 h-4 px-2" alt="icon">
                 <span class="task view-mode"><%= task.task %></span>
-                <input type="text" class="task edit-mode hidden p-2 rounded-lg bg-gray-400 w-full" value="<%= task.task %>" />
+                <input type="text" class="task edit-mode hidden p-2 rounded-lg bg-blue-100 w-full" value="<%= task.task %>" />
             </div>
         </div>
 
@@ -30,7 +30,7 @@
         <!-- TODO: Priority Dropdown -->
         <div class="priority col-span-1 text-center border-r hidden sm:block">
             <span class="priority view-mode"><%= task.priority %></span>
-            <select class="priority edit-mode hidden p-1 rounded-lg bg-gray-400 w-full">
+            <select class="priority edit-mode hidden p-1 rounded-lg bg-blue-100 w-full">
                 <option value="Low" <%= task.priority === 'Low' ? 'selected' : '' %>>Low</option>
                 <option value="Medium" <%= task.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
                 <option value="High" <%= task.priority === 'High' ? 'selected' : '' %>>High</option>
@@ -38,16 +38,16 @@
         </div>
 
         <!-- Date Input -->
-        <div class="col-span-2 text-center border-r hidden sm:block">
+        <div class="date col-span-2 text-center border-r hidden sm:block">
             <span class="view-mode date"><%= new Date(task.dueDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'}) %></span>
-            <input type="date" class="edit-mode hidden p-1 rounded-lg bg-gray-400 w-full" value="<%= new Date(task.dueDate).toISOString().split('T')[0] %>" />
+            <input type="date" class="date edit-mode hidden p-1 rounded-lg bg-blue-100 w-full" value="<%= new Date(task.dueDate).toISOString().split('T')[0] %>" />
         </div>
 
 
         <!-- Frequency Dropdown -->
         <div class="frequency col-span-1 text-center border-r hidden sm:block">
             <span class="frequency view-mode"><%= task.frequency %></span>
-            <select class="frequency edit-mode hidden p-1 rounded-lg bg-gray-400 w-full">
+            <select class="frequency edit-mode hidden p-1 rounded-lg bg-blue-100 w-full">
                 <option value="Once-off" <%= task.frequency === 'Once-off' ? 'selected' : '' %>>Once-off</option>
                 <option value="Daily" <%= task.frequency === 'Daily' ? 'selected' : '' %>>Daily</option>
                 <option value="Weekly" <%= task.frequency === 'Weekly' ? 'selected' : '' %>>Weekly</option>
@@ -55,18 +55,26 @@
             </select>
         </div>
 
-        
+        <!-- TODO:  -->
+        <div class="status col-span-1 text-center border-r hidden sm:block">
+            <span class="status view-mode"><%= task.status %></span>
+            <select class="status edit-mode hidden p-1 rounded-lg bg-blue-100 w-full">
+                <option value="Todo" <%= task.status === 'Todo' ? 'selected' : '' %>>Todo</option>
+                <option value="In-progress" <%= task.status === 'In-progress' ? 'selected' : '' %>>In-progress</option>
+                <option value="On-hold" <%= task.status === 'On-hold' ? 'selected' : '' %>>On-hold</option>
+            </select>
+        </div>
         <!-- <p class="col-span-1 text-center border-r hidden sm:block"><%= task.status%></p> -->
 
         <!-- Options buttons -->
-        <div class="col-span-1 flex items-center justify-center gap-4 hover:invert">
+        <div class="col-span-1 flex items-center justify-center gap-4">
         <button class="optionsBtn px-1 mr-1 flex items-center justify-center" title="more">
-            <img src="../Assets/settings.svg" class=" w-8 h-8 px-2 py-2 filter  " alt="icon">
+            <img src="../Assets/settings.svg" class=" w-8 h-8 px-2 py-2 filter" alt="icon">
         </button>
 
 
             <!-- Settings Modal --> 
-            <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50">
+            <dialog data-modal="addTask" class="taskOptions text-sm p-2 absolute shadow-lg z-50 rounded-lg">
 
                 <div class="grid grid-cols-1 justify-center text-center m-8">
                     <p class="text-lg font-bold text-center mb-2"> Settings </p>
@@ -95,5 +103,3 @@
 </div>
 
 
-
-<!-- ----- EXPORT ME TO A SEPARATE FILE------------------------------------------------------------------------- -->
