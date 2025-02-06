@@ -1,7 +1,10 @@
+// Get element from DOM
 const dateDisplay = document.getElementById('dateDisplay');
 
+// Set Days and Months
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 
 const date = new Date()
 
@@ -10,7 +13,7 @@ const weekday = days[ date.getDay()]
 const month = months[ date.getMonth()]
 
 
-
+// Update time frequently
 setInterval(() => {
     const time = new Date();
 

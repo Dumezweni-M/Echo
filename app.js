@@ -124,7 +124,7 @@ app.patch('/edit/:_id', (req, res) => {
 });
 
 
-
+// Delete selected task
 app.delete('/delete/:type/:_id', (req, res) => {
 
     const { type, _id } = req.params;
