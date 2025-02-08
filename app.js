@@ -9,10 +9,10 @@ const morgan = require('morgan');
 const path = require('path');
 
 // Import models here
-console.log("Loading Model...");
+console.log("Loading DB Models...");
 const Task = require('./models/task')
 const Note = require('./models/note')
-console.log("Model Successfully loaded...");
+console.log("Models Successfully loaded...");
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Error handler middleware
 app.use((err, req, res, next) => {
     console.log(err.stack);
-    res.status(500).send("<----- Error MW ----->")
+    res.status(500).send("<----- Error with middleware ----->")
 });
 
 // Database Connection
