@@ -53,6 +53,7 @@ app.get('/', (req, res) => {
 
     Promise.all([tasksPromise, notesPromise])
         .then(([tasks, notes]) => {
+
             res.render('index', { tasks, notes });
         })
         .catch(err => {
@@ -136,7 +137,6 @@ app.delete('/delete/:type/:_id', (req, res) => {
     } else {
         return res.status(400).json({ message: 'Invalid type. It should be "task" or "note".' });
     }
-
 
     deletePromise
         .then(result => {

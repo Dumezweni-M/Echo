@@ -45,7 +45,7 @@
 
 
 <!-- Button opens Modal in mobile view-->
-<div class="openModalBtn py-1 rounded-full block lg:hidden text-center flex justify-center items-center" title="Add Task">
+<div class="openModalBtn py-1 rounded-full lg:hidden text-center flex justify-center items-center" title="Add Task">
     <div class="flex rounded-3xl items-center">
         <img src="../Assets/plus (2).svg" class="w-4 h-4 m-2" alt="Add task">
         <label for="task">Task</label>
@@ -148,6 +148,17 @@
                 taskEntryModal.close();
             }
         })
+
+
+
+
+            const dateInput = document.getElementById("date-input");
+
+            // Get today's date
+            const today = new Date();
+            dateInput.setAttribute("min", today.toISOString().split('T')[0]);
+
+
 
     });
 </script>
