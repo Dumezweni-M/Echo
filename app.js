@@ -8,11 +8,11 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
 
-// Import models here
-console.log("Loading DB Models...");
+// Import DB models here
+
 const Task = require('./models/task')
 const Note = require('./models/note')
-console.log("Models Successfully loaded...");
+console.log("DB models loaded");
 
 const app = express();
 
@@ -43,6 +43,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 app.use(express.json());
+console.log("Middleware loaded");
 
 
 // Retrieve Data from DB (Tasks and Notes)
@@ -65,6 +66,7 @@ app.get('/', (req, res) => {
 // Enter a task to DB
 app.post('/addTask',(req, res) => {
 
+    // Ensure date = current date
     if(!req.body.duedate || req.body.dueDate === '') {
         req.body.dueDate = new Date();
     }
@@ -109,11 +111,11 @@ app.patch('/edit/:_id', (req, res) => {
         if (result) {
             res.json({redirect: '/'})
         } else {
+            console.log('Task not found')
             res.status(404).send('Task not found')
         }
     })
     .catch(err => {
-        // console.log('Edit was unsuccessful', err);
         res.status(500).send('Error editing entry')
     });
 });
@@ -154,5 +156,6 @@ app.delete('/delete/:type/:_id', (req, res) => {
 
 // If all else fails -  404 redirect
 app.use((req, res) => {
+    console.log('404 Page not found')
     res.status(404).render('404', {name: '404'})
 });

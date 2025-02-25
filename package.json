@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "build-css": "tailwindcss -i ./src/styles.css -o ./public/styles.css --watch",
-    "nodemon": "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
