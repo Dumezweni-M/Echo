@@ -108,7 +108,6 @@ app.patch('/edit/:_id', (req, res) => {
     .then(result => {
         if (result) {
             res.json({redirect: '/'})
-            // res.json({ message: 'Task updated successfully', task: result}); For debug
         } else {
             res.status(404).send('Task not found')
         }

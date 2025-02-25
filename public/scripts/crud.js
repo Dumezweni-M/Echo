@@ -113,24 +113,22 @@
                 const updatedDate = taskItem.querySelector('input[type="date"].edit-mode').value
                 const updatedFrequency = taskItem.querySelector('.frequency select.edit-mode').value
                 const updatedStatus = taskItem.querySelector('.status select.edit-mode').value
-                
-                 // On save returns blank result for edited task until page refresh. "I am here as a patch"
-                location.reload();
-
-                // Send update to backend
-                fetch(`/edit/${taskId}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        task: updatedTaskName,
-                        priority: updatedPriority,
-                        dueDate: updatedDate,
-                        frequency: updatedFrequency,
-                        status: updatedStatus,
-                    }),
-                })
+                location.reload(); //Refreshes page on save to reflect updated info
+                 
+                 // Send update to backend
+                 fetch(`/edit/${taskId}`, {
+                     method: 'PATCH',
+                     headers: {
+                         'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            task: updatedTaskName,
+                            priority: updatedPriority,
+                            dueDate: updatedDate,
+                            frequency: updatedFrequency,
+                            status: updatedStatus,
+                        }),
+                    })
                     .then((response) => {
                         if (!response.ok) throw new Error('Failed to update task');
                         return response.json();
@@ -142,7 +140,7 @@
                         taskItem.querySelector('.view-mode.date').textContent = new Date(updatedDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short'});
                         taskItem.querySelector('.frequency .view-mode').textContent = updatedFrequency;
                         taskItem.querySelector('.status .view-mode').textContent = updatedStatus;
-        
+                        
                         
                         // Exit edit mode (TODO: Put me in a function)
                         taskItem.querySelector('.task .edit-mode').classList.add('hidden');
@@ -155,16 +153,13 @@
                         taskItem.querySelector('.frequency .view-mode').classList.remove('hidden');
                         taskItem.querySelector('.status .edit-mode').classList.add('hidden');
                         taskItem.querySelector('.status .view-mode').classList.remove('hidden');
-        
+                        
                         saveButton.classList.add('hidden');
                         taskItem.querySelector('.cancelButton').classList.add('hidden');
                         taskItem.querySelector('.editButton').classList.remove('hidden');
-        
-
+                        
                         const modal = taskItem.querySelector('.taskOptions');
                         modal.close();
-                        
-                        
                     })
                     .catch((error) => console.error('Error updating task:', error));
             });
