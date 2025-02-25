@@ -13,6 +13,7 @@ console.log("Loading DB Models...");
 const Task = require('./models/task')
 const Note = require('./models/note')
 console.log("Models Successfully loaded...");
+console.log(new Date());
 
 const app = express();
 
@@ -45,11 +46,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 
-// Get home screen route
-// app.get('/', (req, res) => {
-//     res.render('index', {name: 'index'})
-// });
-
 // Retrieve Data from DB (Tasks and Notes)
 app.get('/', (req, res) => {
     const tasksPromise = Task.find().sort({ dueDate: 1 });
@@ -69,7 +65,15 @@ app.get('/', (req, res) => {
 
 // Enter a task to DB
 app.post('/addTask',(req, res) => {
+
+    console.log("Received Task Data:", req.body);
+
+    if(!req.body.duedate || req.body.dueDate === '') {
+        req.body.dueDate = new Date();
+    }
+
     const task = new Task(req.body);
+    console.log('TAsk before save:', task )
     console.log("NOW? ----->  ", task)
     task.save()
         .then(() => {
@@ -100,9 +104,9 @@ app.post('/addNote',(req, res) => {
 // Edit specific task
 app.patch('/edit/:_id', (req, res) => {
     let id = req.params._id;
-    const { task, priority, dueDate, frequency } = req.body; 
+    const { task, priority, dueDate, frequency, status } = req.body; 
 
-    console.log('Edit request:', req.body);
+    console.log('Edit request ------> :', req.body);
 
     Task.findByIdAndUpdate(
         id,
@@ -112,7 +116,7 @@ app.patch('/edit/:_id', (req, res) => {
     .then(result => {
         if (result) {
             res.json({ message: 'Task updated successfully', task: result });
-            console.log('Task edited', result);
+            console.log('Task edited -----> ', result);
         } else {
             res.status(404).send('Task not found')
         }

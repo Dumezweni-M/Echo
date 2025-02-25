@@ -16,22 +16,18 @@ const taskSchema = new Schema({
     dueDate: {
         type: Date,
         required: false,
-        default: Date.now
+        default: function () { return new Date(); }
      },
     frequency: {
         type: String,
-        enum: ["Once-off", "Daily", "Weekly", "Bi-Weekly",],
+        enum: ["Once-off", "Daily", "Weekly", "Monthly",],
         required: false
      },
     status: {
         type: String,
         enum: ["Todo", "In-progress", "On-hold",],
         required: false
-     },
-    isChecked: { 
-        type: Boolean,
-        default: false
-    }
+     }
 }, {timestamps:true});
 
 const Task = mongoose.model('Task', taskSchema);
