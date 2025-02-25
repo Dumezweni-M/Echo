@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
 
-// Import models here
+// Import DB models here
 console.log("Loading Model...");
 const Task = require('./models/task')
 const Note = require('./models/note')
@@ -45,11 +45,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 
-// Get home screen route
-// app.get('/', (req, res) => {
-//     res.render('index', {name: 'index'})
-// });
-
 // Retrieve Data from DB (Tasks and Notes)
 app.get('/', (req, res) => {
     const tasksPromise = Task.find().sort({ dueDate: 1 });
@@ -67,7 +62,7 @@ app.get('/', (req, res) => {
 
 
 
-// Enter a task to DB
+// Post task request
 app.post('/addTask',(req, res) => {
     const task = new Task(req.body);
     console.log("NOW? ----->  ", task)
@@ -81,7 +76,8 @@ app.post('/addTask',(req, res) => {
         });
 });
 
-// Enter a Note to DB
+
+// Post note request
 app.post('/addNote',(req, res) => {
     const note = new Note(req.body);
     console.log("NOW? ----->  ", note)
@@ -96,8 +92,7 @@ app.post('/addNote',(req, res) => {
 });
 
 
-
-// Edit specific task
+// Edit task request
 app.patch('/edit/:_id', (req, res) => {
     let id = req.params._id;
     const { task } = req.body; 
@@ -120,7 +115,7 @@ app.patch('/edit/:_id', (req, res) => {
 });
 
 
-
+// Delete task request
 app.delete('/delete/:type/:_id', (req, res) => {
 
     const { type, _id } = req.params;
@@ -136,7 +131,6 @@ app.delete('/delete/:type/:_id', (req, res) => {
         return res.status(400).json({ message: 'Invalid type. It should be "task" or "note".' });
     }
 
-
     deletePromise
         .then(result => {
             if (result) {
@@ -151,10 +145,6 @@ app.delete('/delete/:type/:_id', (req, res) => {
             res.status(500).json({ message: `Error deleting ${type}.` });
     })
 });
-
-
-
-
 
 
 // 404 redirect
