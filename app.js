@@ -13,7 +13,6 @@ console.log("Loading DB Models...");
 const Task = require('./models/task')
 const Note = require('./models/note')
 console.log("Models Successfully loaded...");
-console.log(new Date());
 
 const app = express();
 
@@ -22,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Error handler middleware
 app.use((err, req, res, next) => {
     console.log(err.stack);
-    res.status(500).send("<----- Error with middleware ----->")
+    res.status(500).send("Error with middleware")
 });
 
 // Database Connection
@@ -32,7 +31,7 @@ mongoose.connect(dbURI)
     .then(result => app.listen (PORT, () => {
         console.log(`Server is running on port ${PORT}`);
     }))
-    .catch(err => console.log("----- Mongoose Connection Issue -----", err))
+    .catch(err => console.log("Mongoose Connection Issue", err))
 
 // Register View 
 app.set('view engine', 'ejs');
@@ -66,36 +65,31 @@ app.get('/', (req, res) => {
 // Enter a task to DB
 app.post('/addTask',(req, res) => {
 
-    console.log("Received Task Data:", req.body);
-
     if(!req.body.duedate || req.body.dueDate === '') {
         req.body.dueDate = new Date();
     }
 
     const task = new Task(req.body);
-    console.log('TAsk before save:', task )
-    console.log("NOW? ----->  ", task)
     task.save()
         .then(() => {
             res.redirect('/');
         })
         .catch((err) => {
-            console.log('----- Error Saving Task -----', err)
-            res.status(500).send('----- Server Error -----')
+            console.log('Error Saving Task', err)
+            res.status(500).send('Server Error')
         });
 });
 
 // Enter a Note to DB
 app.post('/addNote',(req, res) => {
     const note = new Note(req.body);
-    console.log("NOW? ----->  ", note)
     note.save()
         .then(() => {
             res.redirect('/');
         })
         .catch((err) => {
-            console.log('----- Error Saving Note -----', err)
-            res.status(500).send('----- Server Error -----')
+            console.log('Error Saving Note', err)
+            res.status(500).send('Server Error')
         });
 });
 
@@ -106,23 +100,21 @@ app.patch('/edit/:_id', (req, res) => {
     let id = req.params._id;
     const { task, priority, dueDate, frequency, status } = req.body; 
 
-    console.log('Edit request ------> :', req.body);
-
     Task.findByIdAndUpdate(
         id,
-        { task, priority, dueDate, frequency },
+        { task, priority, dueDate, frequency, status },
         {new: true, runValidators: true}
     )
     .then(result => {
         if (result) {
-            res.json({ message: 'Task updated successfully', task: result });
-            console.log('Task edited -----> ', result);
+            res.json({redirect: '/'})
+            // res.json({ message: 'Task updated successfully', task: result}); For debug
         } else {
             res.status(404).send('Task not found')
         }
     })
     .catch(err => {
-        console.log('Edit was unsuccessful', err);
+        // console.log('Edit was unsuccessful', err);
         res.status(500).send('Error editing entry')
     });
 });
@@ -149,7 +141,6 @@ app.delete('/delete/:type/:_id', (req, res) => {
         .then(result => {
             if (result) {
                 res.json({redirect: '/'})
-                // res.json({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.` });
             } else {
                 res.status(404).json({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} not found.` });
             }
@@ -162,10 +153,7 @@ app.delete('/delete/:type/:_id', (req, res) => {
 
 
 
-
-
-
-// 404 redirect
+// If all else fails -  404 redirect
 app.use((req, res) => {
     res.status(404).render('404', {name: '404'})
 });
